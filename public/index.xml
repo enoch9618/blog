@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>我的博客</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on 我的博客</description>
+    <title>Enoch</title>
+    <link>https://blog-eyt.pages.dev/</link>
+    <description>Recent content on Enoch</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 19 May 2026 10:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 May 2026 16:10:00 +0800</lastBuildDate>
+    <atom:link href="https://blog-eyt.pages.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手机第一篇</title>
+      <link>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <pubDate>Tue, 19 May 2026 16:10:00 +0800</pubDate>
+      <guid>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;</description>
+    </item>
     <item>
       <title>关于我</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://blog-eyt.pages.dev/about/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://blog-eyt.pages.dev/about/</guid>
       <description>&lt;p&gt;欢迎来到我的博客！这里我会记录学习心得和技术分享。&lt;/p&gt;
 &lt;h2 id=&#34;我的兴趣&#34;&gt;我的兴趣&lt;/h2&gt;
 &lt;ul&gt;
@@ -23,9 +30,9 @@
     </item>
     <item>
       <title>我的第一篇博客</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
+      <link>https://blog-eyt.pages.dev/posts/my-first-post/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/my-first-post/</guid>
       <description>&lt;h2 id=&#34;hello-hugo&#34;&gt;Hello Hugo!&lt;/h2&gt;
 &lt;p&gt;这是我用Hugo搭建的第一篇博客。通过Cloudflare Pages部署真是太方便了！&lt;/p&gt;
 &lt;h3 id=&#34;我学到了什么&#34;&gt;我学到了什么&lt;/h3&gt;

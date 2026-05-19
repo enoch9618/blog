@@ -2,31 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://blog-eyt.pages.dev/categories/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/posts/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/tags/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/tags/termux/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/tags/%E6%89%8B%E6%9C%BA/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
+    <lastmod>2026-05-19T16:10:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog-eyt.pages.dev/tags/hugo/</loc>
     <lastmod>2026-05-19T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
+    <loc>https://blog-eyt.pages.dev/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2026-05-19T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://blog-eyt.pages.dev/about/</loc>
     <lastmod>2026-05-19T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-05-19T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2026-05-19T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/</loc>
-    <lastmod>2026-05-19T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2026-05-19T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-05-19T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/my-first-post/</loc>
+    <loc>https://blog-eyt.pages.dev/posts/my-first-post/</loc>
     <lastmod>2026-05-19T10:00:00+08:00</lastmod>
   </url>
 </urlset>
