@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+    <title>{{ .Title }}</title>
+    {{ partial "head.html" . }}
+    <style>
+        /* 隐藏默认导航和页脚 */
+        .navbar, .footer, footer, nav, header { display: none !important; }
+        body { margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* 主题变量 */
+        :root {
+            --bible-bg: #f4f1ea;
+            --bible-text: #2d2621;
+            --bible-border: #d6cfbc;
+            --bible-accent: #8c6d46;
+            --bible-card: #fdfcf9;
+            --bible-btn: #fdfcf9;
+            --bible-hl: #e9d8a6;
+        }
+        
+        .bible-root { 
+            background: var(--bible-bg); 
+            color: var(--bible-text); 
+            min-height: 100vh; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        /* 桌面端侧边栏 */
+        .sidebar { 
+            position: fixed; 
+            left: 0; top: 0; bottom: 0; 
+            width: 300px; 
+            background: var(--bible-card); 
+            border-right: 1px solid var(--bible-border); 
+            padding: 25px; 
+            overflow-y: auto; 
+            z-index: 100; 
+        }
+        
+        .main-content { 
+            margin-left: 300px; 
+            padding: 20px 20px 120px; 
+            display: flex; 
+            justify-content: center; 
+        }
+        
+        .container { max-width: 800px; width: 100%; }
+        
+        .search-quick-nav { 
+            display: flex; flex-wrap: nowrap; gap: 8px; 
+            margin-bottom: 20px; padding: 10px 15px; 
+            background: var(--bible-card); 
+            border-bottom: 1px solid var(--bible-border); 
+            position: sticky; top: 0; z-index: 10; 
+            backdrop-filter: blur(10px); 
+            overflow-x: auto; 
+            scrollbar-width: none; 
+        }
+        .search-quick-nav::-webkit-scrollbar { display: none; } 
+        
+        .nav-tag { 
+            font-size: 11px; padding: 4px 10px; 
+            border-radius: 15px; 
+            background: var(--bible-btn); 
+            border: 1px solid var(--bible-border); 
+            cursor: pointer; white-space: nowrap; 
+            font-weight: bold; 
+        }
+        
+        .verse-row { 
+            display: flex; gap: 12px; 
+            padding: 10px 15px; border-radius: 8px; 
+            line-height: 1.9; font-size: 18px; 
+            cursor: pointer; 
+            border: 1px solid transparent; 
+            transition: background 0.2s;
+        }
+        .verse-row:hover { background: var(--bible-card); }
+        
+        .v-num { 
+            color: var(--bible-accent); font-weight: 800; 
+            min-width: 58px; text-align: right; 
+            font-size: 0.75em; margin-top: 6px; 
+            opacity: 0.7; white-space: nowrap; 
+            flex-shrink: 0; font-family: monospace; 
+        }
+        
+        .verse-active-flash { 
+            animation: flash-hl 3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border: 1px solid var(--bible-accent) !important; 
+        }
+        @keyframes flash-hl { 
+            0% { background: var(--bible-hl); } 
+            100% { background: transparent; } 
+        }
+        
+        .ui-input { 
+            width: 100%; padding: 12px; border-radius: 10px; 
+            border: 1.5px solid var(--bible-border); 
+            background: var(--bible-btn); color: var(--bible-text); 
+            margin-bottom: 15px; font-weight: bold; 
+            outline: none; box-sizing: border-box;
+        }
+        
+        .ui-btn { 
+            padding: 8px 15px; border-radius: 8px; 
+            border: 1px solid var(--bible-border); 
+            background: var(--bible-btn); color: var(--bible-text); 
+            cursor: pointer; font-size: 14px; font-weight: 600; 
+        }
+        .ui-btn.active { 
+            background: var(--bible-accent) !important; 
+            color: #fff !important; 
+            border-color: var(--bible-accent) !important; 
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 996px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; padding: 10px 2px 100px; }
+            .container { max-width: 100%; }
+            .verse-row { padding: 8px 6px; gap: 5px; }
+            .v-num { min-width: 45px; }
+            .floating-nav { 
+                position: fixed; bottom: 20px; 
+                left: 50%; transform: translateX(-50%); 
+                width: 94%; height: 56px; 
+                background: var(--bible-card); 
+                border: 1px solid var(--bible-border); 
+                border-radius: 28px; 
+                display: flex; align-items: center; 
+                justify-content: space-between; 
+                padding: 0 10px; z-index: 1000; 
+                box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="bible-app"></div>
+    <script src="/js/bible-reader.js"></script>
+</body>
+</html>
