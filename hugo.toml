@@ -1,4 +1,4 @@
-baseURL = "https://blog-eyt.pages.dev/"  # 暂时先这样写，部署到CF后可以改
+baseURL = "https://blog-eyt.pages.dev/"  
 languageCode = "zh-CN"
 title = "我的博客"
 theme = "PaperMod"
@@ -7,7 +7,7 @@ theme = "PaperMod"
 defaultContentLanguage = "zh"
 
 [params]
-  author = "你的名字"
+  author = "Enoch"
   description = "这是我的个人博客"
   
   # 启用搜索功能
