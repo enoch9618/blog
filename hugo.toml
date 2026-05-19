@@ -21,6 +21,11 @@ defaultContentLanguage = "zh"
   url = "/about/"
   weight = 2
 
+[[menu.main]]
+    name = "圣经阅读"
+    url = "/bible.html"
+    weight = 3  
+
 
 [outputs]
   home = ["HTML"]
