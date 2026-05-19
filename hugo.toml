@@ -1,4 +1,4 @@
-baseURL = "https://blog-eyt.pages.dev/"  
+baseURL = "https://blog-eyt.pages.dev/"
 languageCode = "zh-CN"
 title = "Enoch"
 theme = "PaperMod"
@@ -9,22 +9,14 @@ defaultContentLanguage = "zh"
 [params]
   author = "Enoch"
   description = "这是我的个人博客"
-  
-  # 启用搜索功能
-  fuseOpts = true
 
-# 配置菜单
+# 配置菜单（首页 + 关于）
 [[menu.main]]
   name = "首页"
   url = "/"
   weight = 1
 
 [[menu.main]]
-  name = "归档"
-  url = "/archives/"
-  weight = 2
-
-[[menu.main]]
   name = "关于"
   url = "/about/"
-  weight = 3
+  weight = 2
