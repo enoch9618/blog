@@ -1,6 +1,6 @@
 baseURL = "https://blog-eyt.pages.dev/"  
 languageCode = "zh-CN"
-title = "我的博客"
+title = "Enoch"
 theme = "PaperMod"
 
 # 启用中文支持
