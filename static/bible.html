@@ -1,0 +1,131 @@
+{{- define "main" }}
+<!-- 核心容器 -->
+<div id="bible-app">
+    <div id="status-msg" style="padding: 100px 20px; text-align: center; font-family: sans-serif;">
+        <h2 id="loading-text">正在启动阅读器...</h2>
+        <p id="error-details" style="color: red; margin-top: 10px; display: none;"></p>
+    </div>
+</div>
+
+<style>
+    /* PaperMod 适配：确保内容不被页头遮挡 */
+    :root {
+        --b-bg: #f4f1ea; --b-text: #2d2621; --b-border: #d6cfbc;
+        --b-accent: #8c6d46; --b-card: #fdfcf9;
+    }
+    .dark {
+        --b-bg: #1a1a1b; --b-text: #d4d4d4; --b-border: #3e3e3e;
+        --b-accent: #c9a96e; --b-card: #242424;
+    }
+
+    #bible-app { 
+        min-height: 80vh; background: var(--b-bg); color: var(--b-text);
+        padding: 20px; border-radius: 8px; transition: all 0.3s;
+    }
+
+    /* 布局样式 */
+    .b-header { margin-bottom: 20px; border-bottom: 2px solid var(--b-border); padding-bottom: 15px; }
+    .b-select { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid var(--b-border); background: var(--b-card); color: var(--b-text); margin-bottom: 10px; }
+    .b-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 5px; margin-top: 10px; }
+    .b-btn { padding: 8px 0; text-align: center; border: 1px solid var(--b-border); border-radius: 4px; cursor: pointer; background: var(--b-card); }
+    .b-btn.active { background: var(--b-accent); color: white; border-color: var(--b-accent); }
+    
+    .b-content { padding-top: 20px; }
+    .b-verse { margin-bottom: 12px; line-height: 1.8; font-size: 1.1rem; display: flex; }
+    .b-num { color: var(--b-accent); font-weight: bold; margin-right: 12px; min-width: 25px; text-align: right; }
+    
+    .b-nav { display: flex; gap: 10px; margin-top: 30px; padding-bottom: 50px; }
+    .b-nav button { flex: 1; padding: 15px; border-radius: 8px; border: 1px solid var(--b-border); background: var(--b-card); color: var(--b-text); cursor: pointer; font-weight: bold; }
+
+    /* 强制隐藏 PaperMod 干扰项（可选） */
+    /*.header, .footer { display: none !important; }*/
+</style>
+
+<script>
+(function() {
+    const BIBLE_BOOKS = [
+        { n:"创世记", f:"创", c:50 }, { n:"出埃及记", f:"出", c:40 }, { n:"利未记", f:"利", c:27 }, { n:"民数记", f:"民", c:36 }, { n:"申命记", f:"申", c:34 }, { n:"约书亚记", f:"书", c:24 }, { n:"士师记", f:"士", c:21 }, { n:"路得记", f:"得", c:4 }, { n:"撒母耳记上", f:"撒上", c:31 }, { n:"撒母耳记下", f:"撒下", c:24 }, { n:"列王纪上", f:"王上", c:22 }, { n:"列王纪下", f:"王下", c:25 }, { n:"历代志上", f:"代上", c:29 }, { n:"历代志下", f:"代下", c:36 }, { n:"以斯拉记", f:"斯", c:10 }, { n:"尼希米记", f:"尼", c:13 }, { n:"以斯帖记", f:"帖", c:10 }, { n:"约伯记", f:"伯", c:42 }, { n:"诗篇", f:"诗", c:150 }, { n:"箴言", f:"箴", c:31 }, { n:"传道书", f:"传", c:12 }, { n:"雅歌", f:"歌", c:8 }, { n:"以赛亚书", f:"赛", c:66 }, { n:"耶利米书", f:"耶", c:52 }, { n:"耶利米哀歌", f:"哀", c:5 }, { n:"以西结书", f:"结", c:48 }, { n:"但以理书", f:"但", c:12 }, { n:"何西阿书", f:"何", c:14 }, { n:"约珥书", f:"珥", c:3 }, { n:"阿摩司书", f:"摩", c:9 }, { n:"俄巴底亚书", f:"俄", c:1 }, { n:"约拿书", f:"拿", c:4 }, { n:"弥迦书", f:"弥", c:7 }, { n:"那鸿书", f:"鸿", c:3 }, { n:"哈巴谷书", f:"哈", c:3 }, { n:"西番雅书", f:"番", c:3 }, { n:"哈该书", f:"该", c:2 }, { n:"撒迦利亚书", f:"亚", c:14 }, { n:"玛拉基书", f:"玛", c:4 }, { n:"马太福音", f:"太", c:28 }, { n:"马可福音", f:"可", c:16 }, { n:"路加福音", f:"路", c:24 }, { n:"约翰福音", f:"约", c:21 }, { n:"使徒行传", f:"徒", c:28 }, { n:"罗马书", f:"罗", c:16 }, { n:"哥林多前书", f:"林前", c:16 }, { n:"哥林多后书", f:"林后", c:13 }, { n:"加拉太书", f:"加", c:6 }, { n:"以弗所书", f:"弗", c:6 }, { n:"腓立比书", f:"腓", c:4 }, { n:"歌罗西书", f:"西", c:4 }, { n:"帖撒罗尼迦前书", f:"帖前", c:5 }, { n:"帖撒罗尼迦后书", f:"帖后", c:3 }, { n:"提摩太前书", f:"提前", c:6 }, { n:"提摩太后书", f:"提后", c:4 }, { n:"提多书", f:"多", c:3 }, { n:"腓利门书", f:"门", c:1 }, { n:"希伯来书", f:"来", c:13 }, { n:"雅各书", f:"雅", c:5 }, { n:"彼得前书", f:"彼前", c:5 }, { n:"彼得后书", f:"彼后", c:3 }, { n:"约翰一书", f:"约一", c:5 }, { n:"约翰二书", f:"约二", c:1 }, { n:"约翰三书", f:"约三", c:1 }, { n:"犹大书", f:"犹", c:1 }, { n:"启示录", f:"启", c:22 }
+    ];
+
+    let state = { book: BIBLE_BOOKS[0], chap: 1, data: null };
+
+    const Controller = {
+        async init() {
+            // 默认显示哀歌（因为你只有这个数据）
+            state.book = BIBLE_BOOKS.find(b => b.f === "哀") || BIBLE_BOOKS[0];
+            await this.fetchData();
+        },
+
+        async fetchData() {
+            const url = window.location.origin + "/bible-data/" + state.book.f + ".json";
+            console.log("Fetching:", url);
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("404: 找不到文件 " + state.book.f + ".json");
+                state.data = await res.json();
+                this.render();
+            } catch (e) {
+                document.getElementById('loading-text').innerText = "加载失败";
+                const errDetail = document.getElementById('error-details');
+                errDetail.style.display = "block";
+                errDetail.innerText = e.message + " (请检查 static/bible-data 文件夹)";
+            }
+        },
+
+        changeBook(f) {
+            state.book = BIBLE_BOOKS.find(b => b.f === f);
+            state.chap = 1;
+            this.fetchData();
+        },
+
+        changeChap(c) {
+            state.chap = c;
+            this.render();
+            window.scrollTo(0,0);
+        },
+
+        render() {
+            const container = document.getElementById('bible-app');
+            const verses = state.data[state.chap] || ["未找到内容"];
+            
+            let html = `
+                <div class="b-header">
+                    <select class="b-select" onchange="B.changeBook(this.value)">
+                        ${BIBLE_BOOKS.map(b => `<option value="${b.f}" ${b.f===state.book.f?'selected':''}>${b.n}</option>`).join('')}
+                    </select>
+                    <div class="b-grid">
+                        ${Array.from({length: state.book.c}, (_, i) => i + 1).map(c => `
+                            <div class="b-btn ${c===state.chap?'active':''}" onclick="B.changeChap(${c})">${c}</div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="b-content">
+                    <h1 style="text-align:center">${state.book.n}</h1>
+                    <p style="text-align:center; opacity:0.6">第 ${state.chap} 章</p>
+                    <hr style="margin:20px 0; border:0; border-top:1px solid var(--b-border)">
+                    ${verses.map((v, i) => `<div class="b-verse"><span class="b-num">${i+1}</span><span>${v}</span></div>`).join('')}
+                </div>
+                <div class="b-nav">
+                    <button onclick="B.prev()">上一章</button>
+                    <button onclick="B.next()">下一章</button>
+                </div>
+            `;
+            container.innerHTML = html;
+        },
+
+        prev() {
+            if (state.chap > 1) this.changeChap(state.chap - 1);
+            else this.changeBook(BIBLE_BOOKS[BIBLE_BOOKS.findIndex(b=>b.f===state.book.f)-1]?.f || "创");
+        },
+
+        next() {
+            if (state.chap < state.book.c) this.changeChap(state.chap + 1);
+            else this.changeBook(BIBLE_BOOKS[BIBLE_BOOKS.findIndex(b=>b.f===state.book.f)+1]?.f || "启");
+        }
+    };
+
+    window.B = Controller;
+    Controller.init();
+})();
+</script>
+{{- end }}
