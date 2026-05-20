@@ -5,86 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>圣经阅读器</title>
     <style>
-        :root { --bg: #f4f1ea; --text: #2d2621; --border: #d6cfbc; --accent: #8c6d46; --card: #fdfcf9; }
-        @media (prefers-color-scheme: dark) {
-            :root { --bg: #1a1a1b; --text: #d4d4d4; --border: #3e3e3e; --accent: #c9a96e; --card: #242424; }
+        :root {
+            --bg: #f4f1ea; --text: #2d2621; --border: #d6cfbc;
+            --accent: #8c6d46; --card: #fdfcf9;
         }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; margin: 0; display: flex; justify-content: center; }
-        #app { width: 100%; max-width: 800px; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .header { position: sticky; top: 0; background: var(--bg); padding: 10px 0; border-bottom: 1px solid var(--border); z-index: 10; }
-        select { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 6px; margin-top: 10px; max-height: 120px; overflow-y: auto; padding: 5px; }
-        .btn { padding: 8px 0; text-align: center; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 14px; background: var(--card); }
-        .btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-        .content { padding: 30px 0; }
-        .verse { margin-bottom: 12px; line-height: 1.8; font-size: 1.1rem; display: flex; }
-        .num { color: var(--accent); font-weight: bold; margin-right: 12px; min-width: 25px; text-align: right; font-family: monospace; }
-        .nav-btns { display: flex; gap: 10px; margin: 20px 0 50px; }
-        .nav-btns button { flex: 1; padding: 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); cursor: pointer; font-weight: bold; }
-        .error { color: #e53e3e; background: #fff5f5; padding: 20px; border-radius: 8px; border: 1px solid #feb2b2; text-align: center; }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1b; --text: #d4d4d4; --border: #3e3e3e;
+                --accent: #c9a96e; --card: #242424;
+            }
+        }
+        body { background: var(--bg); color: var(--text); font-family: "Noto Serif SC", serif; margin: 0; display: flex; justify-content: center; line-height: 1.8; }
+        #app { width: 100%; max-width: 800px; padding: 0 20px 100px; }
+        
+        /* 头部控制区 */
+        #h { position: sticky; top: 0; background: var(--bg); padding: 15px 0; border-bottom: 1px solid var(--border); z-index: 99; }
+        select { width: 100%; padding: 12px; font-size: 16px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); outline: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 8px; margin-top: 15px; max-height: 120px; overflow-y: auto; scrollbar-width: none; }
+        .grid::-webkit-scrollbar { display: none; }
+        .btn { padding: 10px 0; text-align: center; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: 14px; background: var(--card); }
+        .btn.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: bold; }
+        
+        /* 正文区 */
+        #v { padding: 30px 0; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .line { margin-bottom: 16px; display: flex; font-size: 1.15rem; }
+        .num { color: var(--accent); font-weight: bold; margin-right: 15px; min-width: 25px; text-align: right; font-size: 0.9em; margin-top: 4px; opacity: 0.7; }
+        
+        /* 底部导航 */
+        .nav { position: fixed; bottom: 20px; width: calc(100% - 40px); max-width: 760px; display: flex; gap: 12px; }
+        .nav button { flex: 1; padding: 16px; border-radius: 12px; border: none; background: var(--accent); color: white; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .nav button:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
     <div id="app">
-        <div id="loading" style="text-align: center; padding-top: 100px;">正在载入圣经数据...</div>
+        <div id="h">
+            <select id="sel" onchange="go(this.value, 1)"></select>
+            <div id="grid" class="grid"></div>
+        </div>
+        <div id="v"></div>
+        <div class="nav">
+            <button onclick="nav(-1)">上一章</button>
+            <button onclick="nav(1)">下一章</button>
+        </div>
     </div>
 
 <script>
-const BIBLE_BOOKS = [
-    { n:"创世记", f:"创", c:50 }, { n:"出埃及记", f:"出", c:40 }, { n:"利未记", f:"利", c:27 }, { n:"民数记", f:"民", c:36 }, { n:"申命记", f:"申", c:34 }, { n:"约书亚记", f:"书", c:24 }, { n:"士师记", f:"士", c:21 }, { n:"路得记", f:"得", c:4 }, { n:"撒母耳记上", f:"撒上", c:31 }, { n:"撒母耳记下", f:"撒下", c:24 }, { n:"列王纪上", f:"王上", c:22 }, { n:"列王纪下", f:"王下", c:25 }, { n:"历代志上", f:"代上", c:29 }, { n:"历代志下", f:"代下", c:36 }, { n:"以斯拉记", f:"斯", c:10 }, { n:"尼希米记", f:"尼", c:13 }, { n:"以斯帖记", f:"帖", c:10 }, { n:"约伯记", f:"伯", c:42 }, { n:"诗篇", f:"诗", c:150 }, { n:"箴言", f:"箴", c:31 }, { n:"传道书", f:"传", c:12 }, { n:"雅歌", f:"歌", c:8 }, { n:"以赛亚书", f:"赛", c:66 }, { n:"耶利米书", f:"耶", c:52 }, { n:"耶利米哀歌", f:"哀", c:5 }, { n:"以西结书", f:"结", c:48 }, { n:"但以理书", f:"但", c:12 }, { n:"何西阿书", f:"何", c:14 }, { n:"约珥书", f:"珥", c:3 }, { n:"阿摩司书", f:"摩", c:9 }, { n:"俄巴底亚书", f:"俄", c:1 }, { n:"约拿书", f:"拿", c:4 }, { n:"弥迦书", f:"弥", c:7 }, { n:"那鸿书", f:"鸿", c:3 }, { n:"哈巴谷书", f:"哈", c:3 }, { n:"西番雅书", f:"番", c:3 }, { n:"哈该书", f:"该", c:2 }, { n:"撒迦利亚书", f:"亚", c:14 }, { n:"玛拉基书", f:"玛", c:4 }, { n:"马太福音", f:"太", c:28 }, { n:"马可福音", f:"可", c:16 }, { n:"路加福音", f:"路", c:24 }, { n:"约翰福音", f:"约", c:21 }, { n:"使徒行传", f:"徒", c:28 }, { n:"罗马书", f:"罗", c:16 }, { n:"哥林多前书", f:"林前", c:16 }, { n:"哥林多后书", f:"林后", c:13 }, { n:"加拉太书", f:"加", c:6 }, { n:"以弗所书", f:"弗", c:6 }, { n:"腓立比书", f:"腓", c:4 }, { n:"歌罗西书", f:"西", c:4 }, { n:"帖撒罗尼迦前书", f:"帖前", c:5 }, { n:"帖撒罗尼迦后书", f:"帖后", c:3 }, { n:"提摩太前书", f:"提前", c:6 }, { n:"提摩太后书", f:"提后", c:4 }, { n:"提多书", f:"多", c:3 }, { n:"腓利门书", f:"门", c:1 }, { n:"希伯来书", f:"来", c:13 }, { n:"雅各书", f:"雅", c:5 }, { n:"彼得前书", f:"彼前", c:5 }, { n:"彼得后书", f:"彼后", c:3 }, { n:"约翰一书", f:"约一", c:5 }, { n:"约翰二书", f:"约二", c:1 }, { n:"约翰三书", f:"约三", c:1 }, { n:"犹大书", f:"犹", c:1 }, { n:"启示录", f:"启", c:22 }
-];
+const B = "创世记,创,50|出埃及记,出,40|利未记,利,27|民数记,民,36|申命记,申,34|约书亚记,书,24|士师记,士,21|路得记,得,4|撒母耳记上,撒上,31|撒母耳记下,撒下,24|列王纪上,王上,22|列王纪下,王下,25|历代志上,代上,29|历代志下,代下,36|以斯拉记,斯,10|尼希米记,尼,13|以斯帖记,帖,10|约伯记,伯,42|诗篇,诗,150|箴言,箴,31|传道书,传,12|雅歌,歌,8|以赛亚书,赛,66|耶利米书,耶,52|耶利米哀歌,哀,5|以西结书,结,48|但以理书,但,12|何西阿书,何,14|约珥书,珥,3|阿摩司书,摩,9|俄巴底亚书,俄,1|约拿书,拿,4|弥迦书,弥,7|那鸿书,鸿,3|哈巴谷书,哈,3|西番雅书,番,3|哈该书,该,2|撒迦利亚书,亚,14|玛拉基书,玛,4|马太福音,太,28|马可福音,可,16|路加福音,路,24|约翰福音,约,21|使徒行传,徒,28|罗马书,罗,16|哥林多前书,林前,16|哥林多后书,林后,13|加拉太书,加,6|以弗所书,弗,6|腓立比书,腓,4|歌罗西书,西,4|帖撒罗尼迦前书,帖前,5|帖撒罗尼迦后书,帖后,3|提摩太前书,提前,6|提摩太后书,提后,4|提多书,多,3|腓利门书,门,1|希伯来书,来,13|雅各书,雅,5|彼得前书,彼前,5|彼得后书,彼后,3|约翰一书,约一,5|约翰二书,约二,1|约翰三书,约三,1|犹大书,犹,1|启示录,启,22".split('|').map(x=>x.split(','));
 
-let state = { book: BIBLE_BOOKS[0], chap: 1, data: null };
+let bk = localStorage.bk || 0, ch = localStorage.ch || 1, cache = {};
 
-async function loadData() {
-    // 因为访问的是 /bible.html，数据在 /bible-data/，所以用相对路径 ./bible-data/
-    const url = `./bible-data/${state.book.f}.json`;
-    try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`找不到文件: bible-data/${state.book.f}.json`);
-        state.data = await res.json();
-        render();
-    } catch (e) {
-        document.getElementById('app').innerHTML = `<div class="error"><h3>加载失败</h3><p>${e.message}</p></div>`;
+// 初始化
+sel.innerHTML = B.map((x,i)=>`<option value=${i} ${i==bk?'selected':''}>${x[0]}</option>`).join('');
+
+async function go(bi, ci) {
+    bk = parseInt(bi); ch = parseInt(ci);
+    localStorage.bk = bk; localStorage.ch = ch;
+    sel.value = bk;
+
+    // 章节网格渲染
+    grid.innerHTML = Array.from({length:B[bk][2]}, (_,i)=>`<div class="btn ${i+1==ch?'active':''}" onclick="go(${bk},${i+1})">${i+1}</div>`).join('');
+    const act = grid.querySelector('.active'); if(act) act.scrollIntoView({block:'nearest'});
+
+    // 缓存加载逻辑
+    const k = B[bk][1];
+    if (!cache[k]) {
+        const local = localStorage.getItem(k);
+        if (local) cache[k] = JSON.parse(local);
+        else {
+            v.innerHTML = "<center>读取中...</center>";
+            cache[k] = await fetch(`./bible-data/${k}.json`).then(r=>r.json());
+            localStorage.setItem(k, JSON.stringify(cache[k]));
+        }
     }
+
+    // 内容渲染
+    v.innerHTML = `<h1 style="text-align:center">${B[bk][0]}</h1><p style="text-align:center;opacity:0.5">第 ${ch} 章</p><hr style="border:0;border-top:1px solid var(--border);margin:20px 0">` + 
+        (cache[k][ch]||[]).map((t,i)=>`<div class="line"><span class="num">${i+1}</span><span>${t}</span></div>`).join('');
+    window.scrollTo(0, 0);
 }
 
-function render() {
-    const verses = state.data[state.chap] || ["本章内容暂缺"];
-    let chaps = "";
-    for(let i=1; i<=state.book.c; i++) {
-        chaps += `<div class="btn ${i===state.chap?'active':''}" onclick="setChap(${i})">${i}</div>`;
-    }
-
-    document.getElementById('app').innerHTML = `
-        <div class="header">
-            <select onchange="setBook(this.value)">
-                ${BIBLE_BOOKS.map(b => `<option value="${b.f}" ${b.f===state.book.f?'selected':''}>${b.n}</option>`).join('')}
-            </select>
-            <div class="grid">${chaps}</div>
-        </div>
-        <div class="content">
-            <h1 style="text-align:center">${state.book.n}</h1>
-            <p style="text-align:center; opacity:0.6">第 ${state.chap} 章</p>
-            <hr style="border:0; border-top:1px solid var(--border); margin:20px 0;">
-            ${verses.map((v, i) => `<div class="verse"><span class="num">${i+1}</span><span>${v}</span></div>`).join('')}
-        </div>
-        <div class="nav-btns">
-            <button onclick="prev()">上一章</button>
-            <button onclick="next()">下一章</button>
-        </div>
-    `;
-    window.scrollTo(0,0);
+function nav(d) {
+    let n = parseInt(ch) + d;
+    if (n < 1) bk > 0 ? go(bk-1, B[bk-1][2]) : 0;
+    else if (n > B[bk][2]) bk < 65 ? go(bk+1, 1) : 0;
+    else go(bk, n);
 }
 
-window.setBook = (f) => { state.book = BIBLE_BOOKS.find(b=>b.f===f); state.chap = 1; loadData(); };
-window.setChap = (c) => { state.chap = c; render(); };
-window.prev = () => { if(state.chap > 1) setChap(state.chap-1); else setBook(BIBLE_BOOKS[BIBLE_BOOKS.findIndex(b=>b.f===state.book.f)-1]?.f || "启"); };
-window.next = () => { if(state.chap < state.book.c) setChap(state.chap+1); else setBook(BIBLE_BOOKS[BIBLE_BOOKS.findIndex(b=>b.f===state.book.f)+1]?.f || "创"); };
-
-// 初始化，默认显示哀歌（如果你只有这个数据）
-state.book = BIBLE_BOOKS.find(b => b.f === "哀") || BIBLE_BOOKS[0];
-loadData();
+// 启动
+go(bk, ch);
 </script>
 </body>
 </html>
