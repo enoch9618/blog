@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Enoch</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://blog-eyt.pages.dev/posts/</link>
     <description>Recent content in Posts on Enoch</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 21 May 2026 02:10:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog-eyt.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>胡义恒的成长记录</title>
-      <link>http://localhost:1313/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</link>
+      <link>https://blog-eyt.pages.dev/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Thu, 21 May 2026 02:10:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</guid>
       <description>&lt;p&gt;&lt;img alt=&#34;IMG_20260515_211307_897&#34; loading=&#34;lazy&#34; src=&#34;_res/IMG_20260515_211307_897.jpg&#34;&gt;
 在上夜班的时候，翻到相册里胡义恒的照片，被治愈了。我的宝宝，你太可爱了&lt;/p&gt;
 &lt;p&gt;今天是2026年5月22日，胡义恒宝宝满三月了。今天和宝妈一起带宝宝去妇保体检了，又给他剪了舌系带。&lt;/p&gt;</description>
     </item>
     <item>
       <title>正常的基督徒生活 读书笔记</title>
-      <link>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 May 2026 13:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;什么是正常的基督徒生活？&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -33,16 +33,16 @@
     </item>
     <item>
       <title>手机第一篇</title>
-      <link>http://localhost:1313/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Tue, 19 May 2026 16:10:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>&lt;p&gt;test&lt;/p&gt;</description>
     </item>
     <item>
       <title>我的第一篇博客</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
+      <link>https://blog-eyt.pages.dev/posts/my-first-post/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/my-first-post/</guid>
       <description>&lt;h2 id=&#34;hello-hugo&#34;&gt;Hello Hugo!&lt;/h2&gt;
 &lt;p&gt;这是我用Hugo搭建的第一篇博客。通过Cloudflare Pages部署真是太方便了！&lt;/p&gt;
 &lt;h3 id=&#34;我学到了什么&#34;&gt;我学到了什么&lt;/h3&gt;

@@ -1,155 +1,186 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const targets = document.querySelectorAll('.jianpu-render-target');
-    targets.forEach(target => {
-        const source = target.getAttribute('data-source').trim();
-        const renderer = new JianpuRenderer(source);
-        target.innerHTML = ''; // 清空加载文字
-        target.appendChild(renderer.render());
-    });
-});
-
 class JianpuRenderer {
     constructor(text) {
-        this.lines = text.split('\n').map(l => l.trim());
-        this.meta = {};
-        this.scoreGroups = []; // [{qTokens: [], cTokens: []}]
+        this.raw = text;
+        this.meta = { title: '', author: '', key: 'C', meter: '4/4' };
+        this.sections = []; // [{q: [], l: []}]
         this.parse();
     }
 
     parse() {
-        let lastQ = null;
-        this.lines.forEach(line => {
-            const cmd = line.substring(0, 2);
-            const content = line.substring(2).trim();
-            if (cmd === "B:") this.meta.title = content;
-            else if (cmd === "Z:") this.meta.author = content;
-            else if (cmd === "D:") this.meta.key = content;
-            else if (cmd === "P:") this.meta.meter = content;
-            else if (cmd === "Q:") {
-                // 将 Q 行按空格切分，过滤掉空项
-                lastQ = content.split(/\s+/).filter(t => t.length > 0);
-            } else if (cmd === "C:") {
-                if (lastQ) {
-                    const cTokens = content.split(/\s+/).filter(t => t.length > 0);
-                    this.scoreGroups.push({ q: lastQ, c: cTokens });
-                    lastQ = null;
+        const lines = this.raw.split('\n').map(s => s.trim());
+        
+        lines.forEach(line => {
+            const head = line.substring(0, 2).toUpperCase();
+            const body = line.substring(2).trim();
+
+            if (head === "B:") this.meta.title = body;
+            else if (head === "Z:") this.meta.author = body;
+            else if (head === "D:") this.meta.key = body;
+            else if (head === "P:") this.meta.meter = body;
+            else if (head === "Q:") {
+                // 每遇到一个 Q: 就开辟一个新段落
+                this.sections.push({ 
+                    q: body.split(/\s+/).filter(t => t), 
+                    l: [] 
+                });
+            } 
+            else if (head === "L:" || head === "C:") {
+                // L: 或 C: 都视为歌词，关联到当前最新的 Q: 段落
+                if (this.sections.length > 0) {
+                    const currentSection = this.sections[this.sections.length - 1];
+                    const lyricTokens = body.split(/\s+/).filter(t => t);
+                    // 允许一个 Q: 对应多行歌词（这里简单合并，或者你可以扩展支持多行）
+                    currentSection.l = currentSection.l.concat(lyricTokens);
                 }
             }
         });
-        // 如果最后一行 Q 没配对 C
-        if (lastQ) this.scoreGroups.push({ q: lastQ, c: [] });
     }
 
     render() {
         const svgNS = "http://www.w3.org/2000/svg";
         const svg = document.createElementNS(svgNS, "svg");
-        const width = 800;
-        const padding = 40;
+        const W = 800; 
+        const PAD = 40;
         let y = 40;
 
-        // 1. 标题和元信息
+        // 1. 元数据渲染
         if (this.meta.title) {
-            this.drawText(svg, width/2, y, this.meta.title, 26, "middle", true);
-            y += 40;
+            this.drawText(svg, W/2, y, this.meta.title, 28, "middle", true);
+            y += 45;
         }
-        if (this.meta.key || this.meta.meter) {
-            this.drawText(svg, padding, y, `1 = ${this.meta.key || 'C'}  ${this.meta.meter || '4/4'}`, 18);
-            if (this.meta.author) this.drawText(svg, width - padding, y, this.meta.author, 16, "end");
-            y += 50;
-        }
+        this.drawText(svg, PAD, y, `1 = ${this.meta.key}  ${this.meta.meter}`, 18);
+        if (this.meta.author) this.drawText(svg, W - PAD, y, this.meta.author, 16, "end");
+        y += 60; // 留出第一行乐谱的距离
 
-        // 2. 渲染每一行乐谱
-        this.scoreGroups.forEach(group => {
-            y = this.renderGroup(svg, group, y, width, padding);
+        // 2. 段落渲染
+        this.sections.forEach(sec => {
+            y = this.renderSection(svg, sec, y, W, PAD);
         });
 
-        svg.setAttribute("viewBox", `0 0 ${width} ${y + 20}`);
-        svg.setAttribute("width", "100%");
+        svg.setAttribute("viewBox", `0 0 ${W} ${y + 50}`);
+        svg.setAttribute("style", "max-width: 100%; height: auto; background: white;");
         return svg;
     }
 
-    renderGroup(svg, group, startY, width, padding) {
-        const qList = group.q;
-        const cList = group.c;
-        
-        // 关键：计算槽位。以 Q 行的 token 数量为基准
-        const totalSlots = qList.length;
-        const slotWidth = (width - 2 * padding) / (totalSlots - 1 || 1);
-        
-        let cIdx = 0;
-        qList.forEach((token, i) => {
-            const x = padding + (i * slotWidth);
-            
-            // 绘制小节线
-            if (token === "|") {
-                this.drawLine(svg, x, startY - 15, x, startY + 15, 2);
-                // 歌词如果也是小节线，跳过
-                if (cList[cIdx] === "|") cIdx++;
+    renderSection(svg, sec, startY, W, PAD) {
+        const qArr = sec.q;
+        const lArr = sec.l;
+        // 计算每个 token 占用的平均宽度
+        const slotW = (W - 2 * PAD) / (qArr.length > 1 ? qArr.length - 1 : 1);
+        let lIdx = 0;
+
+        qArr.forEach((token, i) => {
+            const x = PAD + i * slotW;
+
+            // 1. 跳过单纯的连音线符号（不占位或仅占位）
+            if (token === "(" || token === ")") return;
+
+            // 2. 小节线渲染
+            if (token.match(/[|:|!]/)) {
+                this.drawBar(svg, x, startY, token);
+                // 如果歌词里也有小节线占位符，消耗掉它
+                if (lArr[lIdx] === "|") lIdx++;
                 return;
             }
 
-            // 解析音符核心 (支持 1-7, 0, -)
-            const noteMatch = token.match(/[0-7-]/);
-            if (noteMatch) {
-                const noteChar = noteMatch[0];
-                
-                // 渲染音符（或增时线）
-                if (noteChar === "-") {
-                    this.drawLine(svg, x - 10, startY, x + 10, startY, 1.5);
+            // 3. 音符解析 (1-7, 0, - 及其后缀)
+            const match = token.match(/^([0-7-])(['|,]*)([.]*)(_*)$/);
+            if (match) {
+                const [_, note, oct, dots, beams] = match;
+
+                // 绘制音符或增时线
+                if (note === "-") {
+                    this.drawLine(svg, x - 10, startY, x + 10, startY, 2);
                 } else {
-                    this.drawText(svg, x, startY + 8, noteChar, 22, "middle", true);
+                    this.drawText(svg, x, startY + 8, note, 24, "middle", true);
                 }
 
-                // 渲染修饰符
-                if (token.includes("'")) this.drawCircle(svg, x, startY - 18, 2); // 高音点
-                if (token.includes(",")) this.drawCircle(svg, x, startY + 18, 2); // 低音点
-                if (token.includes("_")) this.drawLine(svg, x - 12, startY + 15, x + 12, startY + 15, 1.5); // 减时线
-
-                // 渲染歌词：强制对齐到音符下方
-                if (cIdx < cList.length && cList[cIdx] !== "|") {
-                    this.drawText(svg, x, startY + 45, cList[cIdx], 16, "middle", false, "#444");
-                    cIdx++;
-                } else if (cList[cIdx] === "|") {
-                    // 如果歌词里误写了小节线，跳过它找下一个词
-                    cIdx++;
-                    if (cIdx < cList.length) {
-                        this.drawText(svg, x, startY + 45, cList[cIdx], 16, "middle", false, "#444");
-                        cIdx++;
+                // 高低音点
+                if (oct) {
+                    const isHigh = oct.includes("'");
+                    for (let j = 0; j < oct.length; j++) {
+                        const off = isHigh ? -(22 + j * 7) : (20 + j * 7);
+                        this.drawCircle(svg, x, startY + off, 2);
                     }
+                }
+
+                // 附点
+                if (dots) {
+                    for (let j = 0; j < dots.length; j++) {
+                        this.drawCircle(svg, x + 15 + j * 6, startY + 4, 1.5);
+                    }
+                }
+
+                // 减时线
+                if (beams) {
+                    for (let j = 0; j < beams.length; j++) {
+                        const off = 16 + j * 6;
+                        this.drawLine(svg, x - 12, startY + off, x + 12, startY + off, 1.5);
+                    }
+                }
+
+                // 4. 歌词渲染 (核心对齐逻辑)
+                if (lIdx < lArr.length && lArr[lIdx] !== "|") {
+                    this.drawText(svg, x, startY + 50, lArr[lIdx], 16, "middle", false, "#333");
+                    lIdx++;
                 }
             }
         });
 
-        return startY + 100; // 返回下一行的起始 Y 坐标
+        return startY + 110; // 返回下一行的 Y 坐标
     }
 
-    // 辅助方法
-    drawText(svg, x, y, txt, size, anchor, bold=false, color="#000") {
-        const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        el.setAttribute("x", x); el.setAttribute("y", y);
-        el.setAttribute("font-size", size);
-        el.setAttribute("text-anchor", anchor);
-        el.setAttribute("font-family", "monospace, sans-serif");
-        if (bold) el.setAttribute("font-weight", "bold");
-        el.style.fill = color;
-        el.textContent = txt;
-        svg.appendChild(el);
+    // 基础绘图函数
+    drawText(svg, x, y, str, size, anchor="start", bold=false, color="#000") {
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("x", x); t.setAttribute("y", y);
+        t.setAttribute("font-size", size);
+        t.setAttribute("text-anchor", anchor);
+        t.setAttribute("font-family", "serif, sans-serif");
+        if (bold) t.setAttribute("font-weight", "bold");
+        t.style.fill = color;
+        t.textContent = str;
+        svg.appendChild(t);
     }
 
-    drawLine(svg, x1, y1, x2, y2, weight) {
-        const el = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        el.setAttribute("x1", x1); el.setAttribute("y1", y1);
-        el.setAttribute("x2", x2); el.setAttribute("y2", y2);
-        el.setAttribute("stroke", "black");
-        el.setAttribute("stroke-width", weight);
-        svg.appendChild(el);
+    drawLine(svg, x1, y1, x2, y2, w) {
+        const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        l.setAttribute("x1", x1); l.setAttribute("y1", y1);
+        l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+        l.setAttribute("stroke", "black");
+        l.setAttribute("stroke-width", w);
+        svg.appendChild(l);
     }
 
     drawCircle(svg, cx, cy, r) {
-        const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        el.setAttribute("cx", cx); el.setAttribute("cy", cy);
-        el.setAttribute("r", r);
-        el.setAttribute("fill", "black");
-        svg.appendChild(el);
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("cx", cx); c.setAttribute("cy", cy);
+        c.setAttribute("r", r);
+        c.setAttribute("fill", "black");
+        svg.appendChild(c);
+    }
+
+    drawBar(svg, x, y, type) {
+        const h = 20;
+        if (type === "|") this.drawLine(svg, x, y - 15, x, y + 15, 1.5);
+        else if (type === "||") {
+            this.drawLine(svg, x - 2, y - 15, x - 2, y + 15, 1);
+            this.drawLine(svg, x + 2, y - 15, x + 2, y + 15, 3);
+        }
+        else if (type === "|:" || type === ":|") {
+            this.drawLine(svg, x, y - 15, x, y + 15, 2.5);
+            const dotX = type === "|:" ? x + 7 : x - 7;
+            this.drawCircle(svg, dotX, y - 6, 1.8);
+            this.drawCircle(svg, dotX, y + 6, 1.8);
+        }
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.jianpu-render-target').forEach(el => {
+        const source = el.getAttribute('data-source').trim();
+        const renderer = new JianpuRenderer(source);
+        el.innerHTML = '';
+        el.appendChild(renderer.render());
+    });
+});
