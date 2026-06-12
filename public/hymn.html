@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>001 救主耶稣</title>
+    <style>
+        /* 核心版面控制 */
+        .sheet {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 40px;
+            font-family: "Georgia", serif;
+            color: #000;
+            line-height: 1;
+        }
+
+        /* 头部：调号、标题、编号 */
+        .sheet-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; }
+        .sheet-header h1 { font-size: 28px; margin: 0; flex: 1; text-align: center; font-weight: bold; }
+        .sheet-header .info { font-size: 18px; font-weight: bold; width: 100px; }
+
+        /* 乐谱行：关键在于固定列宽 */
+        .score-line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px; /* 行间距 */
+            flex-wrap: nowrap;
+        }
+
+        /* 小节容器 */
+        .measure {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        /* 小节线 */
+        .bar {
+            width: 1.5px;
+            height: 45px;
+            background: #000;
+            margin: 0 10px;
+        }
+
+        /* 音符单元：强制上下对齐 */
+        .unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 32px; /* 严格固定宽度，保证垂直一线 */
+        }
+
+        /* 音符数字样式 */
+        .n {
+            font-size: 22px;
+            font-weight: bold;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 歌词文字样式 */
+        .l {
+            font-size: 18px;
+            height: 25px;
+            margin-top: 10px;
+            font-family: "SimSun", serif;
+            white-space: nowrap;
+        }
+
+        /* 修饰：高音点 */
+        .n.hi::before { content: "·"; position: absolute; top: -12px; font-size: 24px; }
+        /* 修饰：低音点 */
+        .n.lo::after { content: "·"; position: absolute; bottom: -12px; font-size: 24px; }
+        
+        /* 减时线（单线） */
+        .n.under::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            width: 80%;
+            height: 1.5px;
+            background: #000;
+        }
+
+        /* 连音线 (Slur) - 纯CSS实现圆弧 */
+        .slur-container {
+            position: absolute;
+            top: -5px;
+            left: 10%;
+            width: 80%;
+            height: 10px;
+            border-top: 1.5px solid #000;
+            border-radius: 50% 50% 0 0;
+        }
+
+        /* 附点 */
+        .n.dot::after { content: "."; position: absolute; right: -8px; bottom: 5px; font-size: 22px; }
+
+        /* 响应式：手机端整体缩放而不是乱排 */
+        @media (max-width: 600px) {
+            .sheet { padding: 10px; transform: scale(0.9); transform-origin: top left; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sheet">
+    <div class="sheet-header">
+        <div class="info"><sup>b</sup>E调 6/8</div>
+        <h1>第 一 首</h1>
+        <div class="info" style="text-align:right">救主耶稣 1</div>
+    </div>
+
+    <!-- 第一行乐谱 -->
+    <div class="score-line">
+        <!-- 段落前缀 -->
+        <div style="font-weight:bold; font-size:20px; margin-right:10px; margin-top:40px;">一</div>
+
+        <!-- 弱起小节 -->
+        <div class="measure">
+            <div class="unit">
+                <div class="n lo">5</div>
+                <div class="l">至</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+
+        <!-- 第一小节 -->
+        <div class="measure">
+            <div class="unit">
+                <div class="n lo under">5</div>
+                <div class="l">大</div>
+            </div>
+            <div class="unit">
+                <div class="unit">
+                    <!-- 连音线包裹 -->
+                    <div class="slur-container"></div>
+                    <div class="n under">3</div>
+                </div>
+                <div class="l">医</div>
+            </div>
+            <div class="unit">
+                <div class="n under">1</div>
+                <div class="l">生</div>
+            </div>
+            <div class="unit">
+                <div class="n under">2</div>
+                <div class="l">现</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+
+        <!-- 第二小节 -->
+        <div class="measure">
+            <div class="unit">
+                <div class="n">3</div>
+                <div class="l">今</div>
+            </div>
+            <div class="unit">
+                <div class="n under">4</div>
+                <div class="l">可</div>
+            </div>
+            <div class="unit">
+                <div class="n">5</div>
+                <div class="l">近</div>
+            </div>
+            <div class="unit">
+                <div class="n">5</div>
+                <div class="l">满</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+
+        <!-- 第三小节 -->
+        <div class="measure">
+            <div class="unit">
+                <div class="n">5</div>
+                <div class="l">有</div>
+            </div>
+            <div class="unit">
+                <div class="n under">1</div>
+                <div class="l">同</div>
+            </div>
+            <div class="unit">
+                <div class="n under">3</div>
+                <div class="l">情</div>
+            </div>
+            <div class="unit">
+                <div class="n under">1</div>
+                <div class="l">的</div>
+            </div>
+            <div class="bar"></div>
+        </div>
+
+        <!-- 第四小节 -->
+        <div class="measure">
+            <div class="unit">
+                <div class="n dot">2</div>
+                <div class="l">耶</div>
+            </div>
+            <div class="unit">
+                <div class="n">1</div>
+                <div class="l">稣</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 副歌行示例 -->
+    <div class="score-line">
+        <div style="font-weight:bold; font-size:20px; margin-right:10px; margin-top:40px;">副</div>
+        <div class="measure">
+            <div class="unit">
+                <div class="slur-container" style="width: 200px;"></div> <!-- 跨越多个音符的连音线 -->
+                <div class="n lo under">5</div>
+                <div class="l">至</div>
+            </div>
+            <div class="unit"><div class="n under">6</div><div class="l">佳</div></div>
+            <div class="unit"><div class="n under">7</div><div class="l">音</div></div>
+            <div class="unit"><div class="n hi under">1</div><div class="l">天</div></div>
+            <div class="unit"><div class="n under">5</div><div class="l">使</div></div>
+            <!-- ... 更多音符 -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

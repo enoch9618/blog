@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hymns on Enoch</title>
+    <link>http://localhost:1313/hymns/</link>
+    <description>Recent content in Hymns on Enoch</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <atom:link href="http://localhost:1313/hymns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>001 救主耶稣</title>
+      <link>http://localhost:1313/hymns/001/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hymns/001/</guid>
+      <description>&lt;h3 id=&#34;第一首救主耶稣&#34;&gt;第一首：救主耶稣&lt;/h3&gt;
+&lt;div class=&#34;jianpu-container&#34; style=&#34;margin: 20px 0; overflow-x: auto;&#34;&gt;
+    &lt;div class=&#34;jp-source&#34; style=&#34;display:none;&#34;&gt;
+j: 5 | 5 3 1 2 | 3 4 5 5 | 5 1 3 1 | 2 . 1 |
+l: 至 | 大 医 生 现 | 今 可 近 满 | 有 同 情 的 | 耶 稣 |
+
+j: ( 5 6 7 ) 1^ 5 | 7 6 5 . | ( 5 6 7 ) 1^ 5 | 7 6 5 . |
+l: 至 佳 音 天 使 在 唱 | 至 尊 名 人 间 无 双 |
+&lt;/div&gt;
+    &lt;div class=&#34;jp-render&#34;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function() {
+    
+    const render = () =&gt; {
+        const containers = document.querySelectorAll(&#39;.jianpu-container&#39;);
+        containers.forEach(el =&gt; {
+            const source = el.querySelector(&#39;.jp-source&#39;).textContent.trim();
+            const target = el.querySelector(&#39;.jp-render&#39;);
+            if (target.children.length === 0) {
+                new Jianpu(source, target, { scale: 1.1 });
+            }
+        });
+    };
+    setTimeout(render, 500);
+})();
+&lt;/script&gt;
+&lt;p&gt;&lt;strong&gt;歌词部分：&lt;/strong&gt;
+二、你罪纵多，祂尽宽恕&amp;hellip;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
