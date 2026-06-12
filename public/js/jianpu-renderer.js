@@ -2,176 +2,177 @@ class JianpuRenderer {
     constructor(text) {
         this.raw = text;
         this.meta = { title: '', author: '', key: 'C', meter: '4/4' };
-        this.sections = []; // [{q: [], l: []}]
+        this.sections = [];
         this.parse();
     }
 
     parse() {
         const lines = this.raw.split('\n').map(s => s.trim());
-        
+        let lastQ = null;
         lines.forEach(line => {
             const head = line.substring(0, 2).toUpperCase();
             const body = line.substring(2).trim();
-
             if (head === "B:") this.meta.title = body;
-            else if (head === "Z:") this.meta.author = body;
             else if (head === "D:") this.meta.key = body;
             else if (head === "P:") this.meta.meter = body;
+            else if (head === "Z:") this.meta.author = body;
             else if (head === "Q:") {
-                // 每遇到一个 Q: 就开辟一个新段落
-                this.sections.push({ 
-                    q: body.split(/\s+/).filter(t => t), 
-                    l: [] 
-                });
-            } 
-            else if (head === "L:" || head === "C:") {
-                // L: 或 C: 都视为歌词，关联到当前最新的 Q: 段落
-                if (this.sections.length > 0) {
-                    const currentSection = this.sections[this.sections.length - 1];
-                    const lyricTokens = body.split(/\s+/).filter(t => t);
-                    // 允许一个 Q: 对应多行歌词（这里简单合并，或者你可以扩展支持多行）
-                    currentSection.l = currentSection.l.concat(lyricTokens);
+                lastQ = body.split(/\s+/).filter(t => t);
+            } else if (head === "L:" || head === "C:") {
+                if (lastQ) {
+                    // 1. 过滤掉辅助线 | 
+                    const rawL = body.split(/\s+/).filter(t => t && t !== "|");
+                    const processedL = [];
+                    rawL.forEach(token => {
+                        // 2. 检查是否是纯标点符号
+                        if (/^[，。？！、；：,.?!;:]+$/.test(token) && processedL.length > 0) {
+                            // 如果是纯标点，追加到上一个词里，并标记它含有标点
+                            const lastItem = processedL[processedL.length - 1];
+                            lastItem.punc += token;
+                        } else {
+                            // 识别词汇和它自带的尾随标点
+                            const match = token.match(/^([^，。？！、；：,.?!;:]+)([，。？！、；：,.?!;:]*)$/);
+                            if (match) {
+                                processedL.push({ text: match[1], punc: match[2] });
+                            } else {
+                                processedL.push({ text: token, punc: '' });
+                            }
+                        }
+                    });
+                    this.sections.push({ q: lastQ, l: processedL });
+                    lastQ = null;
                 }
             }
         });
+        if (lastQ) this.sections.push({ q: lastQ, l: [] });
     }
 
     render() {
         const svgNS = "http://www.w3.org/2000/svg";
         const svg = document.createElementNS(svgNS, "svg");
-        const W = 800; 
-        const PAD = 40;
-        let y = 40;
+        const W = 800, PAD = 40; 
+        let y = 45;
 
-        // 1. 元数据渲染
         if (this.meta.title) {
             this.drawText(svg, W/2, y, this.meta.title, 28, "middle", true);
-            y += 45;
+            y += 50;
         }
         this.drawText(svg, PAD, y, `1 = ${this.meta.key}  ${this.meta.meter}`, 18);
         if (this.meta.author) this.drawText(svg, W - PAD, y, this.meta.author, 16, "end");
-        y += 60; // 留出第一行乐谱的距离
+        y += 75;
 
-        // 2. 段落渲染
         this.sections.forEach(sec => {
-            y = this.renderSection(svg, sec, y, W, PAD);
+            y = this.renderLine(svg, sec, y, W, PAD);
         });
 
-        svg.setAttribute("viewBox", `0 0 ${W} ${y + 50}`);
-        svg.setAttribute("style", "max-width: 100%; height: auto; background: white;");
+        svg.setAttribute("viewBox", `0 0 ${W} ${y + 40}`);
+        svg.setAttribute("style", "width:100%; height:auto; background:white;");
         return svg;
     }
 
-    renderSection(svg, sec, startY, W, PAD) {
+    renderLine(svg, sec, startY, W, PAD) {
         const qArr = sec.q;
         const lArr = sec.l;
-        // 计算每个 token 占用的平均宽度
         const slotW = (W - 2 * PAD) / (qArr.length > 1 ? qArr.length - 1 : 1);
-        let lIdx = 0;
+        let lIdx = 0; 
 
         qArr.forEach((token, i) => {
             const x = PAD + i * slotW;
 
-            // 1. 跳过单纯的连音线符号（不占位或仅占位）
-            if (token === "(" || token === ")") return;
-
-            // 2. 小节线渲染
-            if (token.match(/[|:|!]/)) {
+            // 绘制小节线
+            if (token.match(/^[|:!]+$/)) {
                 this.drawBar(svg, x, startY, token);
-                // 如果歌词里也有小节线占位符，消耗掉它
-                if (lArr[lIdx] === "|") lIdx++;
                 return;
             }
 
-            // 3. 音符解析 (1-7, 0, - 及其后缀)
             const match = token.match(/^([0-7-])(['|,]*)([.]*)(_*)$/);
             if (match) {
                 const [_, note, oct, dots, beams] = match;
 
-                // 绘制音符或增时线
                 if (note === "-") {
-                    this.drawLine(svg, x - 10, startY, x + 10, startY, 2);
+                    this.drawLine(svg, x - 12, startY, x + 12, startY, 2);
                 } else {
+                    // 绘制音符
                     this.drawText(svg, x, startY + 8, note, 24, "middle", true);
+                    
+                    // 绘制歌词：关键对齐算法
+                    if (lIdx < lArr.length) {
+                        const wordObj = lArr[lIdx];
+                        // 核心：只对汉字文本进行居中，标点符号另行追加
+                        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                        
+                        // 1. 绘制汉字（绝对居中）
+                        const t1 = this.drawText(g, x, startY + 55, wordObj.text, 16, "middle", false, "#333");
+                        
+                        // 2. 绘制标点（靠左对齐在汉字右侧，不参与居中计算）
+                        if (wordObj.punc) {
+                            // 估算汉字宽度的一半偏移量，让标点紧跟其后
+                            this.drawText(g, x + 9, startY + 55, wordObj.punc, 16, "start", false, "#666");
+                        }
+                        
+                        svg.appendChild(g);
+                        lIdx++; 
+                    }
                 }
 
-                // 高低音点
+                // 装饰符
                 if (oct) {
-                    const isHigh = oct.includes("'");
-                    for (let j = 0; j < oct.length; j++) {
-                        const off = isHigh ? -(22 + j * 7) : (20 + j * 7);
-                        this.drawCircle(svg, x, startY + off, 2);
-                    }
+                    const high = oct.includes("'");
+                    for (let j=0; j<oct.length; j++) 
+                        this.drawCircle(svg, x, startY + (high? -(22+j*7) : (22+j*7)), 2);
                 }
-
-                // 附点
                 if (dots) {
-                    for (let j = 0; j < dots.length; j++) {
-                        this.drawCircle(svg, x + 15 + j * 6, startY + 4, 1.5);
-                    }
+                    for (let j=0; j<dots.length; j++) 
+                        this.drawCircle(svg, x + 16 + j*6, startY + 4, 1.5);
                 }
-
-                // 减时线
                 if (beams) {
-                    for (let j = 0; j < beams.length; j++) {
-                        const off = 16 + j * 6;
-                        this.drawLine(svg, x - 12, startY + off, x + 12, startY + off, 1.5);
-                    }
-                }
-
-                // 4. 歌词渲染 (核心对齐逻辑)
-                if (lIdx < lArr.length && lArr[lIdx] !== "|") {
-                    this.drawText(svg, x, startY + 50, lArr[lIdx], 16, "middle", false, "#333");
-                    lIdx++;
+                    for (let j=0; j<beams.length; j++) 
+                        this.drawLine(svg, x-14, startY+(16+j*6), x+14, startY+(16+j*6), 1.6);
                 }
             }
         });
 
-        return startY + 110; // 返回下一行的 Y 坐标
+        return startY + 120;
     }
 
-    // 基础绘图函数
-    drawText(svg, x, y, str, size, anchor="start", bold=false, color="#000") {
-        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        t.setAttribute("x", x); t.setAttribute("y", y);
-        t.setAttribute("font-size", size);
-        t.setAttribute("text-anchor", anchor);
-        t.setAttribute("font-family", "serif, sans-serif");
-        if (bold) t.setAttribute("font-weight", "bold");
-        t.style.fill = color;
-        t.textContent = str;
-        svg.appendChild(t);
+    drawText(parent, x, y, t, s, a, b, c) {
+        const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        el.setAttribute("x", x); el.setAttribute("y", y);
+        el.setAttribute("font-size", s); el.setAttribute("text-anchor", a);
+        el.setAttribute("font-family", "Noto Serif SC, SimSun, serif");
+        if (b) el.setAttribute("font-weight", "bold");
+        el.style.fill = c || "#000";
+        el.textContent = t;
+        parent.appendChild(el);
+        return el;
     }
 
     drawLine(svg, x1, y1, x2, y2, w) {
-        const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        l.setAttribute("x1", x1); l.setAttribute("y1", y1);
-        l.setAttribute("x2", x2); l.setAttribute("y2", y2);
-        l.setAttribute("stroke", "black");
-        l.setAttribute("stroke-width", w);
-        svg.appendChild(l);
+        const el = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        el.setAttribute("x1", x1); el.setAttribute("y1", y1);
+        el.setAttribute("x2", x2); el.setAttribute("y2", y2);
+        el.setAttribute("stroke", "black"); el.setAttribute("stroke-width", w);
+        svg.appendChild(el);
     }
 
     drawCircle(svg, cx, cy, r) {
-        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        c.setAttribute("cx", cx); c.setAttribute("cy", cy);
-        c.setAttribute("r", r);
-        c.setAttribute("fill", "black");
-        svg.appendChild(c);
+        const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        el.setAttribute("cx", cx); el.setAttribute("cy", cy); el.setAttribute("r", r);
+        el.setAttribute("fill", "black");
+        svg.appendChild(el);
     }
 
     drawBar(svg, x, y, type) {
         const h = 20;
-        if (type === "|") this.drawLine(svg, x, y - 15, x, y + 15, 1.5);
+        if (type === "|") this.drawLine(svg, x, y-h, x, y+h, 1.5);
         else if (type === "||") {
-            this.drawLine(svg, x - 2, y - 15, x - 2, y + 15, 1);
-            this.drawLine(svg, x + 2, y - 15, x + 2, y + 15, 3);
-        }
-        else if (type === "|:" || type === ":|") {
-            this.drawLine(svg, x, y - 15, x, y + 15, 2.5);
-            const dotX = type === "|:" ? x + 7 : x - 7;
-            this.drawCircle(svg, dotX, y - 6, 1.8);
-            this.drawCircle(svg, dotX, y + 6, 1.8);
+            this.drawLine(svg, x-3, y-h, x-3, y+h, 1);
+            this.drawLine(svg, x+3, y-h, x+3, y+h, 3);
+        } else if (type === "|:" || type === ":|") {
+            this.drawLine(svg, x, y-h, x, y+h, 2.5);
+            const dx = (type === "|:") ? 8 : -8;
+            this.drawCircle(svg, x+dx, y-6, 2);
+            this.drawCircle(svg, x+dx, y+6, 2);
         }
     }
 }
