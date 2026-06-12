@@ -20,17 +20,22 @@ class JianpuRenderer {
                 lastQ = body.split(/\s+/).filter(t => t);
             } else if (head === "L:" || head === "C:") {
                 if (lastQ) {
-                    // 1. 过滤掉辅助线 | 
                     const rawL = body.split(/\s+/).filter(t => t && t !== "|");
+                    let rowLabel = "";
+                    
+                    // --- 智能识别行首标签（一、二、三... 或 副） ---
+                    if (rawL.length > 0) {
+                        const firstToken = rawL[0];
+                        if (/^[一二三四五六七八九十副]$/.test(firstToken)) {
+                            rowLabel = rawL.shift(); // 移出数组，作为标签处理
+                        }
+                    }
+
                     const processedL = [];
                     rawL.forEach(token => {
-                        // 2. 检查是否是纯标点符号
                         if (/^[，。？！、；：,.?!;:]+$/.test(token) && processedL.length > 0) {
-                            // 如果是纯标点，追加到上一个词里，并标记它含有标点
-                            const lastItem = processedL[processedL.length - 1];
-                            lastItem.punc += token;
+                            processedL[processedL.length - 1].punc += token;
                         } else {
-                            // 识别词汇和它自带的尾随标点
                             const match = token.match(/^([^，。？！、；：,.?!;:]+)([，。？！、；：,.?!;:]*)$/);
                             if (match) {
                                 processedL.push({ text: match[1], punc: match[2] });
@@ -39,38 +44,44 @@ class JianpuRenderer {
                             }
                         }
                     });
-                    this.sections.push({ q: lastQ, l: processedL });
+                    this.sections.push({ q: lastQ, l: processedL, label: rowLabel });
                     lastQ = null;
                 }
             }
         });
-        if (lastQ) this.sections.push({ q: lastQ, l: [] });
+        if (lastQ) this.sections.push({ q: lastQ, l: [], label: "" });
     }
 
     render() {
         const svgNS = "http://www.w3.org/2000/svg";
         const svg = document.createElementNS(svgNS, "svg");
-        const W = 800, PAD = 40; 
+        const W = 800, PAD = 50; // 稍微加大左边距
         let y = 45;
 
         if (this.meta.title) {
-            this.drawText(svg, W/2, y, this.meta.title, 28, "middle", true);
-            y += 50;
+            this.drawText(svg, W/2, y, this.meta.title, 32, "middle", true);
+            y += 60;
         }
-        this.drawText(svg, PAD, y, `1 = ${this.meta.key}  ${this.meta.meter}`, 18);
-        if (this.meta.author) this.drawText(svg, W - PAD, y, this.meta.author, 16, "end");
-        y += 75;
+        this.drawText(svg, PAD, y, `1 = ${this.meta.key}  ${this.meta.meter}`, 20);
+        if (this.meta.author) this.drawText(svg, W - PAD, y, this.meta.author, 18, "end");
+        y += 85;
 
         this.sections.forEach(sec => {
             y = this.renderLine(svg, sec, y, W, PAD);
         });
 
-        svg.setAttribute("viewBox", `0 0 ${W} ${y + 40}`);
+        svg.setAttribute("viewBox", `0 0 ${W} ${y + 50}`);
         svg.setAttribute("style", "width:100%; height:auto; background:white;");
         return svg;
     }
 
     renderLine(svg, sec, startY, W, PAD) {
+        // --- 渲染行首标签（一、二、副等） ---
+        if (sec.label) {
+            // 放在左边距位置，不占用音符位
+            this.drawText(svg, PAD - 35, startY + 65, sec.label, 22, "start", true, "#000");
+        }
+
         const qArr = sec.q;
         const lArr = sec.l;
         const slotW = (W - 2 * PAD) / (qArr.length > 1 ? qArr.length - 1 : 1);
@@ -78,8 +89,7 @@ class JianpuRenderer {
 
         qArr.forEach((token, i) => {
             const x = PAD + i * slotW;
-
-            // 绘制小节线
+            if (token === "(" || token === ")") return;
             if (token.match(/^[|:!]+$/)) {
                 this.drawBar(svg, x, startY, token);
                 return;
@@ -88,51 +98,41 @@ class JianpuRenderer {
             const match = token.match(/^([0-7-])(['|,]*)([.]*)(_*)$/);
             if (match) {
                 const [_, note, oct, dots, beams] = match;
-
                 if (note === "-") {
-                    this.drawLine(svg, x - 12, startY, x + 12, startY, 2);
+                    this.drawLine(svg, x - 12, startY, x + 12, startY, 2.5);
                 } else {
-                    // 绘制音符
-                    this.drawText(svg, x, startY + 8, note, 24, "middle", true);
-                    
-                    // 绘制歌词：关键对齐算法
+                    this.drawText(svg, x, startY + 8, note, 26, "middle", true);
                     if (lIdx < lArr.length) {
                         const wordObj = lArr[lIdx];
-                        // 核心：只对汉字文本进行居中，标点符号另行追加
-                        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                        
-                        // 1. 绘制汉字（绝对居中）
-                        const t1 = this.drawText(g, x, startY + 55, wordObj.text, 16, "middle", false, "#333");
-                        
-                        // 2. 绘制标点（靠左对齐在汉字右侧，不参与居中计算）
-                        if (wordObj.punc) {
-                            // 估算汉字宽度的一半偏移量，让标点紧跟其后
-                            this.drawText(g, x + 9, startY + 55, wordObj.punc, 16, "start", false, "#666");
+                        if (wordObj.text !== "_") {
+                            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                            this.drawText(g, x, startY + 65, wordObj.text, 22, "middle", false, "#000");
+                            if (wordObj.punc) {
+                                this.drawText(g, x + 12, startY + 65, wordObj.punc, 20, "start", false, "#444");
+                            }
+                            svg.appendChild(g);
                         }
-                        
-                        svg.appendChild(g);
                         lIdx++; 
                     }
                 }
 
-                // 装饰符
                 if (oct) {
                     const high = oct.includes("'");
                     for (let j=0; j<oct.length; j++) 
-                        this.drawCircle(svg, x, startY + (high? -(22+j*7) : (22+j*7)), 2);
+                        this.drawCircle(svg, x, startY + (high? -(24+j*8) : (24+j*8)), 2.2);
                 }
                 if (dots) {
                     for (let j=0; j<dots.length; j++) 
-                        this.drawCircle(svg, x + 16 + j*6, startY + 4, 1.5);
+                        this.drawCircle(svg, x + 18 + j*6, startY + 4, 1.8);
                 }
                 if (beams) {
                     for (let j=0; j<beams.length; j++) 
-                        this.drawLine(svg, x-14, startY+(16+j*6), x+14, startY+(16+j*6), 1.6);
+                        this.drawLine(svg, x-16, startY+(18+j*7), x+16, startY+(18+j*7), 2);
                 }
             }
         });
 
-        return startY + 120;
+        return startY + 150;
     }
 
     drawText(parent, x, y, t, s, a, b, c) {
@@ -148,11 +148,11 @@ class JianpuRenderer {
     }
 
     drawLine(svg, x1, y1, x2, y2, w) {
-        const el = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        el.setAttribute("x1", x1); el.setAttribute("y1", y1);
-        el.setAttribute("x2", x2); el.setAttribute("y2", y2);
-        el.setAttribute("stroke", "black"); el.setAttribute("stroke-width", w);
-        svg.appendChild(el);
+        const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        l.setAttribute("x1", x1); l.setAttribute("y1", y1);
+        l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+        l.setAttribute("stroke", "black"); l.setAttribute("stroke-width", w);
+        svg.appendChild(l);
     }
 
     drawCircle(svg, cx, cy, r) {
@@ -163,24 +163,22 @@ class JianpuRenderer {
     }
 
     drawBar(svg, x, y, type) {
-        const h = 20;
-        if (type === "|") this.drawLine(svg, x, y-h, x, y+h, 1.5);
+        if (type === "|") this.drawLine(svg, x, y-15, x, y+20, 1.8);
         else if (type === "||") {
-            this.drawLine(svg, x-3, y-h, x-3, y+h, 1);
-            this.drawLine(svg, x+3, y-h, x+3, y+h, 3);
+            this.drawLine(svg, x-4, y-15, x-4, y+20, 1);
+            this.drawLine(svg, x+4, y-15, x+4, y+20, 3.5);
         } else if (type === "|:" || type === ":|") {
-            this.drawLine(svg, x, y-h, x, y+h, 2.5);
-            const dx = (type === "|:") ? 8 : -8;
-            this.drawCircle(svg, x+dx, y-6, 2);
-            this.drawCircle(svg, x+dx, y+6, 2);
+            this.drawLine(svg, x, y-15, x, y+20, 3);
+            const dx = (type === "|:") ? 10 : -10;
+            this.drawCircle(svg, x+dx, y-6, 2.5);
+            this.drawCircle(svg, x+dx, y+8, 2.5);
         }
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.jianpu-render-target').forEach(el => {
-        const source = el.getAttribute('data-source').trim();
-        const renderer = new JianpuRenderer(source);
+        const renderer = new JianpuRenderer(el.getAttribute('data-source').trim());
         el.innerHTML = '';
         el.appendChild(renderer.render());
     });
