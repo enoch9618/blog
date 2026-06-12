@@ -1,0 +1,12 @@
+<div class="jianpu-wrapper" style="margin: 20px 0; overflow-x: auto;">
+    <div class="jianpu-render-target" 
+         data-source="{{ .Inner }}" 
+         style="min-width: 600px; margin: 0 auto;">
+    </div>
+</div>
+
+{{ if not (.Page.Scratch.Get "jianpu_loaded") }}
+    {{ .Page.Scratch.Set "jianpu_loaded" true }}
+    <link rel="stylesheet" href="/css/jianpu.css">
+    <script src="/js/jianpu-renderer.js" defer></script>
+{{ end }}

@@ -1,0 +1,13 @@
+.jianpu-wrapper {
+    width: 100%;
+    font-family: "Microsoft YaHei", "SimSun", sans-serif;
+}
+.jianpu-render-target svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+/* 打印时保持清晰 */
+@media print {
+    .jianpu-render-target svg { width: 100%; }
+}
