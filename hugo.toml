@@ -1,5 +1,5 @@
 baseURL = "https://blog-eyt.pages.dev/"
-languageCode = "zh-CN"
+locale = "zh-CN"
 title = "Enoch"
 theme = "PaperMod"
 
