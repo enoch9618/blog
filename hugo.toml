@@ -1,17 +1,57 @@
 baseURL = "https://blog-eyt.pages.dev/"
-locale = "zh-CN"
 title = "Enoch"
 theme = "PaperMod"
 
-# 启用中文支持
+# 语言设置
 defaultContentLanguage = "zh"
+locale = "zh"                    # 替代 languageCode
+hasCJKLanguage = true            # 移到根级别
+
+# 分页
+paginate = 5
+
+# 基础配置
+enableRobotsTXT = true
+enableEmoji = true
 
 [params]
-  author = "Enoch"
+  author = ["Enoch"]             # 改为数组格式
   description = "这是我的个人博客"
+  env = "production"
+  DateFormat = "2006-01-02"
+  defaultTheme = "auto"
   
+  # 开启这些功能
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowRssButtonInSectionTermList = true
+  ShowToc = true
+  TocOpen = false
+  
+  # 关闭这些功能
+  ShowShareButtons = false
+  ShowWordCount = false
+  
+  # 评论
+  comments = false
+  
+  # 显示作者和元信息
+  hidemeta = false
+  
+  # 禁用主题切换
+  disableThemeToggle = true
 
-# 配置菜单（首页 + 关于）
+  # 主页个人信息模式
+  [params.profileMode]
+    enabled = true
+    title = "Enoch 的博客"
+    subtitle = "我的泉源都在你里面"
+    imageUrl = "images/avatar.jpg"
+    imageWidth = 150
+    imageHeight = 150
+
+# 顶部导航菜单
 [[menu.main]]
   name = "文章"
   url = "/posts/"
@@ -23,33 +63,13 @@ defaultContentLanguage = "zh"
   weight = 2
 
 [[menu.main]]
-    name = "圣经阅读"
-    url = "/bible.html"
-    weight = 3  
+  name = "圣经阅读"
+  url = "/bible.html"
+  weight = 3
 
+# 语法高亮
+pygmentsUseClasses = true
 
-[outputs]
-  home = ["HTML"]
-  page = ["HTML"]
-
-[mediaTypes]
-  [mediaTypes."application/json"]
-    suffix = "json"
-
-[outputFormats]
-  [outputFormats.bible]
-    mediaType = "text/html"
-    isHTML = true
-
-[params.profileMode]
-  enabled = true
-  title = "Enoch 的博客"
-  subtitle = "我的泉源都在你里面"
-  imageUrl = "images/avatar.jpg"  # 图片路径
-  imageWidth = 150                # 单位：像素
-  imageHeight = 150
-##  buttons = [
-##   { name = "博客", url = "/posts/" },
-##    { name = "关于", url = "/about/" },
-##  ]
-
+[markup]
+  [markup.highlight]
+    noClasses = false

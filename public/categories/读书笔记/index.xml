@@ -2,25 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>读书笔记 on Enoch</title>
-    <link>http://localhost:1313/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+    <link>https://blog-eyt.pages.dev/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
     <description>Recent content in 读书笔记 on Enoch</description>
     <generator>Hugo</generator>
-    <language>zh-CN</language>
+    <language>zh</language>
     <lastBuildDate>Wed, 20 May 2026 13:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog-eyt.pages.dev/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>正常的基督徒生活 读书笔记</title>
-      <link>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 May 2026 13:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;什么是正常的基督徒生活？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;加2：20 现在活着的不再是我，乃是基督在我里面活着。这是保罗对基督徒生活的定义。神对于基督徒生活定的准则，是“我不再或者，基督在我里面活出他的生命。”&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;正常的基督徒生活与一般基督徒生活有何不同？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;主在登山宝训的教导中流露出，这样的生活在地上只有神的儿子主耶稣自己实际活出来。&lt;/p&gt;</description>
+&lt;p&gt;加2：20 现在活着的不再是我，乃是基督在我里面活着。这是保罗对基督徒生活的定义。神对于基督徒生活定的准则，是“我不再或者，基督在我里面活出他的生命。”&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
