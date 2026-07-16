@@ -9,6 +9,7 @@ defaultContentLanguage = "zh"
 [params]
   author = "Enoch"
   description = "这是我的个人博客"
+  
 
 # 配置菜单（首页 + 关于）
 [[menu.main]]
@@ -51,3 +52,4 @@ defaultContentLanguage = "zh"
 ##   { name = "博客", url = "/posts/" },
 ##    { name = "关于", url = "/about/" },
 ##  ]
+
