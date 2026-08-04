@@ -4,8 +4,8 @@ theme = "PaperMod"
 
 # 语言设置
 defaultContentLanguage = "zh"
-locale = "zh"                    # 替代 languageCode
-hasCJKLanguage = true            # 移到根级别
+languageCode = "zh-cn"
+hasCJKLanguage = true
 
 # 分页
 [pagination]
@@ -15,13 +15,15 @@ pagerSize = 10
 enableRobotsTXT = true
 enableEmoji = true
 
+
 [params]
-  author = ["Enoch"]             # 改为数组格式
+  author = ["Enoch"]
   description = "这是我的个人博客"
   env = "production"
   DateFormat = "2006-01-02"
+
   defaultTheme = "auto"
-  
+
   # 开启这些功能
   ShowReadingTime = true
   ShowPostNavLinks = true
@@ -29,28 +31,30 @@ enableEmoji = true
   ShowRssButtonInSectionTermList = true
   ShowToc = true
   TocOpen = false
-  
+
   # 关闭这些功能
   ShowShareButtons = false
   ShowWordCount = false
-  
+
   # 评论
   comments = false
-  
+
   # 显示作者和元信息
   hidemeta = false
-  
+
   # 禁用主题切换
   disableThemeToggle = true
+
 
   # 主页个人信息模式
   [params.profileMode]
     enabled = true
     title = "Enoch 的博客"
     subtitle = "我的泉源都在你里面"
-    imageUrl = "images/avatar.jpg"
+    imageUrl = "/images/avatar.jpg"
     imageWidth = 150
     imageHeight = 150
+
 
 # 顶部导航菜单
 [[menu.main]]
@@ -68,9 +72,19 @@ enableEmoji = true
   url = "/bible.html"
   weight = 3
 
+
 # 语法高亮
 pygmentsUseClasses = true
 
+
+# Markdown 渲染设置
 [markup]
+
   [markup.highlight]
     noClasses = false
+
+  # 允许 Markdown 中使用 HTML
+  # （例如 audio、video、自定义播放器）
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
