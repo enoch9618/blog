@@ -8,7 +8,8 @@ locale = "zh"                    # 替代 languageCode
 hasCJKLanguage = true            # 移到根级别
 
 # 分页
-paginate = 5
+[pagination]
+pagerSize = 10
 
 # 基础配置
 enableRobotsTXT = true
