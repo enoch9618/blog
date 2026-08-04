@@ -21,3 +21,5 @@ draft = false
   <source src="kid-playing.mp4" type="video/mp4">
   您的浏览器不支持视频播放，请升级到最新版本。
 </video>
+
+这个月3T MR 工程师来培训了，正好给肖信上班的那天是3T MR，第二天又是自己的班，这两天还是学了不少东西的。
