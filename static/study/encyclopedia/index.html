@@ -8,6 +8,10 @@
         :root { --p: #2c3e50; --a: #d35400; --b: #eee; --g: #666; }
         body { font-family: system-ui, -apple-system, sans-serif; max-width: 750px; margin: 0 auto; padding: 0 15px 30px; line-height: 1.8; color: #333; background: #fff; }
         .hidden { display: none !important; }
+        /* 进度条样式 */
+        #ld { position: fixed; inset: 0; background: #fff; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .p-b { width: 200px; height: 6px; background: #eee; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+        #p-f { width: 0; height: 100%; background: var(--p); transition: width 0.2s; }
         /* 顶部栏 */
         header { position: sticky; top: 0; background: #fff; padding: 15px 0 10px; border-bottom: 1px solid var(--b); z-index: 9; }
         .s-bar { position: relative; display: flex; align-items: center; }
@@ -38,6 +42,12 @@
 </head>
 <body>
 
+<!-- 加载遮罩 -->
+<div id="ld">
+    <div id="ld-t" style="font-size:14px; color:var(--p)">正在载入...</div>
+    <div class="p-b"><div id="p-f"></div></div>
+</div>
+
 <header>
     <div class="s-bar">
         <input type="text" id="q" placeholder="输入词条标题搜索..." oninput="doSearch(this.value)" autocomplete="off">
@@ -63,7 +73,7 @@
 <script>
 /** 书卷映射字典 (固定不变) **/
 const F_MAP = {"创世记":"创","出埃及记":"出","利未记":"利","民数记":"民","申命记":"申","约书亚记":"书","士师记":"士","路得记":"得","撒母耳记上":"撒上","撒母耳记下":"撒下","列王纪上":"王上","列王纪下":"王下","历代志上":"代上","历代志下":"代下","以斯拉记":"拉","尼希米记":"尼","以斯帖记":"斯","约伯记":"伯","诗篇":"诗","箴言":"箴","传道书":"传","雅歌":"歌","以赛亚书":"赛","耶利米书":"耶","耶利米哀歌":"哀","以西结书":"结","但以理书":"但","何西阿书":"何","约珥书":"珥","阿摩司书":"摩","俄巴底亚书":"俄","约拿书":"拿","弥迦书":"弥","那鸿书":"鸿","哈巴谷书":"哈","西番雅书":"番","哈该书":"该","撒迦利亚书":"亚","玛拉基书":"玛","马太福音":"太","马可福音":"可","路加福音":"路","约翰福音":"约","使徒行传":"徒","罗马书":"罗","哥林多前书":"林前","哥林多后书":"林后","加拉太书":"加","以弗所书":"弗","腓立比书":"腓","歌罗西书":"西","帖撒罗尼迦前书":"帖前","帖撒罗尼迦后书":"帖后","提摩太前书":"提前","提摩太后书":"提后","提多书":"多","腓利门书":"门","希伯来书":"来","雅各书":"雅","彼得前书":"彼前","彼得后书":"彼后","约翰一书":"约一","约翰二书":"约二","约翰三书":"约三","犹大书":"犹","启示录":"启"};
-const B_MAP = {"创":"创世记","出":"出埃及记","利":"利未记","民":"民数记","申":"申命记","书":"约书亚记","士":"士师记","得":"路得记","撒上":"撒母耳记上","撒下":"撒母耳记下","王上":"列王纪上","王下":"列王纪下","代上":"历代志上","代下":"历代志下","拉":"以斯拉记","尼":"尼希米记","斯":"以斯帖记","伯":"约伯记","诗":"诗篇","箴":"箴言","传":"传道书","歌":"雅歌","赛":"以赛亚书","耶":"耶利米书","哀":"耶利米哀歌","结":"以西结书","但":"但以理书","何":"何西阿书","珥":"约珥书","摩":"阿摩司书","俄":"俄巴底亚书","拿":"约拿书","弥":"弥迦书","鸿":"那鸿书","哈":"哈巴谷书","番":"西番雅书","该":"哈该书","亚":"撒迦利亚书","玛":"玛拉基书","太":"马太福音","可":"马可福音","路":"路加福音","约":"约翰福音","徒":"使徒行传","罗":"罗马书","林前":"哥林多前书","林后":"哥林多后书","加":"加拉太书","弗":"以弗所书","腓":"腓立比书","西":"歌罗西书","帖前":"帖撒罗尼迦前书","帖后":"帖撒罗尼迦后书","提前":"提摩太前书","提后":"提摩太后书","多":"提多书","门":"腓利门书","来":"希伯来书","雅":"雅各书","彼前":"彼得前书","彼后":"彼后","约一":"约翰一书","约二":"约翰二书","约三":"约翰三书","犹":"犹大书","启":"启示录"};
+const B_MAP = {"创":"创世记","出":"出埃及记","利":"利未记","民":"民数记","申":"申命记","书":"约书亚记","士":"士师记","得":"路得记","撒上":"撒母耳记上","撒下":"撒母耳记下","王上":"列王纪上","王下":"列王纪下","代上":"历代志上","代下":"历代志下","拉":"以斯拉记","尼":"尼希米记","斯":"以斯帖记","伯":"约伯记","诗":"诗篇","箴":"箴言","传":"传道书","歌":"雅歌","赛":"以赛亚书","耶":"耶利米书","哀":"耶利米哀歌","结":"以西结书","但":"但以理书","何":"何西阿书","珥":"约珥书","摩":"阿摩司书","俄":"俄巴底亚书","拿":"约拿书","弥":"弥迦书","鸿":"那鸿书","哈":"哈巴谷书","番":"西番雅书","该":"哈该书","亚":"撒迦利亚书","玛":"玛拉基书","太":"马太福音","可":"马可福音","路":"路加福音","约":"约翰福音","徒":"使徒行传","罗":"罗马书","林前":"哥林多前书","林后":"哥林多后书","加":"加拉太书","弗":"以弗所书","腓":"腓立比书","西":"歌罗西书","帖前":"帖撒罗尼迦前书","帖后":"帖撒罗尼迦后书","提前":"提摩太前书","提后":"提摩太后书","多":"提多书","门":"腓利门书","来":"希伯来书","雅":"雅各书","彼得前书":"彼前","彼得后书":"彼后","约翰一书":"约一","约翰二书":"约二","约翰三书":"约三","犹":"犹大书","启":"启示录"};
 const TO_FILE = Object.assign({}, F_MAP, Object.fromEntries(Object.keys(B_MAP).map(k=>[k,k])));
 const SORTED_NAMES = Object.keys(TO_FILE).sort((a,b)=>b.length - a.length);
 
@@ -86,17 +96,34 @@ async function init() {
 
     if (cached) {
         db = cached;
-        $('info').innerText = `已载入 ${db.length} 个词条`;
+        onReady();
     } else {
-        $('info').innerText = "首次访问，正在下载百科数据...";
-        try {
-            const r = await fetch('encyclopedia.json');
-            const d = await r.json();
-            db = d.records;
-            idb.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(db, 'records');
-            $('info').innerText = `下载完成，共 ${db.length} 个词条`;
-        } catch (e) { $('info').innerText = "加载失败，请刷新重试"; }
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'encyclopedia.json', true);
+        xhr.onprogress = (e) => {
+            if (e.lengthComputable) {
+                let p = Math.round((e.loaded / e.total) * 100);
+                $('ld-t').innerText = `首次访问，正在下载百科数据: ${p}%`;
+                $('p-f').style.width = p + '%';
+            }
+        };
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                $('ld-t').innerText = "解析数据中...";
+                setTimeout(() => {
+                    db = JSON.parse(xhr.responseText).records;
+                    idb.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(db, 'records');
+                    onReady();
+                }, 10);
+            } else { $('ld-t').innerText = "下载失败"; }
+        };
+        xhr.send();
     }
+}
+
+function onReady() {
+    $('ld').classList.add('hidden');
+    $('info').innerText = `已载入 ${db.length} 个词条`;
 }
 
 /** 搜索逻辑 (极速版) **/
