@@ -72,6 +72,10 @@ enableEmoji = true
   url = "/bible.html"
   weight = 3
 
+[[menu.main]]
+  name = "查经资料"
+  url = "/study/"
+  weight = 4
 
 # 语法高亮
 pygmentsUseClasses = true
