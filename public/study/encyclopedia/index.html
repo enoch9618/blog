@@ -5,30 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>证主圣经百科</title>
     <style>
-        body { font-family: system-ui, sans-serif; max-width: 750px; margin: 0 auto; padding: 0 15px 20px; line-height: 1.7; color: #333; }
+        :root { --p: #2c3e50; --a: #d35400; --b: #eee; --g: #666; }
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 750px; margin: 0 auto; padding: 0 15px 30px; line-height: 1.8; color: #333; background: #fff; }
         .hidden { display: none !important; }
-        header { position: sticky; top: 0; background: #fff; padding: 15px 0 10px; border-bottom: 1px solid #eee; z-index: 100; }
+        /* 顶部栏 */
+        header { position: sticky; top: 0; background: #fff; padding: 15px 0 10px; border-bottom: 1px solid var(--b); z-index: 9; }
         .s-bar { position: relative; display: flex; align-items: center; }
-        input { width: 100%; padding: 12px 40px 12px 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; outline: none; box-sizing: border-box; }
-        input:focus { border-color: #2c3e50; }
-        .cls-btn { position: absolute; right: 12px; color: #ccc; cursor: pointer; font-size: 20px; display: none; }
-        #info { font-size: 12px; color: gray; margin-top: 5px; min-height: 1.2em; }
-        .item { padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; }
-        h3 { margin: 0; color: #0056b3; font-size: 18px; }
-        .sum { font-size: 14px; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 4px; }
-        mark { background: #ff0; color: #000; }
-        .back { color: #666; cursor: pointer; display: inline-block; padding: 10px 0; font-size: 14px; font-weight: bold; }
-        #content { font-size: 18px; }
-        #content h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
-        #content a[href^="#b"] { color: #d35400; text-decoration: none; border-bottom: 1px dotted #d35400; cursor: pointer; }
-        /* 弹窗 */
-        #modal-ov { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; }
-        #modal { background: #fff; width: 92%; max-width: 500px; border-radius: 10px; position: relative; max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-        .m-head { padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        input { width: 100%; padding: 12px 40px 12px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; outline: none; -webkit-appearance: none; }
+        input:focus { border-color: var(--p); box-shadow: 0 0 0 3px rgba(44,62,80,0.1); }
+        .cls-btn { position: absolute; right: 12px; color: #ccc; cursor: pointer; font-size: 20px; }
+        #info { font-size: 12px; color: var(--g); margin: 6px 0 -4px; height: 1.2em; }
+        /* 搜索列表 */
+        .item { padding: 16px 0; border-bottom: 1px solid var(--b); cursor: pointer; }
+        h3 { margin: 0; color: #0056b3; font-size: 18px; line-height: 1.4; }
+        .sum { font-size: 14px; color: var(--g); margin-top: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        mark { background: #ff0; color: #000; padding: 0 1px; }
+        /* 内容阅读 */
+        #view-detail { animation: fadeIn 0.2s ease-out; }
+        .back { color: var(--g); cursor: pointer; display: inline-block; padding: 12px 0; font-size: 14px; font-weight: 600; }
+        #content h1 { border-left: 5px solid var(--p); padding-left: 12px; margin: 10px 0 25px; font-size: 26px; color: var(--p); }
+        #content a { color: var(--a); text-decoration: none; border-bottom: 1px dotted var(--a); }
+        /* 经文弹窗 */
+        #modal-ov { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+        #modal { background: #fff; width: 92%; max-width: 480px; border-radius: 12px; max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .m-head { padding: 16px; border-bottom: 1px solid var(--b); display: flex; justify-content: space-between; font-weight: bold; }
         .m-body { padding: 20px; overflow-y: auto; font-size: 17px; }
         .v-group { margin-bottom: 25px; }
-        .v-title { font-weight: bold; color: #2c3e50; border-left: 4px solid #d35400; padding-left: 10px; margin-bottom: 10px; }
-        .v-num { color: #d35400; font-weight: bold; margin-right: 8px; font-size: 0.9em; }
+        .v-title { font-weight: bold; color: var(--p); border-left: 4px solid var(--a); padding-left: 10px; margin-bottom: 10px; }
+        .v-num { color: var(--a); font-weight: bold; margin-right: 8px; font-size: 0.85em; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -36,128 +41,148 @@
 <header>
     <div class="s-bar">
         <input type="text" id="q" placeholder="输入词条标题搜索..." oninput="doSearch(this.value)" autocomplete="off">
-        <span class="cls-btn" id="cb" onclick="clearSearch()">✕</span>
+        <span class="cls-btn hidden" id="cb" onclick="clearSearch()">✕</span>
     </div>
-    <div id="info">数据加载中...</div>
+    <div id="info">正在初始化...</div>
 </header>
 
 <div id="view-list"><div id="list"></div></div>
+
 <div id="view-detail" class="hidden">
     <span class="back" onclick="goBack()">← 返回列表</span>
     <div id="content"></div>
 </div>
 
-<div id="modal-ov" class="hidden" onclick="closeModal()">
+<div id="modal-ov" class="hidden" onclick="closeM()">
     <div id="modal" onclick="event.stopPropagation()">
-        <div class="m-head"><strong>圣经经文引用</strong><span style="cursor:pointer;font-size:24px" onclick="closeModal()">×</span></div>
+        <div class="m-head"><span>经文引用</span><span style="cursor:pointer;font-size:24px" onclick="closeM()">×</span></div>
         <div id="m-body" class="m-body"></div>
     </div>
 </div>
 
 <script>
-// 66卷映射表：全名/简称 ➔ JSON文件名
-const bRaw = {"创世记":"创","创":"创","出埃及记":"出","出":"出","利未记":"利","利":"利","民数记":"民","民":"民","申命记":"申","申":"申","约书亚记":"书","书":"书","士师记":"士","士":"士","路得记":"得","得":"得","撒母耳记上":"撒上","撒上":"撒上","撒母耳记下":"撒下","撒下":"撒下","列王纪上":"王上","王上":"王上","列王纪下":"王下","王下":"王下","历代志上":"代上","代上":"代上","历代志下":"代下","代下":"代下","以斯拉记":"拉","拉":"拉","尼希米记":"尼","尼":"尼","以斯帖记":"斯","斯":"斯","约伯记":"伯","伯":"伯","诗篇":"诗","诗":"诗","箴言":"箴","箴":"箴","传道书":"传","传":"传","雅歌":"歌","歌":"歌","以赛亚书":"赛","以赛亚记":"赛","赛":"赛","耶利米书":"耶","耶":"耶","耶利米哀歌":"哀","哀":"哀","以西结书":"结","结":"结","但以理书":"但","但":"但","何西阿书":"何","何":"何","约珥书":"珥","珥":"珥","阿摩司书":"摩","摩":"摩","俄巴底亚书":"俄","俄":"俄","约拿书":"拿","拿":"拿","弥迦书":"弥","弥":"弥","那鸿书":"鸿","那鸿":"鸿","鸿":"鸿","哈巴谷书":"哈","哈":"哈","西番雅书":"番","番":"番","哈该书":"该","该":"该","撒迦利亚书":"亚","亚":"亚","玛拉基书":"玛","玛":"玛","马太福音":"太","太":"太","马可福音":"可","可":"可","路加福音":"路","路":"路","约翰福音":"约","约":"约","使徒行传":"徒","徒":"徒","罗马书":"罗","罗":"罗","哥林多前书":"林前","林前":"林前","哥林多后书":"林后","林后":"林后","加拉太书":"加","加":"加","以弗所书":"弗","弗":"弗","腓立比书":"腓","腓":"腓","歌罗西书":"西","西":"西","帖撒罗尼迦前书":"帖前","帖前":"帖前","帖撒罗尼迦后书":"帖后","帖后":"帖后","提摩太前书":"提前","提前":"提前","提摩太后书":"提后","提后":"提后","提多书":"多","多":"多","腓利门书":"门","门":"门","希伯来书":"来","来":"来","雅各书":"雅","雅":"雅","彼得前书":"彼前","彼前":"彼前","彼得后书":"彼后","彼后":"彼后","约翰一书":"约一","约一":"约一","约翰二书":"约二","约二":"约二","约翰三书":"约三","约三":"约三","犹大书":"犹","犹":"犹","启示录":"启","启":"启"};
-const bFull = {"创":"创世记","出":"出埃及记","利":"利未记","民":"民数记","申":"申命记","书":"约书亚记","士":"士师记","得":"路得记","撒上":"撒母耳记上","撒下":"撒母耳记下","王上":"列王纪上","王下":"列王纪下","代上":"历代志上","代下":"历代志下","拉":"以斯拉记","尼":"尼希米记","斯":"以斯帖记","伯":"约伯记","诗":"诗篇","箴":"箴言","传":"传道书","歌":"雅歌","赛":"以赛亚书","耶":"耶利米书","哀":"耶利米哀歌","结":"以西结书","但":"但以理书","何":"何西阿书","珥":"约珥书","摩":"阿摩司书","俄":"俄巴底亚书","拿":"约拿书","弥":"弥迦书","鸿":"那鸿书","哈":"哈巴谷书","番":"西番雅书","该":"哈该书","亚":"撒迦利亚书","玛":"玛拉基书","太":"马太福音","可":"马可福音","路":"路加福音","约":"约翰福音","徒":"使徒行传","罗":"罗马书","林前":"哥林多前书","林后":"哥林多后书","加":"加拉太书","弗":"以弗所书","腓":"腓立比书","西":"歌罗西书","帖前":"帖撒罗尼迦前书","帖后":"帖撒罗尼迦后书","提前":"提摩太前书","提后":"提摩太后书","多":"提多书","门":"腓利门书","来":"希伯来书","雅":"雅各书","彼前":"彼得前书","彼后":"彼得后书","约一":"约翰一书","约二":"约翰二书","约三":"约翰三书","犹":"犹大书","启":"启示录"};
-// 排序以便优先匹配长名
-const sortedNames = Object.keys(bRaw).sort((a,b) => b.length - a.length);
+/** 书卷映射字典 (固定不变) **/
+const F_MAP = {"创世记":"创","出埃及记":"出","利未记":"利","民数记":"民","申命记":"申","约书亚记":"书","士师记":"士","路得记":"得","撒母耳记上":"撒上","撒母耳记下":"撒下","列王纪上":"王上","列王纪下":"王下","历代志上":"代上","历代志下":"代下","以斯拉记":"拉","尼希米记":"尼","以斯帖记":"斯","约伯记":"伯","诗篇":"诗","箴言":"箴","传道书":"传","雅歌":"歌","以赛亚书":"赛","耶利米书":"耶","耶利米哀歌":"哀","以西结书":"结","但以理书":"但","何西阿书":"何","约珥书":"珥","阿摩司书":"摩","俄巴底亚书":"俄","约拿书":"拿","弥迦书":"弥","那鸿书":"鸿","哈巴谷书":"哈","西番雅书":"番","哈该书":"该","撒迦利亚书":"亚","玛拉基书":"玛","马太福音":"太","马可福音":"可","路加福音":"路","约翰福音":"约","使徒行传":"徒","罗马书":"罗","哥林多前书":"林前","哥林多后书":"林后","加拉太书":"加","以弗所书":"弗","腓立比书":"腓","歌罗西书":"西","帖撒罗尼迦前书":"帖前","帖撒罗尼迦后书":"帖后","提摩太前书":"提前","提摩太后书":"提后","提多书":"多","腓利门书":"门","希伯来书":"来","雅各书":"雅","彼得前书":"彼前","彼得后书":"彼后","约翰一书":"约一","约翰二书":"约二","约翰三书":"约三","犹大书":"犹","启示录":"启"};
+const B_MAP = {"创":"创世记","出":"出埃及记","利":"利未记","民":"民数记","申":"申命记","书":"约书亚记","士":"士师记","得":"路得记","撒上":"撒母耳记上","撒下":"撒母耳记下","王上":"列王纪上","王下":"列王纪下","代上":"历代志上","代下":"历代志下","拉":"以斯拉记","尼":"尼希米记","斯":"以斯帖记","伯":"约伯记","诗":"诗篇","箴":"箴言","传":"传道书","歌":"雅歌","赛":"以赛亚书","耶":"耶利米书","哀":"耶利米哀歌","结":"以西结书","但":"但以理书","何":"何西阿书","珥":"约珥书","摩":"阿摩司书","俄":"俄巴底亚书","拿":"约拿书","弥":"弥迦书","鸿":"那鸿书","哈":"哈巴谷书","番":"西番雅书","该":"哈该书","亚":"撒迦利亚书","玛":"玛拉基书","太":"马太福音","可":"马可福音","路":"路加福音","约":"约翰福音","徒":"使徒行传","罗":"罗马书","林前":"哥林多前书","林后":"哥林多后书","加":"加拉太书","弗":"以弗所书","腓":"腓立比书","西":"歌罗西书","帖前":"帖撒罗尼迦前书","帖后":"帖撒罗尼迦后书","提前":"提摩太前书","提后":"提摩太后书","多":"提多书","门":"腓利门书","来":"希伯来书","雅":"雅各书","彼前":"彼得前书","彼后":"彼后","约一":"约翰一书","约二":"约翰二书","约三":"约翰三书","犹":"犹大书","启":"启示录"};
+const TO_FILE = Object.assign({}, F_MAP, Object.fromEntries(Object.keys(B_MAP).map(k=>[k,k])));
+const SORTED_NAMES = Object.keys(TO_FILE).sort((a,b)=>b.length - a.length);
 
-let db = [], kw = "";
+let db = [], kw = "", cache = {};
+const $ = (id) => document.getElementById(id);
 
-fetch('encyclopedia.json').then(r => r.json()).then(data => {
-    db = data.records;
-    document.getElementById('info').innerText = `共 ${db.length} 个词条`;
-});
+/** IndexedDB 存储逻辑 **/
+const DB_NAME = 'BibleDB', STORE_NAME = 'encyclopedia_store';
 
+async function init() {
+    const idb = await new Promise(res => {
+        let req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = e => e.target.result.createObjectStore(STORE_NAME);
+        req.onsuccess = e => res(e.target.result);
+    });
+
+    const cached = await new Promise(res => {
+        idb.transaction(STORE_NAME).objectStore(STORE_NAME).get('records').onsuccess = e => res(e.target.result);
+    });
+
+    if (cached) {
+        db = cached;
+        $('info').innerText = `已载入 ${db.length} 个词条`;
+    } else {
+        $('info').innerText = "首次访问，正在下载百科数据...";
+        try {
+            const r = await fetch('encyclopedia.json');
+            const d = await r.json();
+            db = d.records;
+            idb.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(db, 'records');
+            $('info').innerText = `下载完成，共 ${db.length} 个词条`;
+        } catch (e) { $('info').innerText = "加载失败，请刷新重试"; }
+    }
+}
+
+/** 搜索逻辑 (极速版) **/
 function doSearch(v) {
     kw = v.trim().toLowerCase();
-    document.getElementById('view-detail').classList.add('hidden');
-    document.getElementById('view-list').classList.remove('hidden');
-    document.getElementById('cb').style.display = kw ? "block" : "none";
-    if(!kw) { document.getElementById('list').innerHTML = ""; return; }
-    const res = db.filter(i => i.title.toLowerCase().includes(kw)).sort((a, b) => {
-        let ta = a.title.toLowerCase(), tb = b.title.toLowerCase();
-        if (ta === kw) return -1;
-        return ta.startsWith(kw) && !tb.startsWith(kw) ? -1 : ta.length - tb.length;
-    });
-    document.getElementById('info').innerText = `找到 ${res.length} 个结果`;
-    const reg = new RegExp(`(${kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    document.getElementById('list').innerHTML = res.slice(0, 40).map(i => `
-        <div class="item" onclick="showDetail(${i.id})">
-            <h3>${i.title.replace(reg, '<mark>$1</mark>')}</h3>
-            <div class="sum">${i.content.substring(0, 80)}...</div>
-        </div>
-    `).join('');
-}
-
-function clearSearch() { document.getElementById('q').value = ""; doSearch(""); }
-function goBack() { document.getElementById('view-detail').classList.add('hidden'); document.getElementById('view-list').classList.remove('hidden'); }
-
-function showDetail(id) {
-    const it = db.find(x => x.id === id);
-    document.getElementById('view-list').classList.add('hidden');
-    document.getElementById('view-detail').classList.remove('hidden');
-    const box = document.getElementById('content');
-    box.innerHTML = `<h1>${it.title}</h1>${it.content_html}`;
-    window.scrollTo(0, 0);
-    box.querySelectorAll('a[href="#b"]').forEach(a => {
-        a.onclick = (e) => { e.preventDefault(); openBible(a.getAttribute('title') || a.innerText); };
-    });
-}
-
-async function openBible(rawStr) {
-    const body = document.getElementById('m-body');
-    body.innerHTML = "加载中...";
-    document.getElementById('modal-ov').classList.remove('hidden');
+    $('view-detail').classList.add('hidden');
+    $('view-list').classList.remove('hidden');
+    $('cb').classList.toggle('hidden', !kw);
+    if(!kw) { $('list').innerHTML=""; $('info').innerText=`共 ${db.length} 个词条`; return; }
     
+    // 匹配算法：完全匹配 > 开头匹配 > 包含匹配
+    const res = db.filter(i=>i.title.toLowerCase().includes(kw)).sort((a,b)=>{
+        let ta=a.title.toLowerCase(), tb=b.title.toLowerCase();
+        return ta===kw ? -1 : ta.startsWith(kw)&&!tb.startsWith(kw) ? -1 : ta.length - tb.length;
+    });
+    $('info').innerText=`找到 ${res.length} 个结果`;
+    const reg = new RegExp(`(${kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi');
+    $('list').innerHTML = res.slice(0,40).map(i=>`
+        <div class="item" onclick="showDet(${i.id})">
+            <h3>${i.title.replace(reg,'<mark>$1</mark>')}</h3>
+            <div class="sum">${i.content.substring(0,75)}...</div>
+        </div>`).join('');
+}
+
+function showDet(id) {
+    const it = db.find(x=>x.id===id);
+    if(!it) return;
+    $('view-list').classList.add('hidden');
+    $('view-detail').classList.remove('hidden');
+    $('content').innerHTML = `<h1>${it.title}</h1>${it.content_html}`;
+    window.scrollTo(0,0);
+}
+
+// 统一点击事件委托
+$('view-detail').onclick = (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const hash = a.hash, title = a.getAttribute('title') || a.innerText;
+    if (hash==='#b') { e.preventDefault(); openB(title); }
+    else if (hash==='#d') { 
+        e.preventDefault();
+        const clean = title.replace(/^[\s\u3000]+|[\s\u3000]+$/g, '');
+        const target = db.find(x => x.title === title) || db.find(x => x.title === clean);
+        target ? showDet(target.id) : alert('未找到词条: '+title);
+    }
+}
+
+async function openB(raw) {
+    const body = $('m-body');
+    body.innerHTML = "载入中...";
+    $('modal-ov').classList.remove('hidden');
     try {
-        // 1. 规范化处理：去除参见、书名号，转半角
-        let clean = rawStr.replace(/[参见《》\s]/g, '').replace(/：/g, ':').replace(/；/g, ';').replace(/[，、]/g, ',').replace(/[－—]/g, '-');
-        const refs = clean.split(';');
+        let clean = raw.replace(/[参见《》\s]/g,'').replace(/：/g,':').replace(/；/g,';').replace(/[，、]/g,',').replace(/[－—]/g,'-');
         let html = "";
-        const cache = {};
-
-        for (const ref of refs) {
-            // 2. 精确匹配书卷名
-            let matchedName = sortedNames.find(n => ref.startsWith(n));
-            if (!matchedName) continue;
-            
-            let fileKey = bRaw[matchedName];
-            let rest = ref.substring(matchedName.length);
-            let parts = rest.split(':');
-            if (parts.length < 2) continue;
-            
-            let chapter = parts[0], versePart = parts[1];
-            
-            if (!cache[fileKey]) {
-                const r = await fetch(`/bible-data/${fileKey}.json`);
-                if (!r.ok) throw new Error(`${fileKey}.json 加载失败`);
-                cache[fileKey] = await r.json();
+        for (const ref of clean.split(';')) {
+            let name = SORTED_NAMES.find(n=>ref.startsWith(n));
+            if (!name) continue;
+            let file = TO_FILE[name], rest = ref.substring(name.length).split(':');
+            if (rest.length<2) continue;
+            let cap = rest[0], vPart = rest[1];
+            if (!cache[file]) {
+                const r = await fetch(`/bible-data/${encodeURIComponent(file)}.json`);
+                if (!r.ok) throw new Error(file);
+                cache[file] = await r.json();
             }
-
-            let bData = cache[fileKey], cData = bData[chapter];
-            if (!cData) { html += `<div class="v-group"><div class="v-title">${bFull[fileKey]} ${chapter}章</div><div style="color:red">章节不存在</div></div>`; continue; }
-
-            let vList = [];
-            versePart.split(',').forEach(p => {
-                if (p.includes('-')) {
-                    let [s, e] = p.split('-').map(Number);
-                    for (let i = s; i <= e; i++) vList.push(i);
-                } else { vList.push(Number(p)); }
-            });
-
-            html += `<div class="v-group"><div class="v-title">${bFull[fileKey]} ${chapter}:${versePart}</div>`;
-            vList.forEach(v => {
-                let txt = cData[v - 1];
-                if (txt) html += `<div><span class="v-num">${v}</span>${txt}</div>`;
+            let cData = cache[file][cap];
+            html += `<div class="v-group"><div class="v-title">${B_MAP[file]||file} ${cap}:${vPart}</div>`;
+            if (!cData) { html += "未找到章节内容</div>"; continue; }
+            vPart.split(',').forEach(p => {
+                let r = p.split('-').map(Number);
+                for (let i=r[0]; i<=(r[1]||r[0]); i++) {
+                    if (cData[i-1]) html += `<div><span class="v-num">${i}</span>${cData[i-1]}</div>`;
+                }
             });
             html += `</div>`;
         }
-        body.innerHTML = html || `<div style="color:red">无法识别经文引用：${rawStr}</div>`;
-    } catch (e) { body.innerHTML = `<div style="color:red">错误: ${e.message}</div>`; }
+        body.innerHTML = html || "无法解析引用";
+    } catch (e) { body.innerHTML = `<div style="color:red">加载失败: ${e.message}</div>`; }
 }
 
-function closeModal() { document.getElementById('modal-ov').classList.add('hidden'); }
-window.onkeydown = (e) => { if (e.key === "Escape") closeModal(); };
+function clearSearch() { $('q').value=""; doSearch(""); $('q').focus(); }
+function goBack() { $('view-detail').classList.add('hidden'); $('view-list').classList.remove('hidden'); }
+function closeM() { $('modal-ov').classList.add('hidden'); }
+window.onkeydown = (e) => { if(e.key==="Escape") closeM(); };
+
+init();
 </script>
 </body>
 </html>
