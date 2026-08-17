@@ -101,22 +101,31 @@ async function init() {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'encyclopedia.json', true);
         xhr.onprogress = (e) => {
-            if (e.lengthComputable) {
-                let p = Math.round((e.loaded / e.total) * 100);
-                $('ld-t').innerText = `首次访问，正在下载百科数据: ${p}%`;
-                $('p-f').style.width = p + '%';
+            let p = 0;
+            if (e.lengthComputable && e.total > 0) {
+                p = Math.round((e.loaded / e.total) * 100);
+                $('ld-t').innerText = `正在下载数据: ${p}%`;
+            } else {
+                // 兜底：如果服务器没给总大小，按已下载量估算进度（假设数据约8-10MB）
+                p = Math.min(98, Math.round((e.loaded / 8388608) * 100));
+                $('ld-t').innerText = `正在下载: ${(e.loaded / 1024 / 1024).toFixed(1)} MB`;
             }
+            $('p-f').style.width = p + '%';
         };
         xhr.onload = () => {
             if (xhr.status === 200) {
+                $('p-f').style.width = '100%';
                 $('ld-t').innerText = "解析数据中...";
                 setTimeout(() => {
-                    db = JSON.parse(xhr.responseText).records;
-                    idb.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(db, 'records');
-                    onReady();
-                }, 10);
-            } else { $('ld-t').innerText = "下载失败"; }
+                    try {
+                        db = JSON.parse(xhr.responseText).records;
+                        idb.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(db, 'records');
+                        onReady();
+                    } catch(e) { $('ld-t').innerText = "解析失败: " + e.message; }
+                }, 100);
+            } else { $('ld-t').innerText = "下载失败 (HTTP " + xhr.status + ")"; }
         };
+        xhr.onerror = () => { $('ld-t').innerText = "请求出错，请刷新重试"; };
         xhr.send();
     }
 }

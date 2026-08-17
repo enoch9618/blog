@@ -59,7 +59,7 @@ enableEmoji = true
 # 顶部导航菜单
 [[menu.main]]
   name = "文章"
-  url = "/archives/"
+  url = "/posts/"
   weight = 1
 
 [[menu.main]]
@@ -67,11 +67,15 @@ enableEmoji = true
   url = "/about/"
   weight = 2
 
+[[menu.main]]
+  name = "圣经阅读"
+  url = "/bible.html"
+  weight = 3
 
 [[menu.main]]
   name = "查经资料"
   url = "/study/"
-  weight = 3
+  weight = 4
 
 # 语法高亮
 pygmentsUseClasses = true
