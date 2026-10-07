@@ -21,20 +21,17 @@ enableEmoji = true
   defaultTheme = "auto"
   disableThemeToggle = false
 
-  # 显示控制
   ShowReadingTime = false
   ShowWordCount = false
   ShowShareButtons = false
   ShowPostNavLinks = true
-  ShowBreadCrumbs = true
+  ShowBreadCrumbs = false          # 已关闭面包屑
   ShowRssButtonInSectionTermList = true
   ShowToc = true
-  TocOpen = true                # 目录默认展开
-  hideSummary = true            # 列表不显示摘要
-  disableSpecial1stPost = true  # 去掉第一篇大卡片
-  hidemeta = false
+  TocOpen = true
+  hideSummary = true
+  disableSpecial1stPost = true
 
-  # 首页 Profile 模式
   [params.profileMode]
     enabled = true
     title = "Enoch"
@@ -43,7 +40,6 @@ enableEmoji = true
     imageWidth = 120
     imageHeight = 120
 
-# 导航菜单
 [[menu.main]]
   name = "文章"
   url = "/posts/"
