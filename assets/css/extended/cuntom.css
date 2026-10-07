@@ -1,0 +1,196 @@
+/* ========== 颜色（尽量贴近对方） ========== */
+:root {
+  --theme: #f7f4ee;
+  --entry: #fbf9f5;
+  --primary: #1e1c19;
+  --secondary: #6b655b;
+  --tertiary: #e3ddd1;
+  --content: #35312b;
+  --code-bg: #ece7de;
+  --border: #cbc3b5;
+  --accent: #a8412c;
+  --selection: rgb(168 65 44 / 0.16);
+  --main-width: 720px;
+  --gap: 28px;
+  --header-height: 96px;
+  --radius: 6px;
+}
+
+.dark {
+  --theme: #1a1816;
+  --entry: #211f1c;
+  --primary: #eee8dd;
+  --secondary: #a29a8c;
+  --tertiary: #36322c;
+  --content: #d3ccbf;
+  --code-bg: #2a2723;
+  --border: #4b453d;
+  --accent: #e08a6d;
+  --selection: rgb(224 138 109 / 0.26);
+}
+
+/* ========== 全局字体统一 ========== */
+html, body {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif !important;
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  background: var(--theme) !important;
+  color: var(--primary) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.entry-header h2 a,
+.page-header h1,
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--primary);
+}
+
+/* ========== 手写 Logo ========== */
+.logo a {
+  font-family: "Caveat", "Segoe Script", cursive !important;
+  font-size: 2.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--primary) !important;
+  text-decoration: none !important;
+}
+
+.logo a:hover {
+  color: var(--accent) !important;
+}
+
+/* ========== 内容宽度 ========== */
+.main {
+  max-width: calc(720px + 56px) !important;
+}
+
+/* ========== 首页文章列表（干净日期 + 标题） ========== */
+.post-entry {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 0 1.25rem 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 1.4rem !important;
+}
+
+/* 日期 */
+.post-entry .entry-footer {
+  display: block !important;
+  order: -1 !important;
+  flex-shrink: 0;
+  min-width: 6.8rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--secondary) !important;
+  font-size: 0.9rem !important;
+  white-space: nowrap;
+}
+
+/* 只保留日期，隐藏其他 meta */
+.post-entry .entry-footer span:not(:first-child) {
+  display: none !important;
+}
+
+/* 标题 */
+.post-entry .entry-header {
+  margin: 0 !important;
+  flex: 1;
+}
+
+.post-entry .entry-header h2 {
+  margin: 0 !important;
+  font-size: 1.12rem !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+}
+
+.post-entry .entry-header h2 a {
+  color: var(--primary) !important;
+}
+
+.post-entry .entry-header h2 a:hover {
+  color: var(--accent) !important;
+}
+
+/* 隐藏摘要 */
+.post-entry .entry-content {
+  display: none !important;
+}
+
+/* ========== 文章页目录 ========== */
+.toc {
+  margin: 0 0 2rem 0 !important;
+  padding: 0.5rem 0 0.5rem 1rem !important;
+  border-left: 2.5px solid var(--accent) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+}
+
+.toc details {
+  border: none !important;
+  background: transparent !important;
+}
+
+.toc summary {
+  font-weight: 600 !important;
+  color: var(--primary) !important;
+  cursor: pointer;
+  list-style: none;
+  margin-bottom: 0.4rem;
+}
+
+.toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc .inner,
+.toc ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.toc li {
+  margin: 0.28rem 0 !important;
+}
+
+.toc a {
+  color: var(--secondary) !important;
+  text-decoration: none !important;
+}
+
+.toc a:hover {
+  color: var(--accent) !important;
+}
+
+/* ========== 其他细节 ========== */
+a:hover {
+  color: var(--accent) !important;
+}
+
+.profile img {
+  border-radius: 50% !important;
+  border: none !important;
+}
+
+/* 文章正文链接 */
+.post-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-content a:hover {
+  opacity: 0.85;
+}

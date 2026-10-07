@@ -2,65 +2,65 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Enoch</title>
-    <link>https://blog-eyt.pages.dev/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Enoch</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 16 Jul 2026 22:20:36 +0800</lastBuildDate>
-    <atom:link href="https://blog-eyt.pages.dev/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>七月的风</title>
-      <link>https://blog-eyt.pages.dev/posts/2607-1/</link>
+      <link>http://localhost:1313/posts/2607-1/</link>
       <pubDate>Thu, 16 Jul 2026 22:20:36 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/2607-1/</guid>
+      <guid>http://localhost:1313/posts/2607-1/</guid>
       <description>&lt;p&gt;七月，就过去一半了。这半个月气温逐渐升高，从连绵不断的雨，到迎面燥热的风。10号台风巴威虚谎一枪，与江西擦肩而过，并没有带来预想中强雨和强风，就过去了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>关于博客内容</title>
-      <link>https://blog-eyt.pages.dev/posts/aboutblog/</link>
+      <link>http://localhost:1313/posts/aboutblog/</link>
       <pubDate>Mon, 13 Jul 2026 12:32:52 +0000</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/aboutblog/</guid>
+      <guid>http://localhost:1313/posts/aboutblog/</guid>
       <description>&lt;h2 id=&#34;博客搭建历史&#34;&gt;博客搭建历史&lt;/h2&gt;
 &lt;p&gt;从大约2020年起，我就搭建个人博客了，但是几乎没写过。常常是搭建好了，写个一两篇，就没了。&lt;/p&gt;
 &lt;p&gt;可能我对自己的期望太高了吧，又或者是因为自己太懒了。没搭建博客的时候，很想有一个；有了之后，又不知道写什么。&lt;/p&gt;</description>
     </item>
     <item>
       <title>胡义恒的成长记录</title>
-      <link>https://blog-eyt.pages.dev/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</link>
+      <link>http://localhost:1313/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Thu, 21 May 2026 02:10:00 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</guid>
+      <guid>http://localhost:1313/posts/2026-05-21-%E8%83%A1%E4%B9%89%E6%81%92%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/</guid>
       <description>&lt;p&gt;&lt;img alt=&#34;IMG_20260515_211307_897&#34; loading=&#34;lazy&#34; src=&#34;_res/IMG_20260515_211307_897.jpg&#34;&gt;
 在上夜班的时候，翻到相册里胡义恒的照片，被治愈了。我的宝宝，你太可爱了&lt;/p&gt;
 &lt;p&gt;今天是2026年5月22日，胡义恒宝宝满三月了。今天和宝妈一起带宝宝去妇保体检了，又给他剪了舌系带。&lt;/p&gt;</description>
     </item>
     <item>
       <title>正常的基督徒生活 读书笔记</title>
-      <link>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 May 2026 13:00:00 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://localhost:1313/posts/2026-05-20-%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%9F%BA%E7%9D%A3%E5%BE%92%E7%94%9F%E6%B4%BB%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;什么是正常的基督徒生活？&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;加2：20 现在活着的不再是我，乃是基督在我里面活着。这是保罗对基督徒生活的定义。神对于基督徒生活定的准则，是“我不再或者，基督在我里面活出他的生命。”&lt;/p&gt;</description>
     </item>
     <item>
       <title>手机第一篇</title>
-      <link>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>http://localhost:1313/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Tue, 19 May 2026 16:10:00 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>http://localhost:1313/posts/%E6%89%8B%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>&lt;p&gt;test&lt;/p&gt;</description>
     </item>
     <item>
       <title>关于我</title>
-      <link>https://blog-eyt.pages.dev/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/about/</guid>
+      <guid>http://localhost:1313/about/</guid>
       <description>&lt;p&gt;90后，基督徒，毕业于某中医药大学，现在在一家小医院的影像科技术组上班。&lt;/p&gt;</description>
     </item>
     <item>
       <title>我的第一篇博客</title>
-      <link>https://blog-eyt.pages.dev/posts/my-first-post/</link>
+      <link>http://localhost:1313/posts/my-first-post/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 +0800</pubDate>
-      <guid>https://blog-eyt.pages.dev/posts/my-first-post/</guid>
+      <guid>http://localhost:1313/posts/my-first-post/</guid>
       <description>&lt;h2 id=&#34;hello-hugo&#34;&gt;Hello Hugo!&lt;/h2&gt;
 &lt;p&gt;这是我用Hugo搭建的第一篇博客。通过Cloudflare Pages部署真是太方便了！&lt;/p&gt;
 &lt;h3 id=&#34;我学到了什么&#34;&gt;我学到了什么&lt;/h3&gt;
@@ -73,9 +73,9 @@
     </item>
     <item>
       <title>第二首</title>
-      <link>https://blog-eyt.pages.dev/002/</link>
+      <link>http://localhost:1313/002/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog-eyt.pages.dev/002/</guid>
+      <guid>http://localhost:1313/002/</guid>
       <description>&lt;div class=&#34;jianpu-wrapper&#34;&gt;
     &lt;div class=&#34;jianpu-render-target&#34; data-source=&#34;
 B: 第二首
@@ -101,8 +101,8 @@ L: 求 _ 主 耶 稣 来 我 | 心 _ 里， 我 _ 心  留 空 处 为 | 祢。
 
 
     
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://blog-eyt.pages.dev/css/jianpu.css&#34;&gt;
-    &lt;script src=&#34;https://blog-eyt.pages.dev/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/jianpu.css&#34;&gt;
+    &lt;script src=&#34;http://localhost:1313/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
 
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;二、&lt;/strong&gt;
@@ -111,9 +111,9 @@ L: 求 _ 主 耶 稣 来 我 | 心 _ 里， 我 _ 心  留 空 处 为 | 祢。
     </item>
     <item>
       <title>第三首</title>
-      <link>https://blog-eyt.pages.dev/003/</link>
+      <link>http://localhost:1313/003/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog-eyt.pages.dev/003/</guid>
+      <guid>http://localhost:1313/003/</guid>
       <description>&lt;div class=&#34;jianpu-wrapper&#34;&gt;
     &lt;div class=&#34;jianpu-render-target&#34; data-source=&#34;
 B: 救主耶稣不变
@@ -148,8 +148,8 @@ L: 耶 稣 不 _ 改  | 变； _ | 万 事、 万 _ 物 都 在 | 改  变， �
 
 
     
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://blog-eyt.pages.dev/css/jianpu.css&#34;&gt;
-    &lt;script src=&#34;https://blog-eyt.pages.dev/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/jianpu.css&#34;&gt;
+    &lt;script src=&#34;http://localhost:1313/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
 
 &lt;p&gt;&lt;strong&gt;二、&lt;/strong&gt;&lt;br&gt;
 耶稣乃是罪人之友，祂今寻找你；&lt;br&gt;
@@ -159,9 +159,9 @@ L: 耶 稣 不 _ 改  | 变； _ | 万 事、 万 _ 物 都 在 | 改  变， �
     </item>
     <item>
       <title>第十一首</title>
-      <link>https://blog-eyt.pages.dev/011/</link>
+      <link>http://localhost:1313/011/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog-eyt.pages.dev/011/</guid>
+      <guid>http://localhost:1313/011/</guid>
       <description>&lt;div class=&#34;jianpu-wrapper&#34;&gt;
     &lt;div class=&#34;jianpu-render-target&#34; data-source=&#34;
 B: 第十一首
@@ -190,8 +190,8 @@ L: 哦， 这 恩， 带 我 归 祂 自 | 己， _ | 奇 妙 恩！ 带 我 归
 
 
     
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://blog-eyt.pages.dev/css/jianpu.css&#34;&gt;
-    &lt;script src=&#34;https://blog-eyt.pages.dev/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/jianpu.css&#34;&gt;
+    &lt;script src=&#34;http://localhost:1313/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
 
 &lt;p&gt;二 我受创伤重且深， 祂用油酒包裹；
 祂要使我能放心， 就说：“你永属我。”
@@ -199,9 +199,9 @@ L: 哦， 这 恩， 带 我 归 祂 自 | 己， _ | 奇 妙 恩！ 带 我 归
     </item>
     <item>
       <title>第一首</title>
-      <link>https://blog-eyt.pages.dev/001/</link>
+      <link>http://localhost:1313/001/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://blog-eyt.pages.dev/001/</guid>
+      <guid>http://localhost:1313/001/</guid>
       <description>&lt;div class=&#34;jianpu-wrapper&#34;&gt;
     &lt;div class=&#34;jianpu-render-target&#34; data-source=&#34;
 B: 第一首
@@ -227,8 +227,8 @@ L: 至 | 美 歌， 天 | 地 颂 扬； | 耶 稣， 可 爱 | 耶 稣！
 
 
     
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://blog-eyt.pages.dev/css/jianpu.css&#34;&gt;
-    &lt;script src=&#34;https://blog-eyt.pages.dev/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;http://localhost:1313/css/jianpu.css&#34;&gt;
+    &lt;script src=&#34;http://localhost:1313/js/jianpu-renderer.js&#34; defer&gt;&lt;/script&gt;
 
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;二、&lt;/strong&gt;
