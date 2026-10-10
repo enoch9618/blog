@@ -1,7 +1,0 @@
-{{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
-{{- if ge (len $headers) 2 -}}
-<aside class="toc-sidebar" id="toc-sidebar">
-  <div class="toc-sidebar__title">目录</div>
-  {{ .TableOfContents }}
-</aside>
-{{- end -}}
