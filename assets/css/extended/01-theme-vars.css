@@ -29,11 +29,18 @@
   --code-bg: #24231f;
 }
 
+/* iOS 修复：防止 Safari 自动调整文字大小导致渲染异常 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--theme);
   color: var(--content);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  -webkit-text-size-adjust: 100%; /* iOS 修复 */
 }
 
 .header,

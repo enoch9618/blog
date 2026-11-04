@@ -1,11 +1,25 @@
 /* =========================================
+   iOS 字体回退修复
+   Safari 对 Georgia / Times 缺中文字形时，
+   回退行为不可控。下面用 @font-face 显式声明：
+   西文用 Georgia，中文优先用苹方补字。
+   ========================================= */
+@font-face {
+  font-family: "Georgia";
+  src: local("PingFangSC-Regular"), local("PingFang SC");
+  unicode-range: U+3000-303F, U+3400-4DBF, U+4E00-9FFF,
+    U+F900-FAFF, U+FF00-FFEF;
+}
+
+/* =========================================
    字体与正文排版
    ========================================= */
 /* 标准标题统一为宋体 */
 :is(h1, h2, h3, h4, h5, h6,
     .site-title, .archive-year, .post-title) {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "PingFang SC",
+    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
   letter-spacing: 0.02em;
 }
 
@@ -13,8 +27,9 @@
 #profile .profile-title,
 .main .profile h1,
 #profile h1 {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "PingFang SC",
+    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--primary);
@@ -26,8 +41,9 @@
 #profile .profile-subtitle span,
 .profile-subtitle,
 .home-info .entry-header .profile-subtitle {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "PingFang SC",
+    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
   font-weight: 400;
   letter-spacing: 0.06em;
   color: var(--secondary);
@@ -36,12 +52,14 @@
 
 /* 正文 */
 .post-content {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "PingFang SC",
+    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    "STSong", "SimSun", serif;
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.9;
   letter-spacing: 0.06em;
+  -webkit-text-size-adjust: 100%; /* iOS 修复 */
 }
 
 .post-content h2 .anchor,
@@ -63,6 +81,17 @@
   box-shadow: none;
   border-radius: 0;
   filter: grayscale(5%) sepia(5%);
+}
+
+/* iOS 修复：代码块字号异常（PaperMod 在 iOS flex 下的已知问题） */
+code,
+pre,
+kbd,
+samp {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono",
+    Menlo, monospace;
 }
 
 /* 标签 */
