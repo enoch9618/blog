@@ -18,7 +18,7 @@
   font-family: Georgia, "Times New Roman", "Noto Serif SC",
     "Source Han Serif SC", "STSong", "SimSun", serif;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: var(--primary);
   font-weight: 700;
   text-decoration: none;
   padding-bottom: 4px;
@@ -42,7 +42,7 @@
   font-family: Georgia, "Times New Roman", "Noto Serif SC",
     "Source Han Serif SC", "STSong", "SimSun", serif;
   font-weight: 700;
-  color: #000;
+  color: var(--primary);
   border-bottom: 2px solid var(--brand-accent);
   text-decoration: none;
 }
@@ -59,7 +59,7 @@
 .archive-year {
   font-size: 1.55rem;
   font-weight: 500;
-  color: #222;
+  color: var(--primary);
   margin: 0 !important;
   display: inline-flex;
   align-items: flex-start;
@@ -70,7 +70,7 @@
 .archive-year .post-count {
   font-size: 0.75rem;
   font-family: -apple-system, sans-serif;
-  color: #8a8a8a; /* 浅灰色，不抢风头 */
+  color: var(--secondary); /* 浅灰色，不抢风头 */
   margin-left: 6px; /* 和年份拉开距离 */
   position: relative;
   top: -6px; /* 向上偏移，形成上标效果 */
@@ -104,7 +104,7 @@
   flex: 0 0 auto;
   min-width: 105px;
   font-size: 0.82rem;
-  color: #8a8a8a;
+  color: var(--secondary);
   font-family: "Courier New", monospace;
   margin: 0;
   order: -1; /* 日期排在最前面 */
@@ -119,7 +119,7 @@
     "Source Han Serif SC", "STSong", "SimSun", serif;
   font-size: 1.1rem;
   font-weight: 400;
-  color: #222222;
+  color: var(--primary);
   letter-spacing: 0.06em;
   text-decoration: none;
   margin: 0;

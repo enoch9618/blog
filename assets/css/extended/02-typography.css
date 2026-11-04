@@ -17,7 +17,7 @@
     "Source Han Serif SC", "STSong", "SimSun", serif;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: #1a1a1a;
+  color: var(--primary);
 }
 
 /* 首页 Profile 副标题 */
@@ -30,7 +30,7 @@
     "Source Han Serif SC", "STSong", "SimSun", serif;
   font-weight: 400;
   letter-spacing: 0.06em;
-  color: #333333;
+  color: var(--secondary);
   font-size: 1.05rem;
 }
 
@@ -47,7 +47,7 @@
 .post-content h2 .anchor,
 .post-content h3 .anchor {
   opacity: 0.15;
-  color: #888;
+  color: var(--secondary);
   text-decoration: none;
   margin-left: 6px;
   font-weight: normal;
@@ -73,12 +73,12 @@
   background: transparent;
   border: none;
   padding: 0 15px 0 0;
-  color: #888;
+  color: var(--secondary);
   font-size: 0.9rem;
 }
 .post-tags a::before {
   content: "#";
-  color: #ccc;
+  color: var(--border);
   margin-right: 3px;
 }
 .post-tags a:hover {

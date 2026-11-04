@@ -62,7 +62,7 @@
 
 /* 链接样式优化：去掉原来的负 margin，防止和正文挤在一起 */
 .toc a {
-  color: #888 !important; 
+  color: var(--secondary) !important; 
   text-decoration: none !important;
   display: block !important;
   transition: color 0.2s ease;
@@ -81,7 +81,7 @@
 }
 
 .toc a.active {
-  color: #1a1a1a !important;
+  color: var(--primary) !important;
   border-left: 2px solid var(--brand-accent) !important;
   font-weight: 700 !important;
 }
