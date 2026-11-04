@@ -40,9 +40,11 @@ enableEmoji = true
     imageWidth = 120
     imageHeight = 120
 
+disableThemeToggle = true
+
 [[menu.main]]
   name = "文章"
-  url = "/posts/"
+  url = "/archives/"
   weight = 1
 
 [[menu.main]]

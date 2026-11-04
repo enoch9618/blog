@@ -1,0 +1,8 @@
+{{ if .Params.showToc | default true }}
+<details class="toc" open>
+    <summary>目录</summary>
+    <div class="inner">
+        {{ .TableOfContents }}
+    </div>
+</details>
+{{ end }}

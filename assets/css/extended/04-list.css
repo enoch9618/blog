@@ -1,0 +1,142 @@
+/* =========================================
+   顶部导航
+   ========================================= */
+.header {
+  background: transparent;
+  border-bottom: none;
+  padding-block: 2.5rem 1.5rem;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.header .nav a,
+.header .nav .menu a,
+.header nav a {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-size: 1rem;
+  color: #1a1a1a;
+  font-weight: 700;
+  text-decoration: none;
+  padding-bottom: 4px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+.header .nav a:hover,
+.header .nav .menu a:hover,
+.header nav a:hover {
+  color: var(--brand-accent);
+}
+
+.header .nav a.active,
+.header .nav a.current,
+.header .nav .menu a.active,
+.header nav a[aria-current="page"],
+#menu a.active,
+#menu a[aria-current="page"],
+#menu .active,
+.menu .active {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-weight: 700;
+  color: #000;
+  border-bottom: 2px solid var(--brand-accent);
+  text-decoration: none;
+}
+
+/* =========================================
+   列表页 - 年份与文章数量
+   ========================================= */
+.archive-year-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0 1.2rem;
+}
+
+.archive-year {
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: #222;
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* 年份右上角的文章数量 */
+.archive-year .post-count {
+  font-size: 0.75rem;
+  font-family: -apple-system, sans-serif;
+  color: #8a8a8a; /* 浅灰色，不抢风头 */
+  margin-left: 6px; /* 和年份拉开距离 */
+  position: relative;
+  top: -6px; /* 向上偏移，形成上标效果 */
+  font-weight: 400;
+}
+
+/* =========================================
+   列表页 - 文章条目排版
+   ========================================= */
+.post-entry,
+.archive-posts li {
+  display: flex;
+  align-items: baseline;
+  padding: 8px 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  list-style: none;
+}
+
+/* 隐藏不需要的元数据 */
+.post-entry .entry-content,
+.post-entry .entry-cover,
+.post-entry .entry-footer {
+  display: none;
+}
+
+/* 日期样式 */
+.post-entry .post-meta,
+.archive-posts .post-meta {
+  flex: 0 0 auto;
+  min-width: 105px;
+  font-size: 0.82rem;
+  color: #8a8a8a;
+  font-family: "Courier New", monospace;
+  margin: 0;
+  order: -1; /* 日期排在最前面 */
+  white-space: nowrap;
+}
+
+/* 标题样式 */
+.post-entry .entry-header h2,
+.archive-posts a {
+  flex: 1;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #222222;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+/* 去除标题前的多余图标/符号 */
+.archive-posts a::before,
+.post-entry .entry-header h2::before {
+  content: none;
+  display: none;
+}
+
+/* 悬浮变暗红 */
+.post-entry:hover h2,
+.post-entry:hover .entry-header h2 a,
+.archive-posts a:hover {
+  color: var(--brand-accent);
+}

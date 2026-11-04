@@ -1,0 +1,48 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tocLinks = document.querySelectorAll('.toc a');
+    const tocItems = document.querySelectorAll('.toc li');
+    if (tocLinks.length === 0) return;
+
+    // 获取所有标题元素
+    const headings = Array.from(tocLinks).map(link => {
+        const id = decodeURIComponent(link.getAttribute('href').substring(1));
+        return document.getElementById(id);
+    }).filter(Boolean);
+
+    // 滚动监听器
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                
+                // 1. 清除所有高亮和展开
+                tocLinks.forEach(link => link.classList.remove('active'));
+                tocItems.forEach(li => li.classList.remove('has-active'));
+
+                // 2. 找到当前对应的目录链接
+                const activeLink = document.querySelector(`.toc a[href="#${encodeURIComponent(id)}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    
+                    // 3. 【核心修复】展开自身的子菜单，并逐级向上展开所有的父级菜单
+                    let currentLi = activeLink.closest('li');
+                    while (currentLi) {
+                        // 强制让当前项展开（显示它的子标题）
+                        currentLi.classList.add('has-active');
+                        
+                        // 继续找上层，确保外公级也展开
+                        const parentUl = currentLi.parentElement;
+                        currentLi = parentUl ? parentUl.closest('li') : null;
+                    }
+                }
+            }
+        });
+    }, {
+        rootMargin: "0px 0px -50% 0px", // 【关键修改】改为 -50%，意思是标题只要到达屏幕中间，就立刻触发！更加灵敏
+        threshold: 0
+    });
+
+    headings.forEach(heading => observer.observe(heading));
+});
+</script>

@@ -1,0 +1,97 @@
+/* =========================================
+   侧边悬浮目录 - 最终修复版
+   ========================================= */
+
+.toc {
+  position: fixed !important;
+  top: 120px !important;
+  
+  /* 核心修复：利用 calc 让目录永远保持在正文右侧，留出 40px 空隙 */
+  /* 如果屏幕不够宽，就退回距离右边 24px，绝不与正文打架 */
+  left: calc(50vw + 440px) !important;
+  right: auto !important;
+  
+  width: 220px !important;
+  max-height: calc(100vh - 160px) !important;
+  overflow-y: auto !important;
+  
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  
+  font-size: 0.8rem !important;
+  font-family: -apple-system, sans-serif !important;
+  z-index: 10;
+  scrollbar-width: none;
+}
+
+.toc::-webkit-scrollbar {
+  display: none;
+}
+
+.toc summary,
+.toc .toc-title {
+  display: none !important;
+}
+
+/* 左侧的竖线 */
+.toc .inner {
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid var(--border) !important;
+  padding: 0 0 0 16px !important;
+  margin: 0 !important;
+}
+
+/* 列表重置 */
+.toc ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.toc li {
+  margin: 8px 0 !important;
+  line-height: 1.5 !important;
+}
+.toc ul ul {
+  padding-left: 12px !important;
+  margin-top: 6px !important;
+}
+
+/* 链接样式优化：去掉原来的负 margin，防止和正文挤在一起 */
+.toc a {
+  color: #888 !important; 
+  text-decoration: none !important;
+  display: block !important;
+  transition: color 0.2s ease;
+  border-left: 2px solid transparent !important;
+  
+  /* 正常缩进，不往左突出 */
+  margin-left: -18px !important;
+  padding-left: 16px !important;
+  
+  white-space: normal !important;
+  word-break: break-all !important;
+}
+
+.toc a:hover {
+  color: var(--brand-accent) !important;
+}
+
+.toc a.active {
+  color: #1a1a1a !important;
+  border-left: 2px solid var(--brand-accent) !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================
+   智能隐藏：当屏幕宽度不足以容纳正文+TOC时，直接隐藏
+   ========================================= */
+/* 820(正文) + 220(TOC) + 左右间隙 = 大约 1300px */
+@media (max-width: 1350px) {
+  .toc {
+    display: none !important;
+  }
+}

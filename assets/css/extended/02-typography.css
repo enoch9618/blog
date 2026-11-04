@@ -1,0 +1,91 @@
+/* =========================================
+   字体与正文排版
+   ========================================= */
+/* 标准标题统一为宋体 */
+:is(h1, h2, h3, h4, h5, h6,
+    .site-title, .archive-year, .post-title) {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  letter-spacing: 0.02em;
+}
+
+/* 首页 Profile 标题 */
+#profile .profile-title,
+.main .profile h1,
+#profile h1 {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #1a1a1a;
+}
+
+/* 首页 Profile 副标题 */
+#profile .profile-subtitle,
+#profile .profile-subtitle a,
+#profile .profile-subtitle span,
+.profile-subtitle,
+.home-info .entry-header .profile-subtitle {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #333333;
+  font-size: 1.05rem;
+}
+
+/* 正文 */
+.post-content {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", "SimSun", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+}
+
+.post-content h2 .anchor,
+.post-content h3 .anchor {
+  opacity: 0.15;
+  color: #888;
+  text-decoration: none;
+  margin-left: 6px;
+  font-weight: normal;
+  transition: opacity 0.2s;
+}
+.post-content h2:hover .anchor,
+.post-content h3:hover .anchor {
+  opacity: 0.8;
+}
+
+.post-content img {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  filter: grayscale(5%) sepia(5%);
+}
+
+/* 标签 */
+.post-tags {
+  margin-top: 3rem;
+}
+.post-tags a {
+  background: transparent;
+  border: none;
+  padding: 0 15px 0 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+.post-tags a::before {
+  content: "#";
+  color: #ccc;
+  margin-right: 3px;
+}
+.post-tags a:hover {
+  color: var(--brand-accent);
+}
+
+/* 隐藏上一篇/下一篇 */
+.paginav {
+  display: none;
+}

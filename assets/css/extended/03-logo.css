@@ -1,0 +1,41 @@
+/* =========================================
+   Logo：图片放大、纯黑、hover 变暗红
+   ========================================= */
+.logo,
+.logo a,
+.logo h1,
+.logo h1 a,
+#logo a,
+.header .logo a {
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 60px;
+}
+
+.logo a::before,
+.logo h1 a::before,
+#logo a::before {
+  content: "";
+  display: block;
+  width: 180px;
+  height: 60px;
+  background: url("/images/logo.png") left center / contain no-repeat;
+  filter: brightness(0); /* 纯黑；原图透明边缘发灰时靠它压住 */
+  transition: filter 0.3s ease;
+}
+
+/* hover 变暗红：保留 brightness(0) 打底，再叠 invert 链 */
+.logo a:hover::before,
+.logo h1 a:hover::before,
+#logo a:hover::before {
+  filter: brightness(0)
+          invert(18%) sepia(48%) saturate(1800%)
+          hue-rotate(345deg) brightness(85%) contrast(95%);
+}
+
+.logo svg,
+.logo img {
+  display: none;
+}

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Markdown 全语法测试 | Enoch</title>
+<meta name="keywords" content="Markdown, Hugo, 测试">
+<meta name="description" content="纸页上的旧时光
+我始终觉得，书是有气味的。
+新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。">
+<meta name="author" content="Enoch">
+<link rel="canonical" href="http://localhost:1313/posts/test/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.03b4e8621cfb31185e19af515b4a0a4c9b48a2bb8aef11826b896d3467571fb6.css" integrity="sha256-A7ToYhz7MRheGa9RW0oKTJtIoruK7xGCa4ltNGdXH7Y=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="http://localhost:1313/posts/test/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/test/">
+  <meta property="og:site_name" content="Enoch">
+  <meta property="og:title" content="Markdown 全语法测试">
+  <meta property="og:description" content="纸页上的旧时光 我始终觉得，书是有气味的。
+新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-11-04T10:00:00+08:00">
+    <meta property="article:modified_time" content="2026-11-04T10:00:00+08:00">
+    <meta property="article:tag" content="Markdown">
+    <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="测试">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Markdown 全语法测试">
+  <meta name="twitter:description" content="纸页上的旧时光 我始终觉得，书是有气味的。
+新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Markdown 全语法测试",
+      "item": "http://localhost:1313/posts/test/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Markdown 全语法测试",
+  "name": "Markdown 全语法测试",
+  "description": "纸页上的旧时光 我始终觉得，书是有气味的。\n新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。\n",
+  "keywords": [
+    "Markdown", "Hugo", "测试"
+  ],
+  "articleBody": "纸页上的旧时光 我始终觉得，书是有气味的。\n新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。\n一、巷子深处 小时候，家附近有一条窄巷。巷口有棵歪脖子槐树，夏天开一树细碎的白花，风一过，落得满地都是。巷子走到一半，有一间旧书店，门脸不大，招牌上的漆剥落了大半，只剩下\"书\"字还隐约认得出。\n店主是位老先生，总穿一件洗得发白的灰布衫，戴一副圆框眼镜。他很少说话，更多时候是坐在柜台后头，捧一本线装书，慢慢地翻。有人进来，他也不抬头，只在书页间\"嗯\"一声，算是招呼。\n我在那里买过第一本属于自己的书。那本书的封皮已经磨得起了毛边，书页泛黄，边角卷曲，像一片被秋风吹久了的叶子。可我抱着它回家的那个下午，阳光正好，槐花的香气一路跟着我，走得很慢，很慢。\n二、字里行间 后来我渐渐明白，读书这件事，读的不只是字。\n字是静的，可人心是动的。同一段话，少年时读，只觉词句漂亮；中年再读，忽然就读出了话背后没说完的那半句。书还是那本书，人却已经不是原来的人了。\n我们读一本书，其实是在读另一个时刻的自己。 那些停下来的地方，都是心里曾经起过风的地方。\n有一年冬天，我重读一本旧书，读到某一页，忽然看见页边有一行极淡的铅笔字，是我许多年前写的。字迹稚嫩，写的是一个自以为很了不起的感悟。我看了许久，竟有些不好意思地笑了。那时的我，怎么会那样想呢？可转念又觉得，倘若没有那个笨拙的自己，也就不会有今天这个翻着旧书发笑的下午。\n三、灯下 如今的日子，总是快的。\n消息一条接一条，屏幕一页翻一页，人的心也跟着浮起来，落不下去。可偏偏在夜里，关了灯，只剩一盏台灯亮着，摊开一本书的时候，时间忽然就慢了下来。\n灯下的字是温柔的。纸张沙沙地响，像有人在很远的地方低声说话。读到倦了，把书往胸口一扣，闭上眼睛，仿佛能听见许多年前的槐花，正落在一条窄巷的青石板上。\n我想，这大概就是书给人的东西——不是答案，而是一种可以停靠的从容。\n四、听一段声音（测试用） 你的浏览器不支持音频播放。 测试音频：Lo-Fi 04，来源 Mixkit，免费可商用、无需署名。\n",
+  "wordCount" : "946",
+  "inLanguage": "zh",
+  "datePublished": "2026-11-04T10:00:00+08:00",
+  "dateModified": "2026-11-04T10:00:00+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Enoch"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/test/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Enoch",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Enoch (Alt + H)">Enoch</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/archives/" title="文章">
+                    <span>文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/study/" title="查经资料">
+                    <span>查经资料</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Markdown 全语法测试
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-11-04 10:00:00 +0800 CST'>2026-11-04</span>&nbsp;·&nbsp;<span>Enoch</span>
+
+</div>
+  </header> 
+<details class="toc" open>
+    <summary>目录</summary>
+    <div class="inner">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一巷子深处">一、巷子深处</a></li>
+    <li><a href="#二字里行间">二、字里行间</a></li>
+    <li><a href="#三灯下">三、灯下</a></li>
+    <li><a href="#四听一段声音测试用">四、听一段声音（测试用）</a></li>
+  </ul>
+</nav>
+    </div>
+</details>
+
+  <div class="post-content md-content"><h1 id="纸页上的旧时光">纸页上的旧时光<a hidden class="anchor" aria-hidden="true" href="#纸页上的旧时光">#</a></h1>
+<p>我始终觉得，书是有气味的。</p>
+<p>新书是墨与纸浆初遇时的清冽，像一场尚未落笔的雨；旧书则不同，它吸饱了岁月的潮气与日光，翻开来，是一股淡淡的、近乎慵懒的甜。那甜里藏着某年某月的指纹，藏着一个人读到某页时忽然停下的犹豫，也藏着窗台上那盆茉莉不经意洒落的香。</p>
+<p><img alt="旧书与阳光" loading="lazy" src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80"></p>
+<h2 id="一巷子深处">一、巷子深处<a hidden class="anchor" aria-hidden="true" href="#一巷子深处">#</a></h2>
+<p>小时候，家附近有一条窄巷。巷口有棵歪脖子槐树，夏天开一树细碎的白花，风一过，落得满地都是。巷子走到一半，有一间旧书店，门脸不大，招牌上的漆剥落了大半，只剩下&quot;书&quot;字还隐约认得出。</p>
+<p><img alt="巷子里的旧书店" loading="lazy" src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&q=80"></p>
+<p>店主是位老先生，总穿一件洗得发白的灰布衫，戴一副圆框眼镜。他很少说话，更多时候是坐在柜台后头，捧一本线装书，慢慢地翻。有人进来，他也不抬头，只在书页间&quot;嗯&quot;一声，算是招呼。</p>
+<p>我在那里买过第一本属于自己的书。那本书的封皮已经磨得起了毛边，书页泛黄，边角卷曲，像一片被秋风吹久了的叶子。可我抱着它回家的那个下午，阳光正好，槐花的香气一路跟着我，走得很慢，很慢。</p>
+<p><img alt="泛黄的书页" loading="lazy" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&q=80"></p>
+<h2 id="二字里行间">二、字里行间<a hidden class="anchor" aria-hidden="true" href="#二字里行间">#</a></h2>
+<p>后来我渐渐明白，读书这件事，读的不只是字。</p>
+<p>字是静的，可人心是动的。同一段话，少年时读，只觉词句漂亮；中年再读，忽然就读出了话背后没说完的那半句。书还是那本书，人却已经不是原来的人了。</p>
+<blockquote>
+<p>我们读一本书，其实是在读另一个时刻的自己。
+那些停下来的地方，都是心里曾经起过风的地方。</p>
+</blockquote>
+<p><img alt="书页边的铅笔字" loading="lazy" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80"></p>
+<p>有一年冬天，我重读一本旧书，读到某一页，忽然看见页边有一行极淡的铅笔字，是我许多年前写的。字迹稚嫩，写的是一个自以为很了不起的感悟。我看了许久，竟有些不好意思地笑了。那时的我，怎么会那样想呢？可转念又觉得，倘若没有那个笨拙的自己，也就不会有今天这个翻着旧书发笑的下午。</p>
+<h2 id="三灯下">三、灯下<a hidden class="anchor" aria-hidden="true" href="#三灯下">#</a></h2>
+<p>如今的日子，总是快的。</p>
+<p>消息一条接一条，屏幕一页翻一页，人的心也跟着浮起来，落不下去。可偏偏在夜里，关了灯，只剩一盏台灯亮着，摊开一本书的时候，时间忽然就慢了下来。</p>
+<p><img alt="灯下读书" loading="lazy" src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1200&q=80"></p>
+<p>灯下的字是温柔的。纸张沙沙地响，像有人在很远的地方低声说话。读到倦了，把书往胸口一扣，闭上眼睛，仿佛能听见许多年前的槐花，正落在一条窄巷的青石板上。</p>
+<p>我想，这大概就是书给人的东西——不是答案，而是一种可以停靠的从容。</p>
+<p><img alt="窗边的书与花" loading="lazy" src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=1200&q=80"></p>
+<h2 id="四听一段声音测试用">四、听一段声音（测试用）<a hidden class="anchor" aria-hidden="true" href="#四听一段声音测试用">#</a></h2>
+<audio controls preload="none">
+  <source src="https://assets.mixkit.co/music/766/766.mp3" type="audio/mpeg">
+  你的浏览器不支持音频播放。
+</audio>
+<p><em>测试音频：Lo-Fi 04，来源 Mixkit，免费可商用、无需署名。</em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/markdown/">Markdown</a></li>
+      <li><a href="http://localhost:1313/tags/hugo/">Hugo</a></li>
+      <li><a href="http://localhost:1313/tags/%E6%B5%8B%E8%AF%95/">测试</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/261025/">
+    <span class="title">下一页 »</span>
+    <span>撒母耳记上的两块石头</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Enoch</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a><script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tocLinks = document.querySelectorAll('.toc a');
+    const tocItems = document.querySelectorAll('.toc li');
+    if (tocLinks.length === 0) return;
+
+    
+    const headings = Array.from(tocLinks).map(link => {
+        const id = decodeURIComponent(link.getAttribute('href').substring(1));
+        return document.getElementById(id);
+    }).filter(Boolean);
+
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                
+                
+                tocLinks.forEach(link => link.classList.remove('active'));
+                tocItems.forEach(li => li.classList.remove('has-active'));
+
+                
+                const activeLink = document.querySelector(`.toc a[href="#${encodeURIComponent(id)}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    
+                    
+                    let currentLi = activeLink.closest('li');
+                    while (currentLi) {
+                        
+                        currentLi.classList.add('has-active');
+                        
+                        
+                        const parentUl = currentLi.parentElement;
+                        currentLi = parentUl ? parentUl.closest('li') : null;
+                    }
+                }
+            }
+        });
+    }, {
+        rootMargin: "0px 0px -50% 0px", 
+        threshold: 0
+    });
+
+    headings.forEach(heading => observer.observe(heading));
+});
+</script>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
