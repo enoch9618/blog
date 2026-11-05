@@ -15,8 +15,7 @@
 .header .nav a,
 .header .nav .menu a,
 .header nav a {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: var(--font-serif);
   font-size: 1rem;
   color: var(--primary);
   font-weight: 700;
@@ -39,8 +38,7 @@
 #menu a[aria-current="page"],
 #menu .active,
 .menu .active {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: var(--font-serif);
   font-weight: 700;
   color: var(--primary);
   border-bottom: 2px solid var(--brand-accent);
@@ -68,7 +66,7 @@
 
 .archive-year .post-count {
   font-size: 0.75rem;
-  font-family: -apple-system, sans-serif;
+  font-family: var(--font-sans);
   color: var(--secondary);
   margin-left: 6px;
   position: relative;
@@ -102,7 +100,9 @@
   min-width: 105px;
   font-size: 0.82rem;
   color: var(--secondary);
-  font-family: "Courier New", monospace;
+  /* 等宽数字对齐日期，同时沿用衬线字体，避免风格割裂 */
+  font-family: var(--font-serif);
+  font-variant-numeric: tabular-nums;
   margin: 0;
   order: -1;
   white-space: nowrap;
@@ -111,8 +111,7 @@
 .post-entry .entry-header h2,
 .archive-posts a {
   flex: 1;
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: var(--font-serif);
   font-size: 1.1rem;
   font-weight: 400;
   color: var(--primary);

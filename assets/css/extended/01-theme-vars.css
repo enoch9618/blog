@@ -2,21 +2,30 @@
    覆盖 PaperMod 主题变量（暖白纸张风）
    ========================================= */
 :root {
-  --theme: #f7f5ef;      /* 背景 */
-  --entry: #f7f5ef;      /* 列表项背景，与主题一致，去卡片感 */
-  --primary: #2e2e2e;    /* 主文字 */
-  --secondary: #8a8a8a;  /* 次要文字（日期等） */
-  --content: #2e2e2e;    /* 正文 */
-  --border: #e0ddd5;     /* 边框 */
-  --tertiary: #e0ddd5;   /* PaperMod 部分版本用的变量名 */
+  --theme: #f7f5ef;
+  --entry: #f7f5ef;
+  --primary: #2e2e2e;
+  --secondary: #8a8a8a;
+  --content: #2e2e2e;
+  --border: #e0ddd5;
+  --tertiary: #e0ddd5;
   --code-block-bg: #f0ede5;
-  --code-bg: #f0ede5;
+  --code-bg: #f0ede5; /* 与 --code-block-bg 同值，兼容旧版 PaperMod 变量名 */
 
-  /* 自定义品牌色，供后续文件使用 */
   --brand-accent: #8c2d19;
+
+  /* 字体栈（供所有文件复用，避免重复声明） */
+  --font-serif: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* 布局尺寸（供 TOC 定位等联动，改一处即全局生效） */
+  --content-max: 820px;
+  --toc-gap: 40px;
+  --toc-top: 270px;
 }
 
-/* 若关闭了暗色模式可删除此块；保留则同步一套暗色 */
 :root[data-theme="dark"] {
   --theme: #1c1b19;
   --entry: #1c1b19;
@@ -27,19 +36,21 @@
   --tertiary: #33312d;
   --code-block-bg: #24231f;
   --code-bg: #24231f;
+
+  /* 暗底上用更亮的红，保证 hover/active 可辨识 */
+  --brand-accent: #c96b52;
 }
 
 body {
   background-color: var(--theme);
   color: var(--content);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans);
 }
 
 .header,
 .main,
 .footer {
-  max-width: 820px;
+  max-width: var(--content-max);
   margin-inline: auto;
   padding-inline: 24px;
 }

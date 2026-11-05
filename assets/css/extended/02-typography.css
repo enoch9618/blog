@@ -4,8 +4,7 @@
 /* 标准标题统一为宋体 */
 :is(h1, h2, h3, h4, h5, h6,
     .site-title, .archive-year, .post-title) {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: var(--font-serif);
   letter-spacing: 0.02em;
 }
 
@@ -14,19 +13,18 @@
 .main .profile h1,
 #profile h1,
 .profile_inner h1 {
-  font-family: "Palatino Linotype", "Palatino", Georgia, "Times New Roman", serif !important;
-  font-size: 2.4rem !important; 
-  font-weight: 600 !important; 
-  letter-spacing: 0.02em; 
+  font-family: "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif !important;
+  font-size: 2.4rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
   color: var(--primary);
   margin-bottom: 12px;
-  text-shadow: 0.3px 0.3px 0px rgba(0, 0, 0, 0.05);
+  text-shadow: 0.3px 0.3px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* 首页 Profile 副标题（纯正宋体） */
 .profile_inner span {
-  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-family: var(--font-serif) !important;
   font-weight: 400 !important;
   letter-spacing: 0.08em;
   color: var(--secondary);
@@ -35,8 +33,7 @@
 
 /* 正文 */
 .post-content {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.9;
@@ -84,7 +81,7 @@
   color: var(--brand-accent);
 }
 
-/* 隐藏上一篇/下一篇 */
+/* 隐藏上一篇/下一篇（有意移除，非遗漏） */
 .paginav {
   display: none;
 }
@@ -95,68 +92,67 @@
 .footer,
 .footer span,
 .footer a {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-family: var(--font-serif) !important;
   letter-spacing: 0.02em;
 }
 
 /* =========================================
    彻底干掉代码字体，统一文章元数据
    ========================================= */
-/* 1. 直接把文章页所有可能的父级容器里的代码字体变量（--font-mono）篡改成宋体 */
 .post-header,
 .post-meta {
-  --font-mono: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  --font-mono: var(--font-serif) !important;
 }
 
-/* 2. 精准定位你发的代码结构：强制覆盖 div 和 span */
 div.post-meta,
 div.post-meta span {
-  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-family: var(--font-serif) !important;
   font-size: 0.95rem !important;
   font-weight: 400 !important;
   color: var(--secondary) !important;
   letter-spacing: 0.05em !important;
 }
 
-/* 3. 文章大标题也顺便锁死 */
 .post-title {
-  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
-    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-family: var(--font-serif) !important;
   font-weight: 600 !important;
 }
 
 /* =========================================
-   精准打击：只对首页生效的一屏布局（不影响列表页）
+   首页一屏布局（仅首页 .profile 存在时生效）
    ========================================= */
-body.list:has(.profile) .main {
-  min-height: calc(100vh - 220px) !important; 
-  display: flex !important;
-  align-items: center !important;     
-  justify-content: center !important; 
-  margin: 0 auto !important;
-}
+@supports (selector(:has(*))) {
+  body.list:has(.profile) .main {
+    min-height: calc(100vh - 220px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
 
-body.list:has(.profile) .profile {
-  min-height: auto !important;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
+  body.list:has(.profile) .profile {
+    min-height: auto !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 }
 
 /* =========================================
    移动端专属：精准接管首页的高度计算
    ========================================= */
 @media (max-width: 768px) {
-  body.list:has(.profile) .main {
-    min-height: calc(100dvh - 180px) !important; 
-  }
-  
-  body.list:has(.profile) .header {
-    padding-block: 1.5rem 1rem !important; 
-  }
-  body.list:has(.profile) .footer {
-    padding-bottom: 1rem !important;
+  @supports (selector(:has(*))) {
+    body.list:has(.profile) .main {
+      /* 不支持 dvh 的旧浏览器自动沿用上一行 vh 值 */
+      min-height: calc(100vh - 180px) !important;
+      min-height: calc(100dvh - 180px) !important;
+    }
+
+    body.list:has(.profile) .header {
+      padding-block: 1.5rem 1rem !important;
+    }
+    body.list:has(.profile) .footer {
+      padding-bottom: 1rem !important;
+    }
   }
 }

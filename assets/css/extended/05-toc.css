@@ -4,25 +4,23 @@
 
 .toc {
   position: fixed !important;
-  /* 核心修改：加大 top 值，让它精准对齐正文大标题 */
-  top: 270px !important; 
-  
-  /* 让目录永远保持在“居中正文”的右侧，并强制留出 40px 的空隙 */
-  left: calc(50% + 410px + 40px) !important; 
+  top: var(--toc-top) !important;
+  /* 始终贴着"居中正文"右侧，间距由变量控制；改正文宽度时自动联动 */
+  left: calc(50% + var(--content-max) / 2 + var(--toc-gap)) !important;
   right: auto !important;
-  
+
   width: 200px !important;
-  max-height: calc(100vh - 260px) !important; 
+  max-height: calc(100vh - 260px) !important;
   overflow-y: auto !important;
-  
+
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
-  
+
   font-size: 0.8rem !important;
-  font-family: -apple-system, sans-serif !important;
+  font-family: var(--font-sans) !important;
   z-index: 10;
   scrollbar-width: none;
 }
@@ -36,7 +34,7 @@
   display: none !important;
 }
 
-/* 左侧的竖线 */
+/* 左侧竖线 */
 .toc .inner {
   background: transparent !important;
   border: none !important;
@@ -60,17 +58,17 @@
   margin-top: 6px !important;
 }
 
-/* 链接样式优化 */
+/* 链接样式 */
 .toc a {
-  color: var(--secondary) !important; 
+  color: var(--secondary) !important;
   text-decoration: none !important;
   display: block !important;
   transition: color 0.2s ease;
   border-left: 2px solid transparent !important;
-  
+
   margin-left: -18px !important;
   padding-left: 16px !important;
-  
+
   white-space: normal !important;
   word-break: break-all !important;
 }
@@ -86,7 +84,7 @@
 }
 
 /* =========================================
-   智能隐藏：当屏幕宽度不足以容纳正文+TOC时，直接隐藏
+   智能隐藏：屏幕不足以容纳正文+TOC 时隐藏
    ========================================= */
 @media (max-width: 1250px) {
   .toc {

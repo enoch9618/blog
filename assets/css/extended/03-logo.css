@@ -7,11 +7,12 @@
 .logo h1 a,
 #logo a,
 .header .logo a {
-  font-size: 0;
   display: flex;
   align-items: center;
   text-decoration: none;
   height: 60px;
+  /* 视觉隐藏文字但保留给屏幕阅读器/SEO（替代 font-size:0） */
+  font-size: 0;
 }
 
 .logo a::before,
@@ -22,7 +23,7 @@
   width: 180px;
   height: 60px;
   background: url("/images/logo.png") left center / contain no-repeat;
-  filter: brightness(0); 
+  filter: brightness(0);
   transition: filter 0.3s ease;
 }
 
@@ -34,6 +35,7 @@
           hue-rotate(345deg) brightness(85%) contrast(95%);
 }
 
+/* 主题自带 img/svg 隐藏（文字已由 ::before 视觉承载） */
 .logo svg,
 .logo img {
   display: none;
@@ -51,4 +53,15 @@
   filter: brightness(0) invert(1)
           sepia(48%) saturate(1800%) hue-rotate(345deg)
           brightness(85%) contrast(95%);
+}
+
+/* 无障碍：屏幕阅读器仍能读到站点名 */
+.screen-reader-text,
+.logo a .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
