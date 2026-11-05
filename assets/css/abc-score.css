@@ -1,0 +1,151 @@
+/* 乐谱系统整体容器 */
+.abc-score-wrapper {
+    margin: 2rem 0;
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: 8px;
+    background: var(--entry, #ffffff);
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* 控制栏 */
+.abc-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border, #e2e8f0);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.abc-mode-switch {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.abc-btn {
+    background: var(--tertiary, #f1f5f9);
+    color: var(--primary, #1e293b);
+    border: 1px solid var(--border, #cbd5e1);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.abc-btn:hover {
+    background: var(--secondary, #e2e8f0);
+}
+
+.abc-btn.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+}
+
+.abc-print-btn {
+    background: transparent;
+    color: var(--secondary, #64748b);
+    border: 1px dashed var(--border, #cbd5e1);
+}
+
+.abc-print-btn:hover {
+    color: var(--primary, #1e293b);
+    border-color: var(--primary, #1e293b);
+}
+
+/* 渲染显示区 */
+.abc-render-area {
+    width: 100%;
+    overflow-x: auto;
+    text-align: center;
+    min-height: 100px;
+}
+
+.abc-pane {
+    display: none;
+}
+
+.abc-pane.active {
+    display: block;
+}
+
+/* 简谱容器样式 */
+.jianpu-container {
+    font-family: "SimSun", "宋体", serif;
+    padding: 1rem;
+    text-align: left;
+    line-height: 2.2;
+    font-size: 1.1rem;
+    color: var(--primary, #000);
+}
+
+.jianpu-header {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.jianpu-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary, #555);
+}
+
+.jianpu-line {
+    margin-bottom: 1.2rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* PaperMod 深色模式适配 */
+.dark .abc-score-wrapper,
+[data-theme="dark"] .abc-score-wrapper {
+    background: var(--entry, #1d2125);
+    border-color: var(--border, #333d46);
+}
+
+.dark .abc-btn,
+[data-theme="dark"] .abc-btn {
+    background: #282e33;
+    color: #9cdcfe;
+    border-color: #3e4c59;
+}
+
+.dark .abc-btn.active,
+[data-theme="dark"] .abc-btn.active {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+/* 打印专用样式 */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .abc-score-wrapper.printing,
+    .abc-score-wrapper.printing * {
+        visibility: visible;
+    }
+    .abc-score-wrapper.printing {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .abc-controls {
+        display: none !important;
+    }
+}
