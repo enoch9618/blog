@@ -1,18 +1,18 @@
 /* =========================================
-   侧边悬浮目录 - 最终修复版
+   侧边悬浮目录 - 对齐标题版
    ========================================= */
 
 .toc {
   position: fixed !important;
-  top: 120px !important;
+  /* 核心修改：加大 top 值，让它精准对齐正文大标题 */
+  top: 270px !important; 
   
-  /* 核心修复：利用 calc 让目录永远保持在正文右侧，留出 40px 空隙 */
-  /* 如果屏幕不够宽，就退回距离右边 24px，绝不与正文打架 */
-  left: calc(50vw + 440px) !important;
+  /* 让目录永远保持在“居中正文”的右侧，并强制留出 40px 的空隙 */
+  left: calc(50% + 410px + 40px) !important; 
   right: auto !important;
   
-  width: 220px !important;
-  max-height: calc(100vh - 160px) !important;
+  width: 200px !important;
+  max-height: calc(100vh - 260px) !important; 
   overflow-y: auto !important;
   
   background: transparent !important;
@@ -60,7 +60,7 @@
   margin-top: 6px !important;
 }
 
-/* 链接样式优化：去掉原来的负 margin，防止和正文挤在一起 */
+/* 链接样式优化 */
 .toc a {
   color: var(--secondary) !important; 
   text-decoration: none !important;
@@ -68,7 +68,6 @@
   transition: color 0.2s ease;
   border-left: 2px solid transparent !important;
   
-  /* 正常缩进，不往左突出 */
   margin-left: -18px !important;
   padding-left: 16px !important;
   
@@ -89,8 +88,7 @@
 /* =========================================
    智能隐藏：当屏幕宽度不足以容纳正文+TOC时，直接隐藏
    ========================================= */
-/* 820(正文) + 220(TOC) + 左右间隙 = 大约 1300px */
-@media (max-width: 1350px) {
+@media (max-width: 1250px) {
   .toc {
     display: none !important;
   }

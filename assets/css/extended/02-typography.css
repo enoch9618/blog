@@ -101,9 +101,36 @@
 }
 
 /* =========================================
+   彻底干掉代码字体，统一文章元数据
+   ========================================= */
+/* 1. 直接把文章页所有可能的父级容器里的代码字体变量（--font-mono）篡改成宋体 */
+.post-header,
+.post-meta {
+  --font-mono: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+}
+
+/* 2. 精准定位你发的代码结构：强制覆盖 div 和 span */
+div.post-meta,
+div.post-meta span {
+  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: var(--secondary) !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* 3. 文章大标题也顺便锁死 */
+.post-title {
+  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-weight: 600 !important;
+}
+
+/* =========================================
    精准打击：只对首页生效的一屏布局（不影响列表页）
    ========================================= */
-/* 使用 :has(.profile) 锁死，只有包含头像的首页才会应用这个高度 */
 body.list:has(.profile) .main {
   min-height: calc(100vh - 220px) !important; 
   display: flex !important;
