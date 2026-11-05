@@ -15,9 +15,8 @@
 .header .nav a,
 .header .nav .menu a,
 .header nav a {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   font-size: 1rem;
   color: var(--primary);
   font-weight: 700;
@@ -40,9 +39,8 @@
 #menu a[aria-current="page"],
 #menu .active,
 .menu .active {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   font-weight: 700;
   color: var(--primary);
   border-bottom: 2px solid var(--brand-accent);
@@ -113,9 +111,8 @@
 .post-entry .entry-header h2,
 .archive-posts a {
   flex: 1;
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   font-size: 1.1rem;
   font-weight: 400;
   color: var(--primary);

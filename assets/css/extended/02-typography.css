@@ -1,65 +1,46 @@
 /* =========================================
-   iOS 字体回退修复
-   Safari 对 Georgia / Times 缺中文字形时，
-   回退行为不可控。下面用 @font-face 显式声明：
-   西文用 Georgia，中文优先用苹方补字。
-   ========================================= */
-@font-face {
-  font-family: "Georgia";
-  src: local("PingFangSC-Regular"), local("PingFang SC");
-  unicode-range: U+3000-303F, U+3400-4DBF, U+4E00-9FFF,
-    U+F900-FAFF, U+FF00-FFEF;
-}
-
-/* =========================================
    字体与正文排版
    ========================================= */
 /* 标准标题统一为宋体 */
 :is(h1, h2, h3, h4, h5, h6,
     .site-title, .archive-year, .post-title) {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   letter-spacing: 0.02em;
 }
 
-/* 首页 Profile 标题 */
+/* 首页 Profile 标题（英文饱满微粗版） */
 #profile .profile-title,
 .main .profile h1,
-#profile h1 {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+#profile h1,
+.profile_inner h1 {
+  font-family: "Palatino Linotype", "Palatino", Georgia, "Times New Roman", serif !important;
+  font-size: 2.4rem !important; 
+  font-weight: 600 !important; 
+  letter-spacing: 0.02em; 
   color: var(--primary);
+  margin-bottom: 12px;
+  text-shadow: 0.3px 0.3px 0px rgba(0, 0, 0, 0.05);
 }
 
-/* 首页 Profile 副标题 */
-#profile .profile-subtitle,
-#profile .profile-subtitle a,
-#profile .profile-subtitle span,
-.profile-subtitle,
-.home-info .entry-header .profile-subtitle {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
-  font-weight: 400;
-  letter-spacing: 0.06em;
+/* 首页 Profile 副标题（纯正宋体） */
+.profile_inner span {
+  font-family: Georgia, "Times New Roman", "PingFang SC", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.08em;
   color: var(--secondary);
   font-size: 1.05rem;
 }
 
 /* 正文 */
 .post-content {
-  font-family: Georgia, "Times New Roman", "PingFang SC",
-    "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.9;
   letter-spacing: 0.06em;
-  -webkit-text-size-adjust: 100%; /* iOS 修复 */
 }
 
 .post-content h2 .anchor,
@@ -81,17 +62,6 @@
   box-shadow: none;
   border-radius: 0;
   filter: grayscale(5%) sepia(5%);
-}
-
-/* iOS 修复：代码块字号异常（PaperMod 在 iOS flex 下的已知问题） */
-code,
-pre,
-kbd,
-samp {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono",
-    Menlo, monospace;
 }
 
 /* 标签 */
@@ -117,4 +87,49 @@ samp {
 /* 隐藏上一篇/下一篇 */
 .paginav {
   display: none;
+}
+
+/* =========================================
+   统一 Footer 字体（页脚版权信息）
+   ========================================= */
+.footer,
+.footer span,
+.footer a {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif !important;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================
+   精准打击：只对首页生效的一屏布局（不影响列表页）
+   ========================================= */
+/* 使用 :has(.profile) 锁死，只有包含头像的首页才会应用这个高度 */
+body.list:has(.profile) .main {
+  min-height: calc(100vh - 220px) !important; 
+  display: flex !important;
+  align-items: center !important;     
+  justify-content: center !important; 
+  margin: 0 auto !important;
+}
+
+body.list:has(.profile) .profile {
+  min-height: auto !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* =========================================
+   移动端专属：精准接管首页的高度计算
+   ========================================= */
+@media (max-width: 768px) {
+  body.list:has(.profile) .main {
+    min-height: calc(100dvh - 180px) !important; 
+  }
+  
+  body.list:has(.profile) .header {
+    padding-block: 1.5rem 1rem !important; 
+  }
+  body.list:has(.profile) .footer {
+    padding-bottom: 1rem !important;
+  }
 }
