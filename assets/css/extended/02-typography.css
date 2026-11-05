@@ -1,8 +1,5 @@
 /* =========================================
    iOS 字体回退修复
-   Safari 对 Georgia / Times 缺中文字形时，
-   回退行为不可控。下面用 @font-face 显式声明：
-   西文用 Georgia，中文优先用苹方补字。
    ========================================= */
 @font-face {
   font-family: "Georgia";
@@ -30,12 +27,13 @@
   font-family: Georgia, "Times New Roman", "PingFang SC",
     "Noto Serif SC", "Source Han Serif SC", "Songti SC",
     "STSong", "SimSun", serif;
-  font-weight: 500;
+  font-weight: 500 !important;
   letter-spacing: 0.06em;
   color: var(--primary);
+  text-align: center;
 }
 
-/* 首页 Profile 副标题 */
+/* 首页 Profile 副标题 (增加了 !important 强制覆盖主题默认样式) */
 #profile .profile-subtitle,
 #profile .profile-subtitle a,
 #profile .profile-subtitle span,
@@ -43,11 +41,12 @@
 .home-info .entry-header .profile-subtitle {
   font-family: Georgia, "Times New Roman", "PingFang SC",
     "Noto Serif SC", "Source Han Serif SC", "Songti SC",
-    "STSong", "SimSun", serif;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: var(--secondary);
-  font-size: 1.05rem;
+    "STSong", "SimSun", serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--secondary) !important;
+  font-size: 1.05rem !important;
+  text-align: center;
 }
 
 /* 正文 */
@@ -59,7 +58,7 @@
   font-weight: 400;
   line-height: 1.9;
   letter-spacing: 0.06em;
-  -webkit-text-size-adjust: 100%; /* iOS 修复 */
+  -webkit-text-size-adjust: 100%;
 }
 
 .post-content h2 .anchor,
@@ -83,7 +82,7 @@
   filter: grayscale(5%) sepia(5%);
 }
 
-/* iOS 修复：代码块字号异常（PaperMod 在 iOS flex 下的已知问题） */
+/* iOS 修复：代码块字号异常 */
 code,
 pre,
 kbd,
@@ -117,4 +116,15 @@ samp {
 /* 隐藏上一篇/下一篇 */
 .paginav {
   display: none;
+}
+
+/* =========================================
+   【新增】移动端首屏间距紧凑修复
+   ========================================= */
+@media (max-width: 768px) {
+  /* 大幅缩小首页默认强制居中的高度，让头像和标题往上提 */
+  .home-info {
+    min-height: 50vh !important; 
+    padding-top: 1rem !important; 
+  }
 }

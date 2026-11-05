@@ -137,3 +137,23 @@
 .archive-posts a:hover {
   color: var(--brand-accent);
 }
+
+/* =========================================
+   【新增】移动端导航栏与首屏布局修复
+   ========================================= */
+@media (max-width: 768px) {
+  .header {
+    padding-block: 1.5rem 1rem !important; /* 导航上下收紧 */
+  }
+  .header .nav {
+    flex-direction: column !important; /* 手机上改为上下排列，避免横向拥挤 */
+    align-items: center !important;
+    gap: 12px;
+  }
+  .header .nav a,
+  .header .nav .menu a,
+  .header nav a {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important; /* 解决截图里导航字太细不够宋体的问题 */
+  }
+}
