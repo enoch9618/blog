@@ -16,7 +16,18 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;什么是正常的基督徒生活？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;加2：20 现在活着的不再是我，乃是基督在我里面活着。这是保罗对基督徒生活的定义。神对于基督徒生活定的准则，是“我不再或者，基督在我里面活出他的生命。”&lt;/p&gt;</description>
+&lt;p&gt;&lt;link rel=&#34;stylesheet&#34; href=&#34;https://hugujun.com/css/bible-verse.css&#34;&gt;
+  &lt;script src=&#34;https://hugujun.com/js/bible-verse.js&#34; defer&gt;&lt;/script&gt;&lt;button
+  type=&#34;button&#34;
+  class=&#34;bible-verse-button&#34;
+  id=&#34;bible-verse-0&#34;
+  data-book=&#34;加&#34;
+  data-chapter=&#34;2&#34;
+  data-verse=&#34;20&#34;
+  data-base=&#34;/bible-data/&#34;
+  data-target=&#34;bible-verse-0&#34;
+&gt;加2:20&lt;/button&gt;
+ 现在活着的不再是我，乃是基督在我里面活着。这是保罗对基督徒生活的定义。神对于基督徒生活定的准则，是“我不再或者，基督在我里面活出他的生命。”&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
