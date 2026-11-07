@@ -139,10 +139,20 @@
       <guid>https://hugujun.com/try/</guid>
       <description>&lt;p&gt;现在很少静心思考了，难怪主耶稣说：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;清心的人有福了，因为他们必得见神。（太 5:8）&lt;/p&gt;
+&lt;p&gt;清心的人有福了，因为他们必得见神。（&lt;link rel=&#34;stylesheet&#34; href=&#34;https://hugujun.com/css/bible-verse.css&#34;&gt;
+  &lt;script src=&#34;https://hugujun.com/js/bible-verse.js&#34; defer&gt;&lt;/script&gt;&lt;button
+  type=&#34;button&#34;
+  class=&#34;bible-verse-button&#34;
+  id=&#34;bible-verse-0&#34;
+  data-book=&#34;太&#34;
+  data-chapter=&#34;5&#34;
+  data-verse=&#34;8&#34;
+  data-base=&#34;/bible-data/&#34;
+  data-target=&#34;bible-verse-0&#34;
+&gt;太5:8&lt;/button&gt;
+）&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;记得圣经玛拉基书中神说：……以此试试……&lt;/p&gt;
-&lt;p&gt;信仰的路程上，很需要这样的试试。祷告上没有信心，需要这样试一试，要留心祷告是否蒙应允。很多时候没有底气、没有信心和他人分享，因为自己没有这样的经历，或者说，就算经历了，自己也不知道。&lt;/p&gt;</description>
+&lt;p&gt;记得圣经玛拉基书中神说：……以此试试……&lt;/p&gt;</description>
     </item>
     <item>
       <title>平时的祷告</title>
