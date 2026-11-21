@@ -1,0 +1,33 @@
+/* =========================================
+   文章内图片：统一纸张卡片质感
+   ========================================= */
+
+.post-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: var(--section-md) auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  background: var(--entry);
+  object-fit: contain;
+  /* 轻微暖色滤镜，融入纸张底色 */
+  filter: grayscale(5%) sepia(5%);
+  transition: transform var(--transition-base),
+    filter var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+/* 悬停：还原真实色彩 + 轻微抬升 */
+.post-content img:hover {
+  transform: translateY(-2px);
+  filter: grayscale(0) sepia(0);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* 显式居中的图片（src 带 #center） */
+.post-content img[src*="#center"] {
+  margin-inline: auto;
+}

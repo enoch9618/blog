@@ -1,0 +1,43 @@
+/* =========================================
+   文章内嵌媒体：音频 / 视频 / 外链播放器
+   统一成暖白纸张卡片质感
+   ========================================= */
+
+.post-content video,
+.post-content audio,
+.post-content iframe {
+  display: block;
+  max-width: 100%;
+  margin: var(--section-md) auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  background: var(--entry);
+}
+
+/* 视频：撑满正文栏，按比例缩放 */
+.post-content video {
+  width: 100%;
+  height: auto;
+}
+
+/* 音频：卡片式播放条 */
+.post-content audio {
+  width: 100%;
+  height: 3.25rem;
+  overflow: hidden;
+}
+
+/* Chromium / WebKit 音频控件底色跟随卡片，避免白块突兀 */
+.post-content audio::-webkit-media-controls-enclosure {
+  border-radius: var(--radius-md);
+  background: var(--entry);
+}
+.post-content audio::-webkit-media-controls-panel {
+  background: var(--entry);
+}
+
+/* 外链播放器（YouTube / 网易云等）保持圆角与阴影 */
+.post-content iframe {
+  border-radius: var(--radius-md);
+}

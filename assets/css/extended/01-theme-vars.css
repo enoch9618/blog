@@ -1,29 +1,104 @@
 /* =========================================
-   覆盖 PaperMod 主题变量（暖白纸张风）
+   设计令牌 · 暖白纸张风（覆盖 PaperMod 主题变量）
    ========================================= */
 :root {
-  --theme: #f7f5ef;
-  --entry: #f7f5ef;
-  --primary: #2e2e2e;
-  --secondary: #8a8a8a;
-  --content: #2e2e2e;
-  --border: #e0ddd5;
-  --tertiary: #e0ddd5;
-  --code-block-bg: #f0ede5;
-  --code-bg: #f0ede5; /* 与 --code-block-bg 同值，兼容旧版 PaperMod 变量名 */
+  /* —— 颜色 · 基础语义 —— */
+  --theme: #f7f5ef;          /* 页面底色：暖白纸 */
+  --entry: #f7f5ef;          /* 卡片 / 面板底色 */
+  --primary: #2e2e2e;        /* 主文字：墨色 */
+  --secondary: #8a8a8a;      /* 次级文字：灰 */
+  --content: #2e2e2e;        /* 正文 */
+  --border: #e0ddd5;         /* 分隔线 */
+  --tertiary: #e0ddd5;       /* 弱背景 / 边框 */
+  --code-block-bg: #f0ede5;  /* 代码块背景 */
+  --code-bg: #f0ede5;        /* 行内代码背景（兼容旧变量名） */
 
-  --brand-accent: #8c2d19;
+  /* —— 颜色 · 品牌与交互 —— */
+  --brand-accent: #8c2d19;         /* 品牌红 */
+  --brand-accent-hover: #a83226;   /* hover 亮红 */
+  --brand-accent-active: #8c2d19;  /* active */
+  --brand-accent-soft: rgba(140, 45, 25, 0.08); /* 选中 / 淡背景 */
+  --accent-blue: #0284c7;          /* 乐谱激活态蓝 */
+  --overlay-bg: rgba(0, 0, 0, 0.55); /* 弹窗遮罩 */
 
-  /* 字体栈（供所有文件复用，避免重复声明） */
+  /* —— 字体栈 —— */
   --font-serif: Georgia, "Times New Roman", "Noto Serif SC",
     "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+    "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-serif-en: "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Code",
+    Consolas, "Liberation Mono", Menlo, monospace;
 
-  /* 布局尺寸（供 TOC 定位等联动，改一处即全局生效） */
+  /* —— 字号（1rem = 16px）—— */
+  --fs-0: 0;            /* logo 隐藏文字 */
+  --fs-2xs: 0.75rem;    /* 归档篇数 */
+  --fs-xs: 0.8rem;      /* TOC */
+  --fs-sm: 0.875rem;    /* 按钮 / 标签 */
+  --fs-meta: 0.95rem;   /* 文章元数据 */
+  --fs-nav: 1rem;       /* 导航 */
+  --fs-body: 1.05rem;   /* 正文 */
+  --fs-title: 1.1rem;   /* 列表标题 */
+  --fs-md: 1.15rem;     /* 弹窗标题 */
+  --fs-lg: 1.3rem;      /* 简谱标题 */
+  --fs-xl: 1.55rem;     /* 归档年份 */
+  --fs-hero: 2.4rem;    /* 首页标题 */
+
+  /* —— 行高 —— */
+  --lh-body: 1.9;   /* 正文 */
+  --lh-relaxed: 2;  /* 经文 / 宽松段落 */
+  --lh-tight: 1.5;  /* TOC / 紧凑列表 */
+
+  /* —— 字距 —— */
+  --ls-tight: 0.02em;
+  --ls-normal: 0.05em;
+  --ls-loose: 0.06em;
+  --ls-wide: 0.08em;
+
+  /* —— 间距 · 微距 —— */
+  --space-3xs: 3px;
+  --space-2xs: 4px;
+  --space-xs: 6px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 22px;
+  --space-2xl: 24px;
+  --space-3xl: 40px;
+
+  /* —— 间距 · 段落级 —— */
+  --section-sm: 1rem;
+  --section-md: 1.5rem;
+  --section-lg: 2rem;
+  --section-xl: 2.5rem;
+  --section-2xl: 3rem;
+
+  /* —— 圆角 —— */
+  --radius-none: 0;
+  --radius-focus: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* —— 阴影 —— */
+  --shadow-text-soft: 0.3px 0.3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+  /* —— 动效 —— */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* —— 布局尺寸（供 TOC 定位等联动）—— */
   --content-max: 820px;
   --toc-gap: 40px;
   --toc-top: 270px;
+  --logo-width: 180px;
+  --logo-height: 60px;
 }
 
 :root[data-theme="dark"] {
@@ -37,10 +112,19 @@
   --code-block-bg: #24231f;
   --code-bg: #24231f;
 
-  /* 暗底上用更亮的红，保证 hover/active 可辨识 */
-  --brand-accent: #c96b52;
+  --brand-accent: #c96b52;         /* 暗底亮红 */
+  --brand-accent-hover: #d98b70;
+  --brand-accent-active: #c96b52;
+  --brand-accent-soft: rgba(201, 107, 82, 0.14);
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
+/* =========================================
+   全局基础
+   ========================================= */
 body {
   background-color: var(--theme);
   color: var(--content);
@@ -52,5 +136,11 @@ body {
 .footer {
   max-width: var(--content-max);
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: var(--space-2xl);
+}
+
+/* 文本选中：品牌色淡染 */
+::selection {
+  background: var(--brand-accent-soft);
+  color: var(--primary);
 }

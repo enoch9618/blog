@@ -4,7 +4,7 @@
 .header {
   background: transparent;
   border-bottom: none;
-  padding-block: 2.5rem 1.5rem;
+  padding-block: var(--section-xl) var(--section-md);
 }
 .nav {
   display: flex;
@@ -16,13 +16,13 @@
 .header .nav .menu a,
 .header nav a {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: var(--fs-nav);
   color: var(--primary);
   font-weight: 700;
   text-decoration: none;
-  padding-bottom: 4px;
-  letter-spacing: 0.05em;
-  transition: color 0.2s ease;
+  padding-bottom: var(--space-2xs);
+  letter-spacing: var(--ls-normal);
+  transition: color var(--transition-base);
 }
 .header .nav a:hover,
 .header .nav .menu a:hover,
@@ -51,11 +51,11 @@
 .archive-year-wrapper {
   display: flex;
   align-items: center;
-  margin: 3rem 0 1.2rem;
+  margin: var(--section-2xl) 0 1.2rem;
 }
 
 .archive-year {
-  font-size: 1.55rem;
+  font-size: var(--fs-xl);
   font-weight: 500;
   color: var(--primary);
   margin: 0 !important;
@@ -65,10 +65,10 @@
 }
 
 .archive-year .post-count {
-  font-size: 0.75rem;
+  font-size: var(--fs-2xs);
   font-family: var(--font-sans);
   color: var(--secondary);
-  margin-left: 6px;
+  margin-left: var(--space-xs);
   position: relative;
   top: -6px;
   font-weight: 400;
@@ -81,7 +81,7 @@
 .archive-posts li {
   display: flex;
   align-items: baseline;
-  padding: 8px 0;
+  padding: var(--space-sm) 0;
   margin: 0;
   border: 0;
   background: transparent;
@@ -98,7 +98,7 @@
 .archive-posts .post-meta {
   flex: 0 0 auto;
   min-width: 105px;
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
   color: var(--secondary);
   /* 等宽数字对齐日期，同时沿用衬线字体，避免风格割裂 */
   font-family: var(--font-serif);
@@ -112,14 +112,14 @@
 .archive-posts a {
   flex: 1;
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: var(--fs-title);
   font-weight: 400;
   color: var(--primary);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-loose);
   text-decoration: none;
   margin: 0;
   padding: 0;
-  transition: color 0.15s;
+  transition: color var(--transition-fast);
 }
 
 .archive-posts a::before,

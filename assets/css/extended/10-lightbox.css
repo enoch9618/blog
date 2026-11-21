@@ -1,0 +1,92 @@
+/* =========================================
+   图片题注 + 灯箱 + 阅读进度条
+   ========================================= */
+
+/* —— 图片题注 —— */
+.post-figure {
+  margin: var(--section-md) auto;
+  text-align: center;
+}
+.post-figure img {
+  margin: 0 auto; /* 间距交给 figure，避免双重留白 */
+  cursor: zoom-in;
+}
+.post-figure figcaption {
+  margin-top: var(--space-sm);
+  font-family: var(--font-serif);
+  font-size: var(--fs-xs);
+  color: var(--secondary);
+  letter-spacing: var(--ls-normal);
+  line-height: var(--lh-tight);
+}
+
+/* —— 灯箱 —— */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  background: var(--overlay-bg);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+.lightbox[hidden] {
+  display: none;
+}
+.lightbox figure {
+  max-width: 92vw;
+  margin: 0;
+  text-align: center;
+}
+.lightbox img {
+  max-width: 92vw;
+  max-height: 85vh;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-modal);
+  background: var(--entry);
+}
+.lightbox figcaption {
+  margin-top: var(--space-md);
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--ls-normal);
+}
+.lightbox-close {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition-fast),
+    transform var(--transition-fast);
+}
+.lightbox-close:hover {
+  background: var(--brand-accent);
+  transform: rotate(90deg);
+}
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* —— 阅读进度条 —— */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 10001;
+  background: linear-gradient(90deg, var(--brand-accent), var(--brand-accent-hover));
+  box-shadow: 0 0 6px rgba(140, 45, 25, 0.35);
+}

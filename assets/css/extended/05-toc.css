@@ -15,11 +15,11 @@
 
   background: transparent !important;
   border: none !important;
-  border-radius: 0 !important;
+  border-radius: var(--radius-none) !important;
   box-shadow: none !important;
   padding: 0 !important;
 
-  font-size: 0.8rem !important;
+  font-size: var(--fs-xs) !important;
   font-family: var(--font-sans) !important;
   z-index: 10;
   scrollbar-width: none;
@@ -39,7 +39,7 @@
   background: transparent !important;
   border: none !important;
   border-left: 1px solid var(--border) !important;
-  padding: 0 0 0 16px !important;
+  padding: 0 0 0 var(--space-lg) !important;
   margin: 0 !important;
 }
 
@@ -50,12 +50,12 @@
   padding: 0 !important;
 }
 .toc li {
-  margin: 8px 0 !important;
-  line-height: 1.5 !important;
+  margin: var(--space-sm) 0 !important;
+  line-height: var(--lh-tight) !important;
 }
 .toc ul ul {
-  padding-left: 12px !important;
-  margin-top: 6px !important;
+  padding-left: var(--space-md) !important;
+  margin-top: var(--space-xs) !important;
 }
 
 /* 链接样式 */
@@ -63,11 +63,11 @@
   color: var(--secondary) !important;
   text-decoration: none !important;
   display: block !important;
-  transition: color 0.2s ease;
+  transition: color var(--transition-base);
   border-left: 2px solid transparent !important;
 
   margin-left: -18px !important;
-  padding-left: 16px !important;
+  padding-left: var(--space-lg) !important;
 
   white-space: normal !important;
   word-break: break-all !important;

@@ -10,9 +10,9 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  height: 60px;
+  height: var(--logo-height);
   /* 视觉隐藏文字但保留给屏幕阅读器/SEO（替代 font-size:0） */
-  font-size: 0;
+  font-size: var(--fs-0);
 }
 
 .logo a::before,
@@ -20,13 +20,14 @@
 #logo a::before {
   content: "";
   display: block;
-  width: 180px;
-  height: 60px;
+  width: var(--logo-width);
+  height: var(--logo-height);
   background: url("/images/logo.png") left center / contain no-repeat;
   filter: brightness(0);
-  transition: filter 0.3s ease;
+  transition: filter var(--transition-slow);
 }
 
+/* hover：滤镜链调出与品牌红一致的暗红 */
 .logo a:hover::before,
 .logo h1 a:hover::before,
 #logo a:hover::before {
@@ -55,13 +56,18 @@
           brightness(85%) contrast(95%);
 }
 
-/* 无障碍：屏幕阅读器仍能读到站点名 */
+/* 无障碍：屏幕阅读器仍能读到站点名（sr-only 经典写法）
+   注：clip 虽被标记弃用，但兼容性最好且能通过 W3C 验证器；
+   现代写法 clip-path: inset(50%) 反而会被旧版验证器误报为不存在的属性。 */
 .screen-reader-text,
 .logo a .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
 }

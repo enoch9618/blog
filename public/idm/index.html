@@ -10,6 +10,7 @@
 <meta name="description" content="It doesn&rsquo;t matter&hellip;
 whatever
 
+  it doesn&rsquo;t matter
 
 2025 年注：搬运自微信朋友圈。
 已经记不清当时遇到什么事了。当时想表达的意思是：
@@ -20,7 +21,7 @@ whatever
 图片是电影《海上钢琴师》的一张截图，是 1900 最后和他朋友 max 说的话：">
 <meta name="author" content="Enoch">
 <link rel="canonical" href="https://hugujun.com/idm/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.eeb525fc7698decbb6039ca3f5aaa23f86e46c2cd683dfe6206e9c70018ac1e0.css" integrity="sha256-7rUl/HaY3su2A5yj9aqiP4bkbCzWg9/mIG6ccAGKweA=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e4182bd93b775aa6a8a2caa624674b677d1551b7ea98a82b08a81fa11c0ff5d3.css" integrity="sha256-5Bgr2Tt3WqaoosqmJGdLZ30VUbfqmKgrCKgfoRwP9dM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hugujun.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hugujun.com/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://hugujun.com/favicon-32x32.png">
@@ -79,6 +80,7 @@ whatever
   <meta property="og:title" content="it doesn&#39;t matter">
   <meta property="og:description" content="It doesn’t matter…
 whatever
+it doesn’t matter
 2025 年注：搬运自微信朋友圈。
 已经记不清当时遇到什么事了。当时想表达的意思是：
 没关系
@@ -94,6 +96,7 @@ whatever
   <meta name="twitter:title" content="it doesn&#39;t matter">
   <meta name="twitter:description" content="It doesn’t matter…
 whatever
+it doesn’t matter
 2025 年注：搬运自微信朋友圈。
 已经记不清当时遇到什么事了。当时想表达的意思是：
 没关系
@@ -127,12 +130,12 @@ whatever
   "@type": "BlogPosting",
   "headline": "it doesn't matter",
   "name": "it doesn\u0027t matter",
-  "description": "It doesn\u0026rsquo;t matter\u0026hellip;\nwhatever\n2025 年注：搬运自微信朋友圈。\n已经记不清当时遇到什么事了。当时想表达的意思是：\n没关系\n无所谓了\n图片是电影《海上钢琴师》的一张截图，是 1900 最后和他朋友 max 说的话：\n",
+  "description": "It doesn\u0026rsquo;t matter\u0026hellip;\nwhatever\nit doesn\u0026rsquo;t matter\n2025 年注：搬运自微信朋友圈。\n已经记不清当时遇到什么事了。当时想表达的意思是：\n没关系\n无所谓了\n图片是电影《海上钢琴师》的一张截图，是 1900 最后和他朋友 max 说的话：\n",
   "keywords": [
     
   ],
-  "articleBody": "It doesn’t matter…\nwhatever\n2025 年注：搬运自微信朋友圈。\n已经记不清当时遇到什么事了。当时想表达的意思是：\n没关系\n无所谓了\n图片是电影《海上钢琴师》的一张截图，是 1900 最后和他朋友 max 说的话：\nAnd the world passed me by.\n那个时候挺喜欢这部电影的，常常反复观看。现在有好几年没看过了。\n",
-  "wordCount" : "116",
+  "articleBody": "It doesn’t matter…\nwhatever\nit doesn’t matter\n2025 年注：搬运自微信朋友圈。\n已经记不清当时遇到什么事了。当时想表达的意思是：\n没关系\n无所谓了\n图片是电影《海上钢琴师》的一张截图，是 1900 最后和他朋友 max 说的话：\nAnd the world passed me by.\n那个时候挺喜欢这部电影的，常常反复观看。现在有好几年没看过了。\n",
+  "wordCount" : "119",
   "inLanguage": "zh",
   "datePublished": "2015-11-02T00:00:00Z",
   "dateModified": "2015-11-02T00:00:00Z",
@@ -225,7 +228,8 @@ whatever
 
   <div class="post-content md-content"><p>It doesn&rsquo;t matter&hellip;<br>
 whatever</p>
-<p><img alt="it doesn&rsquo;t matter" loading="lazy" src="/idm/matter.jpg"></p>
+<p><figure class="post-figure">
+  <img alt="it doesn&rsquo;t matter" loading="lazy" src="/idm/matter.jpg"><figcaption>it doesn&rsquo;t matter</figcaption></figure></p>
 <hr>
 <p>2025 年注：搬运自微信朋友圈。<br>
 已经记不清当时遇到什么事了。当时想表达的意思是：</p>
@@ -325,6 +329,7 @@ document.addEventListener("DOMContentLoaded", function() {
     headings.forEach(heading => observer.observe(heading));
 });
 </script>
+<script src="/js/site-enhance.js" defer></script>
 
 <script>
     let menu = document.getElementById('menu');
@@ -384,6 +389,53 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

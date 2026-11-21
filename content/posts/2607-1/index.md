@@ -17,7 +17,7 @@ draft = false
 
 崽崽这个月就4个月了，这个月抬头越来越棒，特别爱笑。
 
-<video controls width="100%" style="border-radius: 8px; margin: 1rem 0;">
+<video controls>
   <source src="kid-playing.mp4" type="video/mp4">
   您的浏览器不支持视频播放，请升级到最新版本。
 </video>

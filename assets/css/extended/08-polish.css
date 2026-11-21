@@ -1,0 +1,106 @@
+/* =========================================
+   全局细节润色
+   ========================================= */
+
+/* 平滑滚动 + 纸张细滚动条（尊重减少动效偏好） */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* 首页头像：纸圈 + 投影 */
+.profile img {
+  border-radius: 50%;
+  border: 3px solid var(--entry);
+  box-shadow: var(--shadow-card);
+}
+
+/* 回到顶部按钮：纸张卡片化 */
+.top-link {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: visibility 0.3s, opacity 0.3s,
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+.top-link:hover {
+  color: var(--brand-accent);
+  border-color: var(--brand-accent);
+  transform: translateY(-2px);
+}
+
+/* 高亮：品牌红淡染 */
+.post-content mark {
+  background: var(--brand-accent-soft);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: var(--radius-focus);
+}
+
+/* 列表符号：品牌红圆点 / 灰数字 */
+.post-content ul > li::marker {
+  color: var(--brand-accent);
+}
+.post-content ol > li::marker {
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 代码块：卡片化（为未来内容预留） */
+.post-content .highlight,
+.post-content pre {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* 表格表头：纸色底 */
+.post-content table th {
+  background: var(--code-bg);
+}
+
+/* 标题自动平衡换行（现代浏览器渐进增强） */
+.post-title,
+.page-header h1,
+.profile h1 {
+  text-wrap: balance;
+}
+
+/* 分页：把主题默认的深色药丸改成纸张卡片 */
+.pagination a {
+  background: var(--entry);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+.pagination a:hover {
+  background: var(--brand-accent);
+  color: var(--theme);
+  border-color: var(--brand-accent);
+}

@@ -1,11 +1,24 @@
 /* =========================================
    字体与正文排版
    ========================================= */
+
+/* 键盘焦点：统一品牌红描边 */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-focus);
+}
+
 /* 标准标题统一为宋体 */
 :is(h1, h2, h3, h4, h5, h6,
     .site-title, .archive-year, .post-title) {
   font-family: var(--font-serif);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ls-tight);
 }
 
 /* 首页 Profile 标题（英文饱满微粗版） */
@@ -13,31 +26,84 @@
 .main .profile h1,
 #profile h1,
 .profile_inner h1 {
-  font-family: "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif !important;
-  font-size: 2.4rem !important;
+  font-family: var(--font-serif-en) !important;
+  font-size: var(--fs-hero) !important;
   font-weight: 600 !important;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ls-tight);
   color: var(--primary);
-  margin-bottom: 12px;
-  text-shadow: 0.3px 0.3px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--space-md);
+  text-shadow: var(--shadow-text-soft);
 }
 
 /* 首页 Profile 副标题（纯正宋体） */
 .profile_inner span {
   font-family: var(--font-serif) !important;
   font-weight: 400 !important;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-wide);
   color: var(--secondary);
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
 }
 
 /* 正文 */
 .post-content {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
   font-weight: 400;
-  line-height: 1.9;
-  letter-spacing: 0.06em;
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-loose);
+}
+
+/* 正文标题节奏 */
+.post-content h2 {
+  margin: var(--section-2xl) 0 var(--section-md);
+}
+.post-content h3 {
+  margin: var(--section-xl) 0 var(--section-sm);
+}
+.post-content h4 {
+  margin: var(--section-lg) 0 var(--space-md);
+}
+
+/* 正文链接：品牌红 + 柔和下划线 */
+.post-content a:not(.anchor) {
+  color: var(--brand-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
+}
+.post-content a:not(.anchor):hover {
+  color: var(--brand-accent-hover);
+  text-decoration-color: currentColor;
+}
+
+/* 引用块：纸张淡底 + 品牌红左线 */
+.post-content blockquote {
+  margin: var(--section-md) 0;
+  padding: var(--space-xs) var(--space-lg);
+  border-inline-start: 3px solid var(--brand-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--code-bg);
+  color: var(--secondary);
+}
+
+/* 分隔线：居中细线 */
+.post-content hr {
+  border: 0;
+  height: 1px;
+  width: 40%;
+  margin: var(--section-lg) auto;
+  background: var(--border);
+}
+
+/* 行内代码 */
+.post-content code {
+  padding: 0.2rem 0.3rem;
+  font-size: 0.78em;
+  background: var(--code-bg);
+  border-radius: var(--radius-focus);
 }
 
 .post-content h2 .anchor,
@@ -45,37 +111,33 @@
   opacity: 0.15;
   color: var(--secondary);
   text-decoration: none;
-  margin-left: 6px;
+  margin-left: var(--space-xs);
   font-weight: normal;
-  transition: opacity 0.2s;
+  transition: opacity var(--transition-base);
 }
 .post-content h2:hover .anchor,
 .post-content h3:hover .anchor {
   opacity: 0.8;
 }
 
-.post-content img {
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  filter: grayscale(5%) sepia(5%);
-}
+/* 图片样式统一在 07-images.css 中维护 */
 
 /* 标签 */
 .post-tags {
-  margin-top: 3rem;
+  margin-top: var(--section-2xl);
 }
 .post-tags a {
   background: transparent;
   border: none;
   padding: 0 15px 0 0;
   color: var(--secondary);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
+  transition: color var(--transition-fast);
 }
 .post-tags a::before {
   content: "#";
   color: var(--border);
-  margin-right: 3px;
+  margin-right: var(--space-3xs);
 }
 .post-tags a:hover {
   color: var(--brand-accent);
@@ -93,11 +155,11 @@
 .footer span,
 .footer a {
   font-family: var(--font-serif) !important;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ls-tight);
 }
 
 /* =========================================
-   彻底干掉代码字体，统一文章元数据
+   统一文章元数据：干掉代码字体
    ========================================= */
 .post-header,
 .post-meta {
@@ -107,10 +169,10 @@
 div.post-meta,
 div.post-meta span {
   font-family: var(--font-serif) !important;
-  font-size: 0.95rem !important;
+  font-size: var(--fs-meta) !important;
   font-weight: 400 !important;
   color: var(--secondary) !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: var(--ls-normal) !important;
 }
 
 .post-title {
@@ -149,10 +211,10 @@ div.post-meta span {
     }
 
     body.list:has(.profile) .header {
-      padding-block: 1.5rem 1rem !important;
+      padding-block: var(--section-md) var(--section-sm) !important;
     }
     body.list:has(.profile) .footer {
-      padding-bottom: 1rem !important;
+      padding-bottom: var(--section-sm) !important;
     }
   }
 }

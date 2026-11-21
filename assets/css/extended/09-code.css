@@ -1,0 +1,126 @@
+/* =========================================
+   代码块：暖纸亮色语法主题 + 复制按钮 + 键盘按键
+   ========================================= */
+
+/* 统一代码字体 */
+.post-content code,
+.post-content pre,
+.post-content .chroma {
+  font-family: var(--font-mono);
+}
+
+/* —— 亮色语法主题（Catppuccin Latte 暖调适配版）——
+   仅作用于非暗色模式；暗色沿用主题自带的 Catppuccin Mocha。
+   解决原主题浅色文字在暖白代码底上对比度不足的问题。 */
+:root:not([data-theme="dark"]) .chroma {
+  color: var(--content);
+}
+:root:not([data-theme="dark"]) .chroma .err { color: #d20f39; }
+:root:not([data-theme="dark"]) .chroma .k,
+:root:not([data-theme="dark"]) .chroma .kp,
+:root:not([data-theme="dark"]) .chroma .kr { color: #8839ef; }
+:root:not([data-theme="dark"]) .chroma .kc,
+:root:not([data-theme="dark"]) .chroma .ne,
+:root:not([data-theme="dark"]) .chroma .nn,
+:root:not([data-theme="dark"]) .chroma .py,
+:root:not([data-theme="dark"]) .chroma .m,
+:root:not([data-theme="dark"]) .chroma .mb,
+:root:not([data-theme="dark"]) .chroma .mf,
+:root:not([data-theme="dark"]) .chroma .mh,
+:root:not([data-theme="dark"]) .chroma .mi,
+:root:not([data-theme="dark"]) .chroma .il,
+:root:not([data-theme="dark"]) .chroma .mo { color: #fe640b; }
+:root:not([data-theme="dark"]) .chroma .kd,
+:root:not([data-theme="dark"]) .chroma .kt,
+:root:not([data-theme="dark"]) .chroma .sa,
+:root:not([data-theme="dark"]) .chroma .gr,
+:root:not([data-theme="dark"]) .chroma .gt { color: #d20f39; }
+:root:not([data-theme="dark"]) .chroma .kn,
+:root:not([data-theme="dark"]) .chroma .ni,
+:root:not([data-theme="dark"]) .chroma .sr,
+:root:not([data-theme="dark"]) .chroma .o,
+:root:not([data-theme="dark"]) .chroma .ow { color: #179299; }
+:root:not([data-theme="dark"]) .chroma .na,
+:root:not([data-theme="dark"]) .chroma .nd,
+:root:not([data-theme="dark"]) .chroma .nf,
+:root:not([data-theme="dark"]) .chroma .fm,
+:root:not([data-theme="dark"]) .chroma .dl,
+:root:not([data-theme="dark"]) .chroma .se { color: #1e66f5; }
+:root:not([data-theme="dark"]) .chroma .nb,
+:root:not([data-theme="dark"]) .chroma .bp,
+:root:not([data-theme="dark"]) .chroma .nl { color: #04a5e5; }
+:root:not([data-theme="dark"]) .chroma .nc,
+:root:not([data-theme="dark"]) .chroma .no,
+:root:not([data-theme="dark"]) .chroma .gh { color: #df8e1d; }
+:root:not([data-theme="dark"]) .chroma .s,
+:root:not([data-theme="dark"]) .chroma .sb,
+:root:not([data-theme="dark"]) .chroma .sc,
+:root:not([data-theme="dark"]) .chroma .s2,
+:root:not([data-theme="dark"]) .chroma .si,
+:root:not([data-theme="dark"]) .chroma .sx,
+:root:not([data-theme="dark"]) .chroma .s1,
+:root:not([data-theme="dark"]) .chroma .ss { color: #40a02b; }
+:root:not([data-theme="dark"]) .chroma .nv,
+:root:not([data-theme="dark"]) .chroma .vc,
+:root:not([data-theme="dark"]) .chroma .vg,
+:root:not([data-theme="dark"]) .chroma .vi,
+:root:not([data-theme="dark"]) .chroma .vm { color: #dc8a78; }
+:root:not([data-theme="dark"]) .chroma .c,
+:root:not([data-theme="dark"]) .chroma .ch,
+:root:not([data-theme="dark"]) .chroma .cm,
+:root:not([data-theme="dark"]) .chroma .c1,
+:root:not([data-theme="dark"]) .chroma .cs,
+:root:not([data-theme="dark"]) .chroma .cp,
+:root:not([data-theme="dark"]) .chroma .cpf,
+:root:not([data-theme="dark"]) .chroma .sd,
+:root:not([data-theme="dark"]) .chroma .sh,
+:root:not([data-theme="dark"]) .chroma .go,
+:root:not([data-theme="dark"]) .chroma .gp { color: #7c7f93; }
+:root:not([data-theme="dark"]) .chroma .gd { color: #d20f39; background-color: rgba(210, 15, 57, 0.08); }
+:root:not([data-theme="dark"]) .chroma .gi { color: #40a02b; background-color: rgba(64, 160, 43, 0.08); }
+:root:not([data-theme="dark"]) .chroma .hl { background-color: rgba(140, 45, 25, 0.06); }
+:root:not([data-theme="dark"]) .chroma .ln,
+:root:not([data-theme="dark"]) .chroma .lnt { color: var(--secondary); }
+
+/* —— 复制按钮：纸张卡片化，常驻可见 —— */
+.copy-code {
+  display: block;
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 2px 10px;
+  font-size: var(--fs-2xs);
+  line-height: 22px;
+  color: var(--secondary);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.65;
+  transition: opacity var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+div.highlight:hover .copy-code,
+pre:hover .copy-code {
+  opacity: 1;
+}
+.copy-code:hover {
+  color: var(--brand-accent);
+  border-color: var(--brand-accent);
+}
+
+/* —— 键盘按键 —— */
+.post-content kbd {
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--primary);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-focus);
+}
