@@ -1,0 +1,54 @@
+{{- $id := printf "spoiler-%d" .Ordinal -}}
+<div class="spoiler-wrapper" data-id="{{ $id }}">
+  <input type="checkbox" id="{{ $id }}" class="spoiler-check">
+  <label for="{{ $id }}" class="spoiler-text">{{ .Inner | markdownify }}</label>
+</div>
+
+<style>
+.spoiler-check {
+  display: none;
+}
+.spoiler-text {
+  filter: blur(5px);
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.spoiler-check:checked + .spoiler-text {
+  filter: none;
+  cursor: auto;
+}
+</style>
+
+<script>
+(function () {
+  const wrapper = document.querySelector('.spoiler-wrapper[data-id="{{ $id }}"]');
+  if (!wrapper) return;
+
+  const checkbox = wrapper.querySelector('.spoiler-check');
+  const textEl = wrapper.querySelector('.spoiler-text');
+  let timer = null;
+
+  // 根据文本长度计算阅读时间（毫秒）
+  function getReadTime() {
+    const textLength = textEl.textContent.trim().length;
+    // 基础 3 秒，每 10 个字加 1 秒，封顶 20 秒
+    const seconds = Math.min(3 + textLength / 10, 20);
+    return seconds * 1000;
+  }
+
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      // 点击展开：清除旧定时器，启动新的
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        checkbox.checked = false; // 自动取消勾选，恢复模糊
+      }, getReadTime());
+    } else {
+      // 手动点击恢复模糊时，清掉定时器
+      clearTimeout(timer);
+    }
+  });
+})();
+</script>
