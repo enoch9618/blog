@@ -54,8 +54,8 @@ disableThemeToggle = true
   weight = 2
 
 [[menu.main]]
-  name = "查经资料"
-  url = "/study/"
+  name = "圣经"
+  url = "/bible.html/"
   weight = 3
 
 pygmentsUseClasses = true
