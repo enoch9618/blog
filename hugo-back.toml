@@ -1,20 +1,16 @@
-baseURL = "https://blog-eyt.pages.dev/"
+baseURL = "https://hugujun.com/"
 title = "Enoch"
 theme = "PaperMod"
 
-# 语言设置
 defaultContentLanguage = "zh"
 languageCode = "zh-cn"
 hasCJKLanguage = true
 
-# 分页
 [pagination]
 pagerSize = 10
 
-# 基础配置
 enableRobotsTXT = true
 enableEmoji = true
-
 
 [params]
   author = ["Enoch"]
@@ -23,43 +19,33 @@ enableEmoji = true
   DateFormat = "2006-01-02"
 
   defaultTheme = "auto"
+  disableThemeToggle = false
 
-  # 开启这些功能
-  ShowReadingTime = true
+  ShowReadingTime = false
+  ShowWordCount = false
+  ShowShareButtons = false
   ShowPostNavLinks = true
-  ShowBreadCrumbs = true
+  ShowBreadCrumbs = false          # 已关闭面包屑
+  ShowCodeCopyButtons = true       # 代码块复制按钮
   ShowRssButtonInSectionTermList = true
   ShowToc = true
-  TocOpen = false
+  TocOpen = true
+  hideSummary = true
+  disableSpecial1stPost = true
 
-  # 关闭这些功能
-  ShowShareButtons = false
-  ShowWordCount = false
-
-  # 评论
-  comments = false
-
-  # 显示作者和元信息
-  hidemeta = false
-
-  # 禁用主题切换
-  disableThemeToggle = true
-
-
-  # 主页个人信息模式
   [params.profileMode]
     enabled = true
-    title = "Enoch 的博客"
+    title = "Enoch"
     subtitle = "我的泉源都在你里面"
     imageUrl = "/images/avatar.jpg"
-    imageWidth = 150
-    imageHeight = 150
+    imageWidth = 120
+    imageHeight = 120
 
+disableThemeToggle = true
 
-# 顶部导航菜单
 [[menu.main]]
   name = "文章"
-  url = "/posts/"
+  url = "/archives/"
   weight = 1
 
 [[menu.main]]
@@ -68,27 +54,15 @@ enableEmoji = true
   weight = 2
 
 [[menu.main]]
-  name = "圣经阅读"
-  url = "/bible.html"
+  name = "圣经"
+  url = "/bible/"
   weight = 3
 
-[[menu.main]]
-  name = "查经资料"
-  url = "/study/"
-  weight = 4
-
-# 语法高亮
 pygmentsUseClasses = true
 
-
-# Markdown 渲染设置
 [markup]
-
   [markup.highlight]
     noClasses = false
-
-  # 允许 Markdown 中使用 HTML
-  # （例如 audio、video、自定义播放器）
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true

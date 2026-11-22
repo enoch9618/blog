@@ -7,7 +7,7 @@ languageCode = "zh-cn"
 hasCJKLanguage = true
 
 [pagination]
-pagerSize = 10
+  pagerSize = 10
 
 enableRobotsTXT = true
 enableEmoji = true
@@ -19,14 +19,14 @@ enableEmoji = true
   DateFormat = "2006-01-02"
 
   defaultTheme = "auto"
-  disableThemeToggle = false
+  disableThemeToggle = true        # 合并到这里
 
   ShowReadingTime = false
   ShowWordCount = false
   ShowShareButtons = false
   ShowPostNavLinks = true
-  ShowBreadCrumbs = false          # 已关闭面包屑
-  ShowCodeCopyButtons = true       # 代码块复制按钮
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
   ShowRssButtonInSectionTermList = true
   ShowToc = true
   TocOpen = true
@@ -40,8 +40,6 @@ enableEmoji = true
     imageUrl = "/images/avatar.jpg"
     imageWidth = 120
     imageHeight = 120
-
-disableThemeToggle = true
 
 [[menu.main]]
   name = "文章"
