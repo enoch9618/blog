@@ -55,7 +55,7 @@ disableThemeToggle = true
 
 [[menu.main]]
   name = "圣经"
-  url = "/bible.html/"
+  url = "/bible/"
   weight = 3
 
 pygmentsUseClasses = true
